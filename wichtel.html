@@ -894,7 +894,28 @@ function reveal(){if(!dis.classList.contains('disguise'))return;cvr.classList.ad
 function hideAll(){if(dis.classList.contains('disguise'))return;tripOff();
  [['shw','shx'],['ssw','ssx'],['skw','skx']].forEach(function(p){var w=document.getElementById(p[0]);if(w&&!w.hidden){var b=document.getElementById(p[1]);if(b)b.click()}});
  T0='Weihnachts-Countdown 🎄';document.title=T0;cvr.style.display='flex';void cvr.offsetWidth;cvr.classList.remove('gone');dis.classList.add('disguise')}
-document.getElementById('secret').onclick=reveal;document.getElementById('hideb').onclick=hideAll;
+document.getElementById('hideb').onclick=hideAll;
+/* ---- Geheim-Entsperrung (bewusst schwer, damit niemand zufällig reinkommt) ----
+   Handy & Desktop: 3× auf die große Tage-Zahl tippen, dann den Baum 🎄 lang (700 ms) gedrückt halten.
+   Desktop zusätzlich: das Geheimwort TIPPEN.
+   Zum Ändern einfach TAP_ZIEL, TAPS, HALTEN_MS oder GEHEIMWORT anpassen. */
+(function(){
+ var TAPS=3, HALTEN_MS=700, FENSTER_MS=2500, GEHEIMWORT='wichteln';
+ var tree=document.getElementById('secret'), tapZiel=document.getElementById('cvD');
+ var taps=0, tapTimer, halten, scharf=false;
+ function reset(){taps=0;clearTimeout(tapTimer);}
+ tapZiel.addEventListener('click',function(){taps++;clearTimeout(tapTimer);tapTimer=setTimeout(reset,FENSTER_MS);});
+ function armed(){return taps>=TAPS;}
+ function haltenStart(e){if(e&&e.cancelable)e.preventDefault();clearTimeout(halten);
+  halten=setTimeout(function(){if(armed()){reset();reveal();}else{reset();}},HALTEN_MS);}
+ function haltenStop(){clearTimeout(halten);}
+ tree.addEventListener('pointerdown',haltenStart);
+ ['pointerup','pointerleave','pointercancel'].forEach(function(ev){tree.addEventListener(ev,haltenStop);});
+ tree.addEventListener('contextmenu',function(e){e.preventDefault();}); /* kein Kontextmenü beim Langdrücken */
+ /* Desktop: unsichtbares Geheimwort */
+ var buf='';
+ addEventListener('keydown',function(e){if(e.key&&e.key.length===1){buf=(buf+e.key.toLowerCase()).slice(-GEHEIMWORT.length);if(buf===GEHEIMWORT){buf='';reveal();}}});
+})();
 /* Panik-Tasten: Alt+T oder Esc tarnen sofort */
 addEventListener('keydown',function(e){if((e.altKey&&e.key.toLowerCase()==='t')||e.key==='Escape')hideAll()});
 /* Auto-Tarnen: sobald der Tab in den Hintergrund geht (Tab-Wechsel/minimiert), wieder verstecken.
