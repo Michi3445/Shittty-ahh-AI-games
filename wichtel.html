@@ -599,17 +599,57 @@ t();setInterval(t,1000)})();</script>
   .sbfield{position:relative;height:240px;border-radius:18px;border:1px solid var(--line);background:var(--glass);overflow:hidden;margin:6px 0;touch-action:manipulation}
   .sbtarget{position:absolute;font-size:2rem;line-height:1;cursor:pointer;user-select:none;-webkit-user-select:none;transform:translate(-50%,-50%);animation:sbpop .18s ease-out}
   @keyframes sbpop{from{transform:translate(-50%,-50%) scale(0)}to{transform:translate(-50%,-50%) scale(1)}}
+  .sbtarget.gold{filter:drop-shadow(0 0 7px gold)}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .seg button{border-radius:0;box-shadow:none;background:var(--glass);color:var(--ink);padding:6px 10px;font-size:.78rem}
+  .seg button.on{background:var(--gold);color:#221}
+  .chk{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700}
+  .m8{width:150px;height:150px;margin:6px auto;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4a4a6a,#0a0a18 70%);display:flex;align-items:center;justify-content:center;font-size:3rem;cursor:pointer;user-select:none;box-shadow:inset -8px -8px 22px #0008,0 6px 16px #0006}
+  .m8:active{transform:scale(.97)}
+  @keyframes m8sh{0%,100%{transform:none}20%{transform:translate(-6px,3px) rotate(-6deg)}50%{transform:translate(6px,-3px) rotate(6deg)}80%{transform:translate(-4px,2px) rotate(-3deg)}}
+  .m8.shake{animation:m8sh .5s}
+  .fc{font-size:3.2rem;background:none!important;box-shadow:none!important;padding:8px;display:block;margin:2px auto;transition:transform .1s}
+  @keyframes fccr{30%{transform:scale(1.25) rotate(-8deg)}60%{transform:scale(.9) rotate(6deg)}}
+  .fc.crack{animation:fccr .4s}
+  .fire{width:100%;max-width:300px;border-radius:14px;background:#0a0410;display:block;margin:4px auto}
+  .spin{width:min(70vw,240px);height:auto;aspect-ratio:1;display:block;margin:4px auto;cursor:grab;touch-action:none}
   </style>
   <div class="mp" data-p="fun"><div class="grid">
     <section class="card tile s3">
       <div class="th"><div class="ti">🫧</div><div><h2>Luftpolsterfolie</h2><small>Zum Entspannen: alle Blasen zerdrücken</small></div></div>
       <div id="bwrap" class="bwrap" role="group" aria-label="Luftpolsterfolie"></div>
-      <div class="btnrow"><button id="bwnew" class="ghost">Neu aufpumpen 🔄</button><span class="hint" id="bwct"></span></div>
+      <div class="btnrow"><button id="bwnew" class="ghost">Neu aufpumpen 🔄</button>
+        <span class="seg" id="bwsize"><button data-bs="s">S</button><button data-bs="m" class="on">M</button><button data-bs="l">L</button></span>
+        <label class="chk"><input type="checkbox" id="bwendless"> Endlos</label>
+        <span class="hint" id="bwct"></span></div>
     </section>
     <section class="card tile s3">
-      <div class="th"><div class="ti">❄️</div><div><h2>Schneeball-Wurf</h2><small>Triff so viele Ziele wie möglich in 30 s</small></div></div>
+      <div class="th"><div class="ti">❄️</div><div><h2>Schneeball-Wurf</h2><small>Triff so viele Ziele wie möglich – mit Combo!</small></div></div>
       <div id="sbfield" class="sbfield" aria-label="Spielfeld"></div>
-      <div class="btnrow"><button id="sbstart">Start ❄️</button><span class="stt2">Punkte: <b id="sbsc">0</b></span><span class="stt2">Zeit: <b id="sbtm">30</b> s</span><span class="stt2">Rekord: <b id="sbbest">0</b></span></div>
+      <div class="btnrow"><button id="sbstart">Start ❄️</button>
+        <span class="seg" id="sbdur"><button data-du="20">20s</button><button data-du="30" class="on">30s</button><button data-du="60">60s</button></span>
+        <span class="seg" id="sbdiff"><button data-df="e">Leicht</button><button data-df="n" class="on">Normal</button><button data-df="h">Schwer</button></span></div>
+      <div class="btnrow"><span class="stt2">Punkte: <b id="sbsc">0</b></span><span class="stt2">Combo: <b id="sbcombo">0</b>×</span><span class="stt2">Zeit: <b id="sbtm">30</b> s</span><span class="stt2">Rekord: <b id="sbbest">0</b></span></div>
+    </section>
+    <section class="card tile s2">
+      <div class="th"><div class="ti">🔮</div><div><h2>Frag das Christkind</h2><small>Ja/Nein-Frage denken und tippen</small></div></div>
+      <div id="m8" class="m8" role="button" tabindex="0" aria-label="Magische Kugel">🔮</div>
+      <p class="hint" id="m8a" style="text-align:center;min-height:1.4em;font-weight:700"></p>
+    </section>
+    <section class="card tile s2">
+      <div class="th"><div class="ti">🥠</div><div><h2>Glückskeks</h2><small>Aufbrechen für einen Spruch</small></div></div>
+      <button id="fcbtn" class="fc" aria-label="Glückskeks aufbrechen">🥠</button>
+      <p class="hint" id="fctext" style="text-align:center;min-height:1.6em;font-weight:700"></p>
+    </section>
+    <section class="card tile s2">
+      <div class="th"><div class="ti">🔥</div><div><h2>Virtueller Kamin</h2><small>Zum Entspannen</small></div></div>
+      <canvas id="fire" width="300" height="200" class="fire" aria-label="Kaminfeuer"></canvas>
+      <div class="btnrow"><label class="chk"><input type="checkbox" id="firesnd"> Knistern 🔊</label></div>
+    </section>
+    <section class="card tile s2">
+      <div class="th"><div class="ti">🌀</div><div><h2>Fidget-Spinner</h2><small>Ziehen &amp; loslassen zum Schleudern</small></div></div>
+      <canvas id="spin" width="240" height="240" class="spin" aria-label="Fidget-Spinner"></canvas>
+      <div class="btnrow"><span class="stt2">Tempo: <b id="spinrpm">0</b></span><span class="stt2">Umdrehungen: <b id="spinturns">0</b></span></div>
     </section>
   </div></div>
   <div class="mp" data-p="chaos"><div class="msub"><button data-v="cf" class="on">💥 Konfetti</button><button data-v="sh">🔫 Schießstand</button><button data-v="pr">🎭 Streiche</button></div>
@@ -2357,36 +2397,96 @@ $('tyi').addEventListener('input',function(){if(!ty.run)return;var v=this.value;
  $('setImp').onclick=function(){var io=$('setIO');if(io.hidden||!io.value.trim()){io.hidden=false;io.focus();return;}try{var o=JSON.parse(io.value);KEYS.forEach(function(k){if(o[k]!=null)s(k,o[k]);else rm(k);});location.reload();}catch(e){alert('Code ungültig.');}};
  $('setRst').onclick=function(){if(confirm('Alle Einstellungen zurücksetzen?')){KEYS.forEach(rm);location.reload();}};
 })();</script>
-<script>/* ---- Spaß-Widgets: eigener, Mute-bewusster Piepser (snd lebt in einem anderen Scope) ---- */
-var __AC;function beep(f,t){if(window.__mute)return;try{__AC=__AC||new(window.AudioContext||window.webkitAudioContext)();var o=__AC.createOscillator(),g=__AC.createGain(),n=__AC.currentTime;o.type=t||'sine';o.frequency.value=f;g.gain.setValueAtTime(.12,n);g.gain.exponentialRampToValueAtTime(.001,n+.09);o.connect(g);g.connect(__AC.destination);o.start();o.stop(n+.1);}catch(e){}}
-/* ---- Luftpolsterfolie (Toy) ---- */(function(){
- var wrap=document.getElementById('bwrap');if(!wrap)return;
- var N=48, ct=document.getElementById('bwct');
- function count(){var left=wrap.querySelectorAll('button:not(.pop)').length;ct.textContent=left?(left+' übrig'):'Alle zerdrückt! 🎉';return left;}
- function pop(e){var b=e.currentTarget;if(b.classList.contains('pop'))return;b.classList.add('pop');beep(680+Math.random()*520,'triangle');if(navigator.vibrate)navigator.vibrate(8);if(count()===0)beep(1250,'triangle');}
- function build(){wrap.innerHTML='';for(var i=0;i<N;i++){var b=document.createElement('button');b.setAttribute('aria-label','Blase');b.addEventListener('pointerdown',pop);wrap.appendChild(b);}count();}
+<script>/* ---- Spaß-Sektion: Sound-Kit + Toys (eigener Scope, Mute-bewusst) ---- */
+var __AC;function actx(){__AC=__AC||new(window.AudioContext||window.webkitAudioContext)();if(__AC.state==='suspended')__AC.resume();return __AC;}
+var __noise;function noiseBuf(a){if(__noise)return __noise;var n=a.sampleRate|0,b=a.createBuffer(1,n,a.sampleRate),d=b.getChannelData(0);for(var i=0;i<n;i++)d[i]=Math.random()*2-1;__noise=b;return b;}
+var SFX={
+ tone:function(f,d,type,vol){if(window.__mute)return;try{var a=actx(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime;o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(vol||.12,t);g.gain.exponentialRampToValueAtTime(.001,t+(d||.1));o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+(d||.1)+.02);}catch(e){}},
+ pop:function(){if(window.__mute)return;try{var a=actx(),t=a.currentTime;
+  var o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(880+Math.random()*320,t);o.frequency.exponentialRampToValueAtTime(150,t+.09);g.gain.setValueAtTime(.2,t);g.gain.exponentialRampToValueAtTime(.001,t+.12);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+.13);
+  var ns=a.createBufferSource();ns.buffer=noiseBuf(a);var bp=a.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1400;var ng=a.createGain();ng.gain.setValueAtTime(.14,t);ng.gain.exponentialRampToValueAtTime(.001,t+.05);ns.connect(bp);bp.connect(ng);ng.connect(a.destination);ns.start(t);ns.stop(t+.06);}catch(e){}},
+ chime:function(f){if(window.__mute)return;try{var a=actx(),t=a.currentTime;[1,2,3].forEach(function(h,i){var o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=(f||600)*h;g.gain.setValueAtTime(.12/(i+1),t);g.gain.exponentialRampToValueAtTime(.001,t+.5);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+.52);});}catch(e){}},
+ crack:function(){if(window.__mute)return;try{var a=actx(),t=a.currentTime;var ns=a.createBufferSource();ns.buffer=noiseBuf(a);var hp=a.createBiquadFilter();hp.type='highpass';hp.frequency.value=2200;var g=a.createGain();g.gain.setValueAtTime(.32,t);g.gain.exponentialRampToValueAtTime(.001,t+.12);ns.connect(hp);hp.connect(g);g.connect(a.destination);ns.start(t);ns.stop(t+.13);
+  var o=a.createOscillator(),og=a.createGain();o.type='square';o.frequency.setValueAtTime(210,t);o.frequency.exponentialRampToValueAtTime(60,t+.1);og.gain.setValueAtTime(.12,t);og.gain.exponentialRampToValueAtTime(.001,t+.12);o.connect(og);og.connect(a.destination);o.start(t);o.stop(t+.13);}catch(e){}},
+ shake:function(){if(window.__mute)return;try{var a=actx(),t=a.currentTime;for(var k=0;k<3;k++){var ns=a.createBufferSource();ns.buffer=noiseBuf(a);var bp=a.createBiquadFilter();bp.type='bandpass';bp.frequency.value=380;var g=a.createGain();var s=t+k*.12;g.gain.setValueAtTime(.2,s);g.gain.exponentialRampToValueAtTime(.001,s+.08);ns.connect(bp);bp.connect(g);g.connect(a.destination);ns.start(s);ns.stop(s+.09);}}catch(e){}}
+};
+function beep(f,t){SFX.tone(f,.1,t||'sine');}
+/* ---- Luftpolsterfolie ---- */(function(){
+ var wrap=document.getElementById('bwrap');if(!wrap)return;var ct=document.getElementById('bwct');
+ var SIZES={s:[6,6],m:[8,6],l:[10,8]},cur='m',endless=false,total=0;
+ function count(){var left=wrap.querySelectorAll('button:not(.pop)').length;ct.textContent=endless?'Endlos-Modus ♾️':(left?(left+'/'+total+' übrig'):'Alle zerdrückt! 🎉');return left;}
+ function pop(e){var b=e.currentTarget;if(b.classList.contains('pop'))return;b.classList.add('pop');SFX.pop();if(navigator.vibrate)navigator.vibrate(8);
+  if(endless){setTimeout(function(){b.classList.remove('pop');},1400+Math.random()*900);}else if(count()===0)SFX.chime(680);}
+ function build(){var d=SIZES[cur];wrap.style.gridTemplateColumns='repeat('+d[0]+',1fr)';total=d[0]*d[1];wrap.innerHTML='';
+  for(var i=0;i<total;i++){var b=document.createElement('button');b.setAttribute('aria-label','Blase');b.addEventListener('pointerdown',pop);wrap.appendChild(b);}count();}
  document.getElementById('bwnew').onclick=build;
+ document.querySelectorAll('#bwsize button').forEach(function(b){b.onclick=function(){cur=b.dataset.bs;document.querySelectorAll('#bwsize button').forEach(function(x){x.classList.toggle('on',x===b);});build();};});
+ document.getElementById('bwendless').addEventListener('change',function(){endless=this.checked;count();});
  build();
 })();
-/* ---- Schneeball-Wurf (Spiel) ---- */(function(){
- var field=document.getElementById('sbfield');if(!field)return;
- var EM=['❄️','⛄','🎁','🔔','⭐','🍪'],score=0,time=30,iv,spawn,running=false;
+/* ---- Schneeball-Wurf ---- */(function(){
+ var field=document.getElementById('sbfield');if(!field)return;function id(x){return document.getElementById(x);}
+ var EM=['❄️','⛄','🎁','🔔','⭐','🍪'],score=0,combo=0,time=30,iv,spawn,running=false,dur=30,diff='n';
  var best=0;try{best=parseInt(localStorage.getItem('sb_best'),10)||0;}catch(e){}
- var elSc=document.getElementById('sbsc'),elTm=document.getElementById('sbtm'),elBest=document.getElementById('sbbest'),btn=document.getElementById('sbstart');
- elBest.textContent=best;
+ var elSc=id('sbsc'),elTm=id('sbtm'),elBest=id('sbbest'),elCombo=id('sbcombo'),btn=id('sbstart');
+ var DIFF={e:[900,1500],n:[650,1150],h:[450,820]};elBest.textContent=best;
  function rnd(a,b){return a+Math.random()*(b-a);}
- function addTarget(){if(!running)return;var t=document.createElement('div');t.className='sbtarget';t.textContent=EM[Math.floor(Math.random()*EM.length)];
-  t.style.left=rnd(12,88)+'%';t.style.top=rnd(16,84)+'%';
-  var life=setTimeout(function(){t.remove();},1100);
-  t.addEventListener('pointerdown',function(){clearTimeout(life);t.remove();score++;elSc.textContent=score;beep(880+score*8,'triangle');if(navigator.vibrate)navigator.vibrate(10);});
+ function addTarget(){if(!running)return;var gold=Math.random()<.12;var t=document.createElement('div');t.className='sbtarget'+(gold?' gold':'');t.textContent=gold?'🏆':EM[Math.floor(Math.random()*EM.length)];
+  t.style.left=rnd(10,90)+'%';t.style.top=rnd(16,84)+'%';
+  var life=setTimeout(function(){t.remove();if(running){combo=0;elCombo.textContent=0;}},DIFF[diff][1]);
+  t.addEventListener('pointerdown',function(ev){ev.stopPropagation();clearTimeout(life);t.remove();combo++;var pts=(gold?5:1)*(1+Math.floor(combo/5));score+=pts;elSc.textContent=score;elCombo.textContent=combo;SFX.chime(560+Math.min(combo,20)*28);if(navigator.vibrate)navigator.vibrate(10);});
   field.appendChild(t);}
- function stop(){running=false;clearInterval(iv);clearInterval(spawn);
-  [].forEach.call(field.querySelectorAll('.sbtarget'),function(t){t.remove();});
-  if(score>best){best=score;try{localStorage.setItem('sb_best',best);}catch(e){}elBest.textContent=best;}
+ function stop(){running=false;clearInterval(iv);clearInterval(spawn);[].forEach.call(field.querySelectorAll('.sbtarget'),function(t){t.remove();});
+  if(score>best){best=score;try{localStorage.setItem('sb_best',best);}catch(e){}elBest.textContent=best;SFX.chime(880);}
   btn.disabled=false;btn.textContent='Nochmal ❄️';}
- btn.onclick=function(){if(running)return;running=true;score=0;time=30;elSc.textContent=0;elTm.textContent=30;btn.disabled=true;
-  iv=setInterval(function(){time--;elTm.textContent=time;if(time<=0)stop();},1000);
-  spawn=setInterval(addTarget,600);addTarget();};
+ function seg(sel,b){document.querySelectorAll(sel+' button').forEach(function(x){x.classList.toggle('on',x===b);});}
+ document.querySelectorAll('#sbdur button').forEach(function(b){b.onclick=function(){if(running)return;dur=+b.dataset.du;elTm.textContent=dur;seg('#sbdur',b);};});
+ document.querySelectorAll('#sbdiff button').forEach(function(b){b.onclick=function(){if(running)return;diff=b.dataset.df;seg('#sbdiff',b);};});
+ btn.onclick=function(){if(running)return;running=true;score=0;combo=0;time=dur;elSc.textContent=0;elCombo.textContent=0;elTm.textContent=dur;btn.disabled=true;
+  iv=setInterval(function(){time--;elTm.textContent=time;if(time<=0)stop();},1000);spawn=setInterval(addTarget,DIFF[diff][0]);addTarget();};
+})();
+/* ---- Frag das Christkind (Magic 8-Ball) ---- */(function(){
+ var el=document.getElementById('m8');if(!el)return;var out=document.getElementById('m8a');
+ var A=['Ja, ganz sicher! 🎄','Auf jeden Fall ✨','Die Sterne sagen ja ⭐','Ho ho ho – ja! 🎅','Frag später nochmal 🔮','Vielleicht … 🤔','Eher nicht ❄️','Nein, sagt das Christkind 🙈','Absolut! 🎁','Zähl nicht drauf 😅','Sieht gut aus! 👍','Bleib geduldig ⏳'],busy=false;
+ function ask(){if(busy)return;busy=true;out.textContent='';el.textContent='🔮';el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');SFX.shake();
+  setTimeout(function(){out.textContent=A[Math.floor(Math.random()*A.length)];SFX.chime(520);busy=false;},560);}
+ el.onclick=ask;el.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();ask();}};
+})();
+/* ---- Glückskeks ---- */(function(){
+ var btn=document.getElementById('fcbtn');if(!btn)return;var out=document.getElementById('fctext');
+ var F=['Ein Lächeln ist das schönste Geschenk. 🎁','Bald erwartet dich eine süße Überraschung. 🍪','Teile Kekse – teile Freude. 🥛','Dein nächstes Wichtel-Geschenk wird ein Volltreffer. 🎯','Wärme kommt von innen. 🔥','Heute ist ein guter Tag für Zimtsterne. ⭐','Sei wie Schnee: leise, aber verwandle alles. ❄️','Das Christkind hat dich auf der Lieben-Liste. 💌','Glück ist selbstgebacken. 🧑‍🍳','Ein Kompliment heute öffnet ein Herz. 💖'];
+ btn.onclick=function(){btn.classList.remove('crack');void btn.offsetWidth;btn.classList.add('crack');SFX.crack();btn.textContent='🍪';
+  setTimeout(function(){out.textContent='„'+F[Math.floor(Math.random()*F.length)]+'“';},240);setTimeout(function(){btn.textContent='🥠';},1400);};
+})();
+/* ---- Virtueller Kamin ---- */(function(){
+ var cv=document.getElementById('fire');if(!cv)return;var x=cv.getContext('2d'),W=cv.width,H=cv.height,parts=[],crackle=false,crackT=60,fun=document.querySelector('.mp[data-p="fun"]');
+ document.getElementById('firesnd').addEventListener('change',function(){crackle=this.checked;});
+ function loop(){requestAnimationFrame(loop);if(!fun||!fun.classList.contains('on')||document.body.classList.contains('disguise'))return;
+  x.globalCompositeOperation='source-over';x.fillStyle='#0a0410';x.fillRect(0,0,W,H);
+  for(var i=0;i<4;i++)parts.push({x:W/2+(Math.random()-.5)*56,y:H-12,vx:(Math.random()-.5)*.6,vy:-1-Math.random()*1.7,life:40+Math.random()*30,age:0,r:6+Math.random()*10});
+  x.globalCompositeOperation='lighter';
+  parts=parts.filter(function(p){p.age++;p.x+=p.vx;p.y+=p.vy;p.vy-=.01;var k=1-p.age/p.life;if(k<=0)return false;
+   x.fillStyle='hsla('+Math.max(5,42-34*(1-k))+',100%,'+(48+22*k)+'%,'+(k*.5)+')';x.beginPath();x.arc(p.x,p.y,p.r*k,0,6.28);x.fill();return true;});
+  x.globalCompositeOperation='source-over';x.fillStyle='#4a2a14';x.fillRect(W/2-46,H-14,92,10);x.fillStyle='#3a2010';x.fillRect(W/2-30,H-8,60,6);
+  if(crackle&&--crackT<=0){crackT=40+Math.random()*90;SFX.tone(70+Math.random()*70,.05,'sawtooth',.06);}
+ }
+ loop();
+})();
+/* ---- Fidget-Spinner ---- */(function(){
+ var cv=document.getElementById('spin');if(!cv)return;var x=cv.getContext('2d'),W=cv.width,H=cv.height,cx=W/2,cy=H/2,R=W*.42;
+ var ang=0,vel=0,dragging=false,lastA=0,lastT=0,turns=0,rpmEl=document.getElementById('spinrpm'),tEl=document.getElementById('spinturns');
+ function ptA(e){var r=cv.getBoundingClientRect();return Math.atan2((e.clientY-r.top)/r.height*H-cy,(e.clientX-r.left)/r.width*W-cx);}
+ cv.addEventListener('pointerdown',function(e){dragging=true;lastA=ptA(e);lastT=performance.now();vel=0;try{cv.setPointerCapture(e.pointerId);}catch(_){}});
+ cv.addEventListener('pointermove',function(e){if(!dragging)return;var a=ptA(e),d=a-lastA;while(d>Math.PI)d-=6.283;while(d<-Math.PI)d+=6.283;var now=performance.now(),dt=Math.max(1,now-lastT);ang+=d;vel=d/dt*16;lastA=a;lastT=now;});
+ addEventListener('pointerup',function(){if(dragging){dragging=false;if(Math.abs(vel)>.03)SFX.tone(200,.09,'triangle',.1);}});
+ var cols=['#ff3d81','#ffd23f','#3ddc97'];
+ function draw(){requestAnimationFrame(draw);if(!dragging){ang+=vel;vel*=.99;if(Math.abs(vel)<.0006)vel=0;}
+  turns+=Math.abs(vel)/6.283;if(tEl)tEl.textContent=Math.floor(turns);if(rpmEl)rpmEl.textContent=Math.round(Math.abs(vel)*955);
+  x.clearRect(0,0,W,H);x.save();x.translate(cx,cy);x.rotate(ang);
+  for(var i=0;i<3;i++){x.rotate(6.283/3);x.beginPath();x.arc(0,-R*.7,R*.32,0,6.28);x.fillStyle=cols[i];x.fill();x.strokeStyle='#0004';x.lineWidth=2;x.stroke();}
+  x.beginPath();x.arc(0,0,R*.3,0,6.28);x.fillStyle='#d8d8e0';x.fill();x.beginPath();x.arc(0,0,R*.13,0,6.28);x.fillStyle='#8a8a98';x.fill();
+  x.restore();}
+ draw();
 })();</script>
 <style>
 #showfx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
