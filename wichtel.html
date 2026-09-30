@@ -2992,5 +2992,23 @@ button,.btn,.mtabs button,.msub button,.gfilter button,.seg button{transition:ba
 @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
 </style>
 
+<style>/* ===== Echte Übergänge: Panels, Overlays, (Unter-)Tabs ===== */
+@keyframes uxfade{from{opacity:0}to{opacity:1}}
+@keyframes uxpop{from{opacity:0;transform:scale(.95) translateY(12px)}to{opacity:1;transform:none}}
+/* Einstellungen-Panel */
+#setw:not([hidden]){animation:uxfade .2s ease}
+#setw:not([hidden]) .setcard{animation:uxpop .3s cubic-bezier(.2,.8,.3,1)}
+/* Spielhalle & Spiel-Overlays */
+#shw:not([hidden]),#ssw:not([hidden]),#skw:not([hidden]){animation:uxfade .28s ease}
+/* Unter-Tabs (Party/Chaos/Tools) */
+.grid.mv.on{animation:mpin .34s cubic-bezier(.2,.7,.3,1)}
+/* Kartenreihen etwas lebendiger beim Tab-Wechsel */
+.mp.on .grid>.card.tile{animation:uxpop .42s cubic-bezier(.2,.8,.3,1) both}
+.mp.on .grid>.card.tile:nth-child(2){animation-delay:.05s}
+.mp.on .grid>.card.tile:nth-child(3){animation-delay:.1s}
+.mp.on .grid>.card.tile:nth-child(n+4){animation-delay:.15s}
+@media (prefers-reduced-motion:reduce){#setw:not([hidden]),#setw:not([hidden]) .setcard,#shw:not([hidden]),#ssw:not([hidden]),#skw:not([hidden]),.grid.mv.on,.mp.on .grid>.card.tile{animation:none}}
+</style>
+
 </body>
 </html>
