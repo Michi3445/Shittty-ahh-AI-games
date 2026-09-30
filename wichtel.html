@@ -1510,11 +1510,12 @@ body.facing .duel .p1{transform:rotate(180deg)}
 #t2g div{aspect-ratio:1;border-radius:14px;background:#ffffff14;display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:800;cursor:pointer}
 .ep-opts{display:flex;gap:10px;justify-content:center;margin:8px 0}
 .ep-opts button{font-size:1.6rem;padding:14px 18px}
+.gfilter{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:2px 0 12px}.gfilter button{background:#ffffff14;border:1px solid #ffffff2e;padding:7px 14px;border-radius:999px;color:var(--ink);font-size:.85rem}.gfilter button.on{background:var(--gold);color:#221}.gcard.two{border-color:#ffd23f66}.gcard.two .sb{color:var(--gold)}
 &lt;/style&gt;&lt;/head&gt;&lt;body&gt;
 &lt;h1&gt;Spielhalle 🕹️&lt;/h1&gt;
 &lt;nav id=&quot;tabs&quot;&gt;&lt;/nav&gt;
 &lt;button id=&quot;homebtn&quot;&gt;☰ Menü&lt;/button&gt;
-&lt;section id=&quot;s-menu&quot; class=&quot;on&quot;&gt;&lt;div class=&quot;menu-grid&quot; id=&quot;glist&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section id=&quot;s-menu&quot; class=&quot;on&quot;&gt;&lt;div class=&quot;gfilter&quot; id=&quot;gfilter&quot;&gt;&lt;button data-f=&quot;all&quot; class=&quot;on&quot;&gt;Alle&lt;/button&gt;&lt;button data-f=&quot;1&quot;&gt;👤 1 Spieler&lt;/button&gt;&lt;button data-f=&quot;2&quot;&gt;⚔️ 2 Spieler&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;menu-grid&quot; id=&quot;glist&quot;&gt;&lt;/div&gt;&lt;/section&gt;
 
 &lt;section id=&quot;s-sn&quot;&gt;
  &lt;div class=&quot;hud&quot;&gt;&lt;span&gt;Punkte: &lt;b id=&quot;pt&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Rekord: &lt;b id=&quot;hi&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
@@ -1609,6 +1610,7 @@ Tanz 10 Sekunden 🕺&lt;/textarea&gt;
   &lt;div class=&quot;duel-half p2&quot; data-rd=&quot;2&quot;&gt;&lt;span&gt;Spieler 2 🟢&lt;/span&gt;&lt;span class=&quot;rdm&quot;&gt;Warte auf Gold&lt;/span&gt;&lt;span&gt;Punkte: &lt;b class=&quot;rds2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
  &lt;/div&gt;
  &lt;p style=&quot;opacity:.75;font-size:.85rem;margin:8px 0 0&quot;&gt;Wird die Fläche gold, zuerst tippen! Zu früh = Punkt für den anderen.&lt;/p&gt;
+&lt;p style=&quot;opacity:.7;font-size:.78rem;margin:6px 0 0&quot;&gt;💻 Desktop: 🔴 = A-Taste · 🟢 = L-Taste&lt;/p&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-bm&quot;&gt;
  &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;bmgo&quot;&gt;Start (10 s)&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;Zeit: &lt;b id=&quot;bmt&quot;&gt;10&lt;/b&gt;s&lt;/span&gt;&lt;button class=&quot;faceBtn&quot; style=&quot;background:#ffffff26&quot;&gt;🔄&lt;/button&gt;&lt;/div&gt;
@@ -1616,6 +1618,7 @@ Tanz 10 Sekunden 🕺&lt;/textarea&gt;
   &lt;div class=&quot;duel-half p1&quot; data-bm=&quot;1&quot;&gt;&lt;span&gt;Spieler 1 🔴&lt;/span&gt;&lt;span class=&quot;bignum&quot; id=&quot;bm1&quot;&gt;0&lt;/span&gt;&lt;span&gt;Hau drauf!&lt;/span&gt;&lt;/div&gt;
   &lt;div class=&quot;duel-half p2&quot; data-bm=&quot;2&quot;&gt;&lt;span&gt;Spieler 2 🟢&lt;/span&gt;&lt;span class=&quot;bignum&quot; id=&quot;bm2&quot;&gt;0&lt;/span&gt;&lt;span&gt;Hau drauf!&lt;/span&gt;&lt;/div&gt;
  &lt;/div&gt;
+&lt;p style=&quot;opacity:.7;font-size:.78rem;margin:6px 0 0&quot;&gt;💻 Desktop: 🔴 = A · 🟢 = L (schnell drücken)&lt;/p&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-tug&quot;&gt;
  &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;tuggo&quot;&gt;Start&lt;/button&gt;&lt;button class=&quot;faceBtn&quot; style=&quot;background:#ffffff26&quot;&gt;🔄&lt;/button&gt;&lt;/div&gt;
@@ -1623,6 +1626,7 @@ Tanz 10 Sekunden 🕺&lt;/textarea&gt;
  &lt;div class=&quot;tugbar&quot;&gt;&lt;i id=&quot;tugi&quot;&gt;&lt;/i&gt;&lt;/div&gt;
  &lt;div class=&quot;duel&quot;&gt;&lt;div class=&quot;duel-half p2&quot; data-tug=&quot;2&quot;&gt;&lt;span&gt;Spieler 2 🟢&lt;/span&gt;&lt;span&gt;Zieh zu dir! ➡️&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
  &lt;p class=&quot;res&quot; id=&quot;tugr&quot;&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p style=&quot;opacity:.7;font-size:.78rem;margin:6px 0 0&quot;&gt;💻 Desktop: 🔴 = A · 🟢 = L&lt;/p&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-c4&quot;&gt;
  &lt;div class=&quot;res&quot; id=&quot;c4s&quot;&gt;🔴 Spieler 1 ist dran&lt;/div&gt;
@@ -1633,22 +1637,26 @@ Tanz 10 Sekunden 🕺&lt;/textarea&gt;
  &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;kbgo&quot;&gt;Start&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;🔴 &lt;b id=&quot;kbs1&quot;&gt;0&lt;/b&gt; : &lt;b id=&quot;kbs2&quot;&gt;0&lt;/b&gt; 🟢&lt;/span&gt;&lt;/div&gt;
  &lt;canvas id=&quot;kbc&quot; width=&quot;380&quot; height=&quot;520&quot; class=&quot;arena&quot;&gt;&lt;/canvas&gt;
  &lt;p style=&quot;opacity:.75;font-size:.85rem;margin:6px 0 0&quot;&gt;Zieh auf deiner Hälfte, um dein Auto zu steuern, und schieb den Ball ins gegnerische Tor. 🔴 unten, 🟢 oben. Erster mit 5 gewinnt.&lt;/p&gt;
+&lt;p style=&quot;opacity:.7;font-size:.78rem;margin:6px 0 0&quot;&gt;💻 Desktop: 🔴 = WASD · 🟢 = Pfeiltasten&lt;/p&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-pg&quot;&gt;
  &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;pggo&quot;&gt;Start&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;🟢 &lt;b id=&quot;pgs2&quot;&gt;0&lt;/b&gt; : &lt;b id=&quot;pgs1&quot;&gt;0&lt;/b&gt; 🔴&lt;/span&gt;&lt;/div&gt;
  &lt;canvas id=&quot;pgc&quot; width=&quot;360&quot; height=&quot;520&quot; class=&quot;arena&quot;&gt;&lt;/canvas&gt;
  &lt;p style=&quot;opacity:.75;font-size:.85rem&quot;&gt;Zieh auf deiner Hälfte, um den Schläger zu bewegen. 🔴 unten, 🟢 oben. Erster mit 7 gewinnt.&lt;/p&gt;
+&lt;p style=&quot;opacity:.7;font-size:.78rem;margin:6px 0 0&quot;&gt;💻 Desktop: 🔴 = A/D · 🟢 = ◀ ▶&lt;/p&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-ah&quot;&gt;
  &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;ahgo&quot;&gt;Start&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;🟢 &lt;b id=&quot;ahs2&quot;&gt;0&lt;/b&gt; : &lt;b id=&quot;ahs1&quot;&gt;0&lt;/b&gt; 🔴&lt;/span&gt;&lt;/div&gt;
  &lt;canvas id=&quot;ahc&quot; width=&quot;360&quot; height=&quot;520&quot; class=&quot;arena&quot;&gt;&lt;/canvas&gt;
  &lt;p style=&quot;opacity:.75;font-size:.85rem&quot;&gt;Zieh deinen Schläger auf deiner Hälfte. Puck ins gegnerische Tor. Erster mit 7 gewinnt.&lt;/p&gt;
+&lt;p style=&quot;opacity:.7;font-size:.78rem;margin:6px 0 0&quot;&gt;💻 Desktop: 🔴 = WASD · 🟢 = Pfeiltasten&lt;/p&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-sd&quot;&gt;
  &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;sdgo&quot;&gt;Start (30 s)&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;Zeit: &lt;b id=&quot;sdt&quot;&gt;30&lt;/b&gt;s&lt;/span&gt;&lt;button class=&quot;faceBtn&quot; style=&quot;background:#ffffff26&quot;&gt;🔄&lt;/button&gt;&lt;/div&gt;
  &lt;div class=&quot;duel&quot;&gt;&lt;div class=&quot;duel-half p1&quot; id=&quot;sdf1&quot; style=&quot;position:relative;overflow:hidden;min-height:20vh&quot;&gt;&lt;span style=&quot;position:absolute;top:6px;left:10px&quot;&gt;🔴 &lt;b id=&quot;sds1&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
  &lt;div class=&quot;duel&quot;&gt;&lt;div class=&quot;duel-half p2&quot; id=&quot;sdf2&quot; style=&quot;position:relative;overflow:hidden;min-height:20vh&quot;&gt;&lt;span style=&quot;position:absolute;top:6px;left:10px&quot;&gt;🟢 &lt;b id=&quot;sds2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
  &lt;p style=&quot;opacity:.75;font-size:.85rem;margin:6px 0 0&quot;&gt;Jeder trifft die Schneeflocken auf seiner eigenen Hälfte. Wer in 30 s mehr trifft, gewinnt.&lt;/p&gt;
+&lt;p style=&quot;opacity:.7;font-size:.78rem;margin:6px 0 0&quot;&gt;💻 Desktop: 🔴 = A · 🟢 = L&lt;/p&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-ep&quot;&gt;
  &lt;div class=&quot;res&quot; id=&quot;epmsg&quot;&gt;Spieler 1 schießt – Richtung wählen&lt;/div&gt;
@@ -1664,6 +1672,7 @@ Tanz 10 Sekunden 🕺&lt;/textarea&gt;
   &lt;div class=&quot;duel-half p2&quot;&gt;&lt;button id=&quot;qzb2&quot;&gt;🟢 BUZZ&lt;/button&gt;&lt;span&gt;Punkte: &lt;b id=&quot;qzs2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
  &lt;/div&gt;
  &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;qzgo&quot;&gt;Start / Nächste Frage&lt;/button&gt;&lt;button class=&quot;faceBtn&quot; style=&quot;background:#ffffff26&quot;&gt;🔄&lt;/button&gt;&lt;/div&gt;
+&lt;p style=&quot;opacity:.7;font-size:.78rem;margin:6px 0 0&quot;&gt;💻 Desktop: 🔴 buzzt mit A · 🟢 mit L&lt;/p&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-t2&quot;&gt;
  &lt;div class=&quot;res&quot; id=&quot;t2s&quot;&gt;🔴 Spieler 1 (✖) ist dran&lt;/div&gt;
@@ -1693,11 +1702,10 @@ function ls(k,v){try{if(v===undefined)return parseFloat(localStorage.getItem(k))
 var tab=&#x27;menu&#x27;;
 var GG=[[&#x27;sn&#x27;,&#x27;Snake&#x27;,&#x27;🐍&#x27;,&#x27;Klassiker&#x27;],[&#x27;tt&#x27;,&#x27;Tetris&#x27;,&#x27;🧱&#x27;,&#x27;Blöcke stapeln&#x27;],[&#x27;2048&#x27;,&#x27;2048&#x27;,&#x27;🔢&#x27;,&#x27;Verschmelzen&#x27;],[&#x27;bo&#x27;,&#x27;Breakout&#x27;,&#x27;🏓&#x27;,&#x27;Ziegel zerstören&#x27;],[&#x27;mw&#x27;,&#x27;Maulwurf&#x27;,&#x27;🔨&#x27;,&#x27;Drauf hauen&#x27;],[&#x27;ttt&#x27;,&#x27;3 Gewinnt&#x27;,&#x27;⭕&#x27;,&#x27;Gegen CPU&#x27;],[&#x27;rd&#x27;,&#x27;Reaktions-Duell&#x27;,&#x27;⚡&#x27;,&#x27;2 Spieler&#x27;],[&#x27;bm&#x27;,&#x27;Button-Mash&#x27;,&#x27;👆&#x27;,&#x27;2 Spieler&#x27;],[&#x27;tug&#x27;,&#x27;Seilziehen&#x27;,&#x27;🪢&#x27;,&#x27;2 Spieler&#x27;],[&#x27;c4&#x27;,&#x27;Vier Gewinnt&#x27;,&#x27;🔴&#x27;,&#x27;2 Spieler&#x27;],[&#x27;kb&#x27;,&#x27;Kickbot&#x27;,&#x27;🚗&#x27;,&#x27;2 Spieler&#x27;],[&#x27;pg&#x27;,&#x27;Pong 2P&#x27;,&#x27;🏓&#x27;,&#x27;2 Spieler&#x27;],[&#x27;ah&#x27;,&#x27;Air-Hockey&#x27;,&#x27;🏒&#x27;,&#x27;2 Spieler&#x27;],[&#x27;sd&#x27;,&#x27;Schneeball-Duell&#x27;,&#x27;❄️&#x27;,&#x27;2 Spieler&#x27;],[&#x27;ep&#x27;,&#x27;Elfmeter&#x27;,&#x27;🥅&#x27;,&#x27;2 Spieler&#x27;],[&#x27;qz&#x27;,&#x27;Quiz-Buzzer&#x27;,&#x27;❓&#x27;,&#x27;2 Spieler&#x27;],[&#x27;t2&#x27;,&#x27;3 Gewinnt 2P&#x27;,&#x27;⭕&#x27;,&#x27;2 Spieler&#x27;],[&#x27;db&#x27;,&#x27;Käsekästchen&#x27;,&#x27;🟦&#x27;,&#x27;2 Spieler&#x27;],[&#x27;md&#x27;,&#x27;Memory-Duell&#x27;,&#x27;🧩&#x27;,&#x27;2 Spieler&#x27;],[&#x27;fb&#x27;,&#x27;Flappy&#x27;,&#x27;🦌&#x27;,&#x27;Fliegen&#x27;],[&#x27;rz&#x27;,&#x27;Reaktion&#x27;,&#x27;⚡&#x27;,&#x27;Schnell tippen&#x27;],[&#x27;kl&#x27;,&#x27;Klick&#x27;,&#x27;👆&#x27;,&#x27;10 s Speed&#x27;],[&#x27;wh&#x27;,&#x27;Glücksrad&#x27;,&#x27;🎡&#x27;,&#x27;Drehen&#x27;],[&#x27;dc&#x27;,&#x27;Würfel &amp; Münze&#x27;,&#x27;🎲&#x27;,&#x27;Zufall&#x27;],[&#x27;fg&#x27;,&#x27;Fidget&#x27;,&#x27;🫧&#x27;,&#x27;Entspannen&#x27;],[&#x27;ss&#x27;,&#x27;Schneesturm&#x27;,&#x27;⛄&#x27;,&#x27;Physik&#x27;],[&#x27;sk&#x27;,&#x27;Tasten-Duell&#x27;,&#x27;⌨️&#x27;,&#x27;Tasten finden&#x27;],[&#x27;rk&#x27;,&#x27;Rekorde&#x27;,&#x27;🏆&#x27;,&#x27;Bestenliste&#x27;]];
 var BESTKEY={sn:&#x27;sn_hi&#x27;,tt:&#x27;tt_hi&#x27;,fb:&#x27;fb_hi&#x27;,&#x27;2048&#x27;:&#x27;g2048_hi&#x27;,bo:&#x27;bo_hi&#x27;,mw:&#x27;mw_hi&#x27;,kl:&#x27;kl_hi&#x27;};
-function buildMenu(){var gl=$(&#x27;glist&#x27;);gl.innerHTML=&#x27;&#x27;;GG.forEach(function(g){var c=document.createElement(&#x27;div&#x27;);c.className=&#x27;gcard&#x27;;c.tabIndex=0;
- var bs=&#x27;&#x27;;if(BESTKEY[g[0]]){var v=ls(BESTKEY[g[0]]);if(v&amp;&amp;!isNaN(v))bs=&#x27;Rekord: &#x27;+v}
- c.innerHTML=&#x27;&lt;span class=&quot;em&quot;&gt;&#x27;+g[2]+&#x27;&lt;/span&gt;&lt;span class=&quot;nm&quot;&gt;&#x27;+g[1]+&#x27;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;&#x27;+g[3]+&#x27;&lt;/span&gt;&lt;span class=&quot;bs&quot;&gt;&#x27;+bs+&#x27;&lt;/span&gt;&#x27;;
- c.onclick=function(){goTab(g[0])};c.onkeydown=function(e){if(e.key===&#x27;Enter&#x27;||e.key===&#x27; &#x27;){e.preventDefault();goTab(g[0])}};
- gl.appendChild(c)})}
+var curFilter=&#x27;all&#x27;;
+function buildMenu(){var gl=$(&#x27;glist&#x27;);gl.innerHTML=&#x27;&#x27;;GG.forEach(function(g){var two=g[3]===&#x27;2 Spieler&#x27;;if(curFilter===&#x27;2&#x27;&amp;&amp;!two)return;if(curFilter===&#x27;1&#x27;&amp;&amp;two)return;var c=document.createElement(&#x27;div&#x27;);c.className=&#x27;gcard&#x27;+(two?&#x27; two&#x27;:&#x27;&#x27;);c.tabIndex=0;var bs=&#x27;&#x27;;if(BESTKEY[g[0]]){var v=ls(BESTKEY[g[0]]);if(v&amp;&amp;!isNaN(v))bs=&#x27;Rekord: &#x27;+v}c.innerHTML=&#x27;&lt;span class=&quot;em&quot;&gt;&#x27;+g[2]+&#x27;&lt;/span&gt;&lt;span class=&quot;nm&quot;&gt;&#x27;+g[1]+&#x27;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;&#x27;+g[3]+&#x27;&lt;/span&gt;&lt;span class=&quot;bs&quot;&gt;&#x27;+bs+&#x27;&lt;/span&gt;&#x27;;c.onclick=function(){goTab(g[0])};c.onkeydown=function(e){if(e.key===&#x27;Enter&#x27;||e.key===&#x27; &#x27;){e.preventDefault();goTab(g[0])}};gl.appendChild(c)})}
+function setFilter(fl){curFilter=fl;document.querySelectorAll(&#x27;#gfilter button&#x27;).forEach(function(b){b.classList.toggle(&#x27;on&#x27;,b.dataset.f===fl)});buildMenu()}
+document.addEventListener(&#x27;click&#x27;,function(e){var b=e.target&amp;&amp;e.target.closest?e.target.closest(&#x27;#gfilter button&#x27;):null;if(b)setFilter(b.dataset.f)});
 buildMenu();
 function leave(){pause(true);if(tst===&#x27;run&#x27;)tst=&#x27;pause&#x27;;if(fst===&#x27;run&#x27;)fst=&#x27;pause&#x27;}
 function goTab(t){leave();tab=t;document.body.classList.add(&#x27;ingame&#x27;);
@@ -2017,20 +2025,20 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
  function round(){clr();state=&#x27;wait&#x27;;msg(&#x27;Bereit… nicht zu früh!&#x27;);tmr=setTimeout(function(){state=&#x27;go&#x27;;halves.forEach(function(h){h.classList.add(&#x27;hot&#x27;)});msg(&#x27;JETZT!&#x27;);beep(880,.1,&#x27;triangle&#x27;)},1200+Math.random()*3000)}
  function done(p,foul){state=&#x27;done&#x27;;clearTimeout(tmr);if(foul){sec.querySelector(&#x27;.p&#x27;+p).classList.add(&#x27;foul&#x27;);var o=p==1?2:1;if(o==1)s1++;else s2++;beep(140,.3,&#x27;sawtooth&#x27;);msg(&#x27;Zu früh! Punkt für Spieler &#x27;+o)}else{sec.querySelector(&#x27;.p&#x27;+p).classList.add(&#x27;win&#x27;);if(p==1)s1++;else s2++;beep(600,.2,&#x27;triangle&#x27;);msg(&#x27;Spieler &#x27;+p+&#x27; gewinnt die Runde!&#x27;)}sc()}
  halves.forEach(function(h){h.addEventListener(&#x27;pointerdown&#x27;,function(){var p=+h.dataset.rd;if(state===&#x27;go&#x27;)done(p,false);else if(state===&#x27;wait&#x27;)done(p,true)})});
- $(&#x27;rdgo&#x27;).onclick=function(){if(state===&#x27;wait&#x27;)return;round()};
+ $(&#x27;rdgo&#x27;).onclick=function(){if(state===&#x27;wait&#x27;)return;round()};addEventListener(&#x27;keydown&#x27;,function(e){if(tab!==&#x27;rd&#x27;||e.repeat)return;var k=e.key.toLowerCase();if(k===&#x27;a&#x27;){if(state===&#x27;go&#x27;)done(1,false);else if(state===&#x27;wait&#x27;)done(1,true);else return;e.preventDefault()}else if(k===&#x27;l&#x27;){if(state===&#x27;go&#x27;)done(2,false);else if(state===&#x27;wait&#x27;)done(2,true);else return;e.preventDefault()}});
 })();&lt;/script&gt;
 &lt;script&gt;/* Button-Mash */(function(){
  var sec=$(&#x27;s-bm&#x27;);if(!sec)return;var c1=0,c2=0,run=false,t=10,iv,e1=$(&#x27;bm1&#x27;),e2=$(&#x27;bm2&#x27;),et=$(&#x27;bmt&#x27;);
  sec.querySelectorAll(&#x27;.duel-half&#x27;).forEach(function(h){h.addEventListener(&#x27;pointerdown&#x27;,function(){if(!run)return;if(h.dataset.bm===&#x27;1&#x27;){c1++;e1.textContent=c1}else{c2++;e2.textContent=c2}beep(280+Math.random()*220,.02)})});
  $(&#x27;bmgo&#x27;).onclick=function(){if(run)return;run=true;c1=c2=0;e1.textContent=0;e2.textContent=0;t=10;et.textContent=10;sec.querySelectorAll(&#x27;.duel-half&#x27;).forEach(function(h){h.classList.remove(&#x27;win&#x27;)});
-  iv=setInterval(function(){t--;et.textContent=t;if(t&lt;=0){clearInterval(iv);run=false;var w=c1&gt;c2?&#x27;.p1&#x27;:c2&gt;c1?&#x27;.p2&#x27;:null;if(w)sec.querySelector(w).classList.add(&#x27;win&#x27;);beep(700,.2,&#x27;triangle&#x27;)}},1000)};
+  iv=setInterval(function(){t--;et.textContent=t;if(t&lt;=0){clearInterval(iv);run=false;var w=c1&gt;c2?&#x27;.p1&#x27;:c2&gt;c1?&#x27;.p2&#x27;:null;if(w)sec.querySelector(w).classList.add(&#x27;win&#x27;);beep(700,.2,&#x27;triangle&#x27;)}},1000)};addEventListener(&#x27;keydown&#x27;,function(e){if(tab!==&#x27;bm&#x27;||!run||e.repeat)return;var k=e.key.toLowerCase();if(k===&#x27;a&#x27;){c1++;e1.textContent=c1;beep(300,.02)}else if(k===&#x27;l&#x27;){c2++;e2.textContent=c2;beep(340,.02)}else return;e.preventDefault()});
 })();&lt;/script&gt;
 &lt;script&gt;/* Seilziehen */(function(){
  var sec=$(&#x27;s-tug&#x27;);if(!sec)return;var pos=50,run=false,marker=$(&#x27;tugi&#x27;),res=$(&#x27;tugr&#x27;);
  function upd(){marker.style.left=pos+&#x27;%&#x27;}
  sec.querySelectorAll(&#x27;.duel-half&#x27;).forEach(function(h){h.addEventListener(&#x27;pointerdown&#x27;,function(){if(!run)return;if(h.dataset.tug===&#x27;1&#x27;)pos=Math.max(0,pos-3);else pos=Math.min(100,pos+3);upd();beep(220,.02);
    if(pos&lt;=3){run=false;res.textContent=&#x27;Spieler 1 gewinnt! 🔴&#x27;;beep(700,.2,&#x27;triangle&#x27;)}else if(pos&gt;=97){run=false;res.textContent=&#x27;Spieler 2 gewinnt! 🟢&#x27;;beep(700,.2,&#x27;triangle&#x27;)}})});
- $(&#x27;tuggo&#x27;).onclick=function(){pos=50;upd();run=true;res.textContent=&#x27;Los! Hau drauf!&#x27;};upd();
+ $(&#x27;tuggo&#x27;).onclick=function(){pos=50;upd();run=true;res.textContent=&#x27;Los! Hau drauf!&#x27;};addEventListener(&#x27;keydown&#x27;,function(e){if(tab!==&#x27;tug&#x27;||!run||e.repeat)return;var k=e.key.toLowerCase();if(k===&#x27;a&#x27;)pos=Math.max(0,pos-3);else if(k===&#x27;l&#x27;)pos=Math.min(100,pos+3);else return;e.preventDefault();upd();beep(220,.02);if(pos&lt;=3){run=false;res.textContent=&#x27;Spieler 1 gewinnt! 🔴&#x27;;beep(700,.2,&#x27;triangle&#x27;)}else if(pos&gt;=97){run=false;res.textContent=&#x27;Spieler 2 gewinnt! 🟢&#x27;;beep(700,.2,&#x27;triangle&#x27;)}});upd();
 })();&lt;/script&gt;
 &lt;script&gt;/* Vier Gewinnt */(function(){
  var g=$(&#x27;c4g&#x27;);if(!g)return;var W=7,H=6,b,turn,over,w1=0,w2=0,cells=[],st=$(&#x27;c4s&#x27;);
@@ -2071,12 +2079,12 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
   x.fillStyle=&#x27;#fff&#x27;;x.beginPath();x.arc(ball.x,ball.y,ball.r,0,6.28);x.fill();
   if(!run){x.fillStyle=&#x27;#fff&#x27;;x.textAlign=&#x27;center&#x27;;x.font=&#x27;bold 20px system-ui&#x27;;x.fillText(s1&gt;=5?&#x27;🔴 Spieler 1 gewinnt!&#x27;:s2&gt;=5?&#x27;🟢 Spieler 2 gewinnt!&#x27;:&#x27;Start drücken&#x27;,W/2,H/2-16)}}
  function loop(){requestAnimationFrame(loop);if(tab!==&#x27;kb&#x27;||document.body.classList.contains(&#x27;disguise&#x27;))return;if(run)step();draw()}
- $(&#x27;kbgo&#x27;).onclick=function(){s1=s2=0;$(&#x27;kbs1&#x27;).textContent=0;$(&#x27;kbs2&#x27;).textContent=0;reset();run=true};
+ $(&#x27;kbgo&#x27;).onclick=function(){s1=s2=0;$(&#x27;kbs1&#x27;).textContent=0;$(&#x27;kbs2&#x27;).textContent=0;reset();run=true};addEventListener(&#x27;keydown&#x27;,function(e){if(tab!==&#x27;kb&#x27;)return;var st=22,k=e.key.toLowerCase(),a=cars[1],b=cars[2];if(k===&#x27;a&#x27;)a.x-=st;else if(k===&#x27;d&#x27;)a.x+=st;else if(k===&#x27;w&#x27;)a.y-=st;else if(k===&#x27;s&#x27;)a.y+=st;else if(e.key===&#x27;ArrowLeft&#x27;)b.x-=st;else if(e.key===&#x27;ArrowRight&#x27;)b.x+=st;else if(e.key===&#x27;ArrowUp&#x27;)b.y-=st;else if(e.key===&#x27;ArrowDown&#x27;)b.y+=st;else return;e.preventDefault();targets[1]=null;targets[2]=null});
  reset();loop();
 })();&lt;/script&gt;
 &lt;script&gt;/* Pong 2P */(function(){var cv=$(&#x27;pgc&#x27;);if(!cv)return;var x=cv.getContext(&#x27;2d&#x27;),W=cv.width,H=cv.height;
  var s1=0,s2=0,pad={1:W/2,2:W/2},pw=74,ball,run=false,pmap={};
- function reset(dir){ball={x:W/2,y:H/2,vx:(Math.random()-.5)*4,vy:(dir||(Math.random()&lt;.5?-1:1))*4.2,r:9}}
+ function reset(dir){ball={x:W/2,y:H/2,vx:(Math.random()-.5)*2.6,vy:(dir||(Math.random()&lt;.5?-1:1))*3,r:9}}
  function pt(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
  cv.addEventListener(&#x27;pointerdown&#x27;,function(e){var p=pt(e),s=p.y&lt;H/2?2:1;pmap[e.pointerId]=s;pad[s]=p.x;try{cv.setPointerCapture(e.pointerId)}catch(_){}});
  cv.addEventListener(&#x27;pointermove&#x27;,function(e){var s=pmap[e.pointerId];if(s)pad[s]=pt(e).x});
@@ -2091,17 +2099,17 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
   x.fillStyle=&#x27;#fff&#x27;;x.beginPath();x.arc(ball.x,ball.y,ball.r,0,6.28);x.fill();
   if(!run){x.fillStyle=&#x27;#fff&#x27;;x.textAlign=&#x27;center&#x27;;x.font=&#x27;bold 20px system-ui&#x27;;x.fillText(s1&gt;=7?&#x27;🔴 gewinnt!&#x27;:s2&gt;=7?&#x27;🟢 gewinnt!&#x27;:&#x27;Start drücken&#x27;,W/2,H/2-14)}}
  function loop(){requestAnimationFrame(loop);if(tab!==&#x27;pg&#x27;||document.body.classList.contains(&#x27;disguise&#x27;))return;if(run)step();draw()}
- $(&#x27;pggo&#x27;).onclick=function(){s1=s2=0;$(&#x27;pgs1&#x27;).textContent=0;$(&#x27;pgs2&#x27;).textContent=0;reset();run=true};reset();loop();})();&lt;/script&gt;
+ $(&#x27;pggo&#x27;).onclick=function(){s1=s2=0;$(&#x27;pgs1&#x27;).textContent=0;$(&#x27;pgs2&#x27;).textContent=0;reset();run=true};addEventListener(&#x27;keydown&#x27;,function(e){if(tab!==&#x27;pg&#x27;)return;var k=e.key.toLowerCase();if(k===&#x27;a&#x27;)pad[1]=Math.max(pw/2,pad[1]-24);else if(k===&#x27;d&#x27;)pad[1]=Math.min(W-pw/2,pad[1]+24);else if(e.key===&#x27;ArrowLeft&#x27;)pad[2]=Math.max(pw/2,pad[2]-24);else if(e.key===&#x27;ArrowRight&#x27;)pad[2]=Math.min(W-pw/2,pad[2]+24);else return;e.preventDefault()});reset();loop();})();&lt;/script&gt;
 &lt;script&gt;/* Air-Hockey */(function(){var cv=$(&#x27;ahc&#x27;);if(!cv)return;var x=cv.getContext(&#x27;2d&#x27;),W=cv.width,H=cv.height,GW=W*0.44;
  var s1=0,s2=0,puck,mal={1:{x:W/2,y:H-60,r:24},2:{x:W/2,y:60,r:24}},prev={1:{x:W/2,y:H-60},2:{x:W/2,y:60}},targets={1:null,2:null},pmap={},run=false;
- function reset(){puck={x:W/2,y:H/2,vx:(Math.random()-.5)*2,vy:(Math.random()&lt;.5?-1:1)*3,r:12}}
+ function reset(){puck={x:W/2,y:H/2,vx:(Math.random()-.5)*1.4,vy:(Math.random()&lt;.5?-1:1)*2.2,r:12}}
  function pt(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
  cv.addEventListener(&#x27;pointerdown&#x27;,function(e){var p=pt(e),s=p.y&lt;H/2?2:1;pmap[e.pointerId]=s;targets[s]=p;try{cv.setPointerCapture(e.pointerId)}catch(_){}});
  cv.addEventListener(&#x27;pointermove&#x27;,function(e){var s=pmap[e.pointerId];if(s)targets[s]=pt(e)});
  function up(e){var s=pmap[e.pointerId];if(s){targets[s]=null;delete pmap[e.pointerId]}}cv.addEventListener(&#x27;pointerup&#x27;,up);cv.addEventListener(&#x27;pointercancel&#x27;,up);
  function goal(who){if(who===1)s1++;else s2++;$(&#x27;ahs1&#x27;).textContent=s1;$(&#x27;ahs2&#x27;).textContent=s2;beep(600,.2,&#x27;triangle&#x27;);if(s1&gt;=7||s2&gt;=7)run=false;else reset()}
  function step(){[1,2].forEach(function(k){var mv=mal[k],t=targets[k];prev[k].x=mv.x;prev[k].y=mv.y;if(t){mv.x=Math.max(mv.r,Math.min(W-mv.r,t.x));mv.y=Math.max(mv.r,Math.min(H-mv.r,t.y))}
-   var dx=puck.x-mv.x,dy=puck.y-mv.y,d=Math.hypot(dx,dy),md=puck.r+mv.r;if(d&lt;md&amp;&amp;d&gt;0){var nx=dx/d,ny=dy/d;puck.x=mv.x+nx*md;puck.y=mv.y+ny*md;puck.vx=nx*7+(mv.x-prev[k].x);puck.vy=ny*7+(mv.y-prev[k].y);beep(500,.03)}});
+   var dx=puck.x-mv.x,dy=puck.y-mv.y,d=Math.hypot(dx,dy),md=puck.r+mv.r;if(d&lt;md&amp;&amp;d&gt;0){var nx=dx/d,ny=dy/d;puck.x=mv.x+nx*md;puck.y=mv.y+ny*md;puck.vx=nx*5+(mv.x-prev[k].x)*.8;puck.vy=ny*5+(mv.y-prev[k].y)*.8;beep(500,.03)}});
   puck.x+=puck.vx;puck.y+=puck.vy;puck.vx*=.995;puck.vy*=.995;
   if(puck.x&lt;puck.r){puck.x=puck.r;puck.vx*=-1}if(puck.x&gt;W-puck.r){puck.x=W-puck.r;puck.vx*=-1}
   var ig=puck.x&gt;(W-GW)/2&amp;&amp;puck.x&lt;(W+GW)/2;
@@ -2114,7 +2122,7 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
   x.fillStyle=&#x27;#fff&#x27;;x.beginPath();x.arc(puck.x,puck.y,puck.r,0,6.28);x.fill();
   if(!run){x.fillStyle=&#x27;#fff&#x27;;x.textAlign=&#x27;center&#x27;;x.font=&#x27;bold 20px system-ui&#x27;;x.fillText(s1&gt;=7?&#x27;🔴 gewinnt!&#x27;:s2&gt;=7?&#x27;🟢 gewinnt!&#x27;:&#x27;Start drücken&#x27;,W/2,H/2-50)}}
  function loop(){requestAnimationFrame(loop);if(tab!==&#x27;ah&#x27;||document.body.classList.contains(&#x27;disguise&#x27;))return;if(run)step();draw()}
- $(&#x27;ahgo&#x27;).onclick=function(){s1=s2=0;$(&#x27;ahs1&#x27;).textContent=0;$(&#x27;ahs2&#x27;).textContent=0;reset();run=true};reset();loop();})();&lt;/script&gt;
+ $(&#x27;ahgo&#x27;).onclick=function(){s1=s2=0;$(&#x27;ahs1&#x27;).textContent=0;$(&#x27;ahs2&#x27;).textContent=0;reset();run=true};addEventListener(&#x27;keydown&#x27;,function(e){if(tab!==&#x27;ah&#x27;)return;var st=24,k=e.key.toLowerCase(),a=mal[1],b=mal[2];if(k===&#x27;a&#x27;)a.x-=st;else if(k===&#x27;d&#x27;)a.x+=st;else if(k===&#x27;w&#x27;)a.y-=st;else if(k===&#x27;s&#x27;)a.y+=st;else if(e.key===&#x27;ArrowLeft&#x27;)b.x-=st;else if(e.key===&#x27;ArrowRight&#x27;)b.x+=st;else if(e.key===&#x27;ArrowUp&#x27;)b.y-=st;else if(e.key===&#x27;ArrowDown&#x27;)b.y+=st;else return;e.preventDefault();a.x=Math.max(a.r,Math.min(W-a.r,a.x));a.y=Math.max(a.r,Math.min(H-a.r,a.y));b.x=Math.max(b.r,Math.min(W-b.r,b.x));b.y=Math.max(b.r,Math.min(H-b.r,b.y))});reset();loop();})();&lt;/script&gt;
 &lt;script&gt;/* Schneeball-Duell */(function(){var f1=$(&#x27;sdf1&#x27;),f2=$(&#x27;sdf2&#x27;);if(!f1)return;var s1=0,s2=0,run=false,iv,sp,t=30;
  function spawn(f,which){if(!run)return;var el=document.createElement(&#x27;div&#x27;);el.className=&#x27;sbtarget&#x27;;el.textContent=&#x27;❄️&#x27;;el.style.left=(12+Math.random()*76)+&#x27;%&#x27;;el.style.top=(30+Math.random()*55)+&#x27;%&#x27;;
   var life=setTimeout(function(){el.remove()},1100);
@@ -2122,7 +2130,7 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
   f.appendChild(el)}
  $(&#x27;sdgo&#x27;).onclick=function(){if(run)return;run=true;s1=s2=0;$(&#x27;sds1&#x27;).textContent=0;$(&#x27;sds2&#x27;).textContent=0;t=30;$(&#x27;sdt&#x27;).textContent=30;
   iv=setInterval(function(){t--;$(&#x27;sdt&#x27;).textContent=t;if(t&lt;=0){clearInterval(iv);clearInterval(sp);run=false;[f1,f2].forEach(function(f){[].forEach.call(f.querySelectorAll(&#x27;.sbtarget&#x27;),function(e){e.remove()})});beep(700,.2,&#x27;triangle&#x27;)}},1000);
-  sp=setInterval(function(){spawn(f1,1);spawn(f2,2)},600)};})();&lt;/script&gt;
+  sp=setInterval(function(){spawn(f1,1);spawn(f2,2)},600)};addEventListener(&#x27;keydown&#x27;,function(e){if(tab!==&#x27;sd&#x27;||!run)return;var k=e.key.toLowerCase(),t;if(k===&#x27;a&#x27;){t=f1.querySelector(&#x27;.sbtarget&#x27;);if(!t)return;t.dispatchEvent(new PointerEvent(&#x27;pointerdown&#x27;,{bubbles:true}))}else if(k===&#x27;l&#x27;){t=f2.querySelector(&#x27;.sbtarget&#x27;);if(!t)return;t.dispatchEvent(new PointerEvent(&#x27;pointerdown&#x27;,{bubbles:true}))}else return;e.preventDefault()});})();&lt;/script&gt;
 &lt;script&gt;/* Elfmeter */(function(){var sec=$(&#x27;s-ep&#x27;);if(!sec)return;var n=1,s1=0,s2=0,phase=&#x27;shoot&#x27;,shootDir=null,shooter=1,opts=$(&#x27;epopts&#x27;),msg=$(&#x27;epmsg&#x27;);
  function enable(v){[].forEach.call(opts.children,function(b){b.disabled=!v})}
  function start(){n=1;s1=s2=0;$(&#x27;eps1&#x27;).textContent=0;$(&#x27;eps2&#x27;).textContent=0;$(&#x27;epn&#x27;).textContent=1;shooter=1;phase=&#x27;shoot&#x27;;shootDir=null;msg.textContent=&#x27;Spieler 1 schießt – Richtung wählen&#x27;;$(&#x27;epnext&#x27;).style.display=&#x27;none&#x27;;enable(true)}
@@ -2150,7 +2158,7 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
  function answer(i,b){if(answered||!player)return;answered=true;var ok=i===cur.c;
   [].forEach.call(ansEl.children,function(bb,idx){bb.disabled=true;if(idx===cur.c)bb.classList.add(&#x27;ok&#x27;)});if(!ok)b.classList.add(&#x27;bad&#x27;);
   var who=ok?player:(player===1?2:1);if(who===1){s1++;$(&#x27;qzs1&#x27;).textContent=s1}else{s2++;$(&#x27;qzs2&#x27;).textContent=s2}beep(ok?800:160,.18,ok?&#x27;triangle&#x27;:&#x27;sawtooth&#x27;)}
- $(&#x27;qzb1&#x27;).onclick=function(){buzz(1)};$(&#x27;qzb2&#x27;).onclick=function(){buzz(2)};$(&#x27;qzgo&#x27;).onclick=show;})();&lt;/script&gt;
+ $(&#x27;qzb1&#x27;).onclick=function(){buzz(1)};$(&#x27;qzb2&#x27;).onclick=function(){buzz(2)};$(&#x27;qzgo&#x27;).onclick=show;addEventListener(&#x27;keydown&#x27;,function(e){if(tab!==&#x27;qz&#x27;)return;var k=e.key.toLowerCase();if(k===&#x27;a&#x27;){buzz(1);e.preventDefault()}else if(k===&#x27;l&#x27;){buzz(2);e.preventDefault()}});})();&lt;/script&gt;
 &lt;script&gt;/* 3 Gewinnt 2P */(function(){var g=$(&#x27;t2g&#x27;);if(!g)return;var b,turn,over,w1=0,w2=0,cells=[],L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
  for(var i=0;i&lt;9;i++){(function(i){var c=document.createElement(&#x27;div&#x27;);c.onclick=function(){play(i)};cells.push(c);g.appendChild(c)})(i)}
  function wins(p){return L.some(function(l){return l.every(function(i){return b[i]===p})})}
