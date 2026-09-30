@@ -547,7 +547,7 @@ t();setInterval(t,1000)})();</script>
   <div hidden><button id="ssgo" tabindex="-1"></button><button id="skgo" tabindex="-1"></button></div>
 
   <nav class="mtabs" id="mtabs" aria-label="Bereiche">
-    <button data-p="home" class="on">🏠 Zentrale</button><button data-p="cook">🍪 Kekse</button><button data-p="party">🎉 Party</button><button data-p="fun">🎡 Spaß</button><button data-p="chaos">💥 Chaos</button><button data-p="tools">🧰 Tools</button>
+    <button data-p="home" class="on">🏠 Zentrale</button><button data-p="cook">🍪 Kekse</button><button data-p="party">🎉 Party</button><button data-p="fun">🎡 Spaß</button><button data-p="chaos">💥 Chaos</button><button data-p="tools">🧰 Tools</button><button data-p="kreativ">🎨 Kreativ</button>
   </nav>
   <div class="mp on" data-p="home"><div class="grid">
     <section class="card tile s4 hall">
@@ -720,6 +720,35 @@ t();setInterval(t,1000)})();</script>
       <input type="text" id="tyi" placeholder="Hier tippen…" autocomplete="off" autocapitalize="off" spellcheck="false" disabled aria-label="Tippfeld">
       <div class="btnrow"><button id="tygo">Start (30 s)</button><span id="tys" class="stt2"></span></div></section>
 </div>
+  </div>
+  <div class="mp" data-p="kreativ"><div class="msub"><button data-v="dr" class="on">✏️ Zeichnen</button><button data-v="tx">🔤 Text</button><button data-v="sf">🎧 Sounds</button><button data-v="mu">🎵 Musik</button><button data-v="el">🧝 Elf-Name</button></div>
+    <div class="grid mv on" data-v="dr"><section class="card tile">
+      <div class="th"><div class="ti">✏️</div><div><h2>Zeichenbrett</h2><small>Frei malen und speichern</small></div></div>
+      <canvas id="dpc" width="620" height="380" style="width:100%;border-radius:14px;background:#fff;cursor:crosshair;touch-action:none;border:1px solid var(--line)"></canvas>
+      <div class="btnrow" id="dpcolors"></div>
+      <div class="btnrow"><label class="chk">Pinsel <input type="range" id="dpsize" min="1" max="40" value="7" style="width:110px"></label><button id="dperase" class="ghost">Radierer</button><button id="dpclear" class="ghost">Leeren</button><button id="dpsave" class="gold">Speichern 💾</button></div>
+    </section></div>
+    <div class="grid mv" data-v="tx"><section class="card tile">
+      <div class="th"><div class="ti">🔤</div><div><h2>Text &amp; Sticker</h2><small>Schöne Schrift &amp; Emojis zum Kopieren</small></div></div>
+      <input id="tgin" placeholder="Text eingeben…" maxlength="60" value="Frohe Weihnachten">
+      <div id="tgout"></div>
+      <p class="hint">Sticker antippen zum Kopieren:</p><div id="tgstick" class="btnrow"></div>
+    </section></div>
+    <div class="grid mv" data-v="sf"><section class="card tile">
+      <div class="th"><div class="ti">🎧</div><div><h2>ASMR-Sound-Mixer</h2><small>Klänge einzeln mischen</small></div></div>
+      <div id="mixrows"></div>
+      <p class="hint">Tipp einen Regler hoch – die Klänge starten von selbst und laufen weiter.</p>
+    </section></div>
+    <div class="grid mv" data-v="mu"><section class="card tile">
+      <div class="th"><div class="ti">🎵</div><div><h2>Musik-Player</h2><small>Kleine Weihnachtsmelodien</small></div></div>
+      <div class="btnrow" id="mubtns"></div>
+      <div class="btnrow"><button id="mustop" class="ghost">Stopp ⏹</button><span class="stt2" id="munow"></span></div>
+    </section></div>
+    <div class="grid mv" data-v="el"><section class="card tile">
+      <div class="th"><div class="ti">🧝</div><div><h2>Elf-Namen-Generator</h2><small>Dein Wichtelname</small></div></div>
+      <div class="btnrow"><input id="elin" placeholder="Dein Name…" maxlength="24"><button id="elgo">Verwichteln ✨</button></div>
+      <p id="elname"></p>
+    </section></div>
   </div>
 </main>
 <div id="chat">
@@ -3012,6 +3041,79 @@ button,.btn,.mtabs button,.msub button,.gfilter button,.seg button{transition:ba
 .mp.on .grid>.card.tile:nth-child(n+4){animation-delay:.15s}
 @media (prefers-reduced-motion:reduce){#setw:not([hidden]),#setw:not([hidden]) .setcard,#shw:not([hidden]),#ssw:not([hidden]),#skw:not([hidden]),.grid.mv.on,.mp.on .grid>.card.tile{animation:none}}
 </style>
+
+<style>
+#dpcolors .swatch{width:28px;height:28px;border-radius:50%;padding:0;border:2px solid #ffffff88;box-shadow:0 2px 6px #0004;cursor:pointer}
+#dpcolors .swatch.on{outline:3px solid var(--gold);outline-offset:2px}
+.tgline{display:flex;gap:10px;align-items:center;justify-content:space-between;background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:9px 14px;margin:7px 0;cursor:pointer;font-size:1.15rem;transition:background-color .2s}
+.tgline:hover{background:color-mix(in srgb,var(--glass),#fff 10%)}
+.tgline small{opacity:.6;font-size:.7rem;white-space:nowrap}
+#tgstick button{font-size:1.5rem;padding:6px 8px;background:var(--glass);border:1px solid var(--line)}
+.mixrow{display:flex;align-items:center;gap:12px;margin:10px 0}
+.mixrow span{width:110px;font-weight:700}.mixrow input[type=range]{flex:1}
+#elname{font-family:'Bungee',Impact,sans-serif;font-size:clamp(1.4rem,6vw,2rem);text-align:center;min-height:1.4em;margin:12px 0 0;background:linear-gradient(90deg,var(--pink),var(--gold),var(--mint));-webkit-background-clip:text;background-clip:text;color:transparent}
+</style>
+<script>/* ===== Kreativ-Tools ===== */
+(function(){/* Zeichenbrett */var cv=document.getElementById('dpc');if(!cv)return;var x=cv.getContext('2d');x.lineCap='round';x.lineJoin='round';
+ var col='#e01e6a',size=7,erase=false,drawing=false,last=null;x.fillStyle='#fff';x.fillRect(0,0,cv.width,cv.height);
+ var COLS=['#111','#e01e6a','#ff8a3d','#ffd23f','#3ddc97','#2b7cff','#7a2cff','#8a5a2b','#fff'];
+ var cw=document.getElementById('dpcolors');COLS.forEach(function(c,i){var b=document.createElement('button');b.className='swatch'+(i===1?' on':'');b.style.background=c;b.onclick=function(){col=c;erase=false;cw.querySelectorAll('.swatch').forEach(function(s){s.classList.toggle('on',s===b)})};cw.appendChild(b)});
+ document.getElementById('dpsize').oninput=function(){size=+this.value};
+ document.getElementById('dperase').onclick=function(){erase=true;cw.querySelectorAll('.swatch').forEach(function(s){s.classList.remove('on')})};
+ document.getElementById('dpclear').onclick=function(){x.fillStyle='#fff';x.fillRect(0,0,cv.width,cv.height)};
+ document.getElementById('dpsave').onclick=function(){var a=document.createElement('a');a.download='zeichnung.png';a.href=cv.toDataURL('image/png');a.click()};
+ function pt(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*cv.width,y:(e.clientY-r.top)/r.height*cv.height}}
+ cv.addEventListener('pointerdown',function(e){drawing=true;last=pt(e);try{cv.setPointerCapture(e.pointerId)}catch(_){}});
+ cv.addEventListener('pointermove',function(e){if(!drawing)return;var p=pt(e);x.strokeStyle=erase?'#fff':col;x.lineWidth=erase?size*2.2:size;x.beginPath();x.moveTo(last.x,last.y);x.lineTo(p.x,p.y);x.stroke();last=p});
+ function end(){drawing=false}cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+})();
+(function(){/* Text & Sticker */var inp=document.getElementById('tgin');if(!inp)return;var out=document.getElementById('tgout');
+ function map(s,base,baseL,base0){return s.replace(/[A-Za-z0-9]/g,function(c){var o=c.charCodeAt(0);if(o>=65&&o<=90)return String.fromCodePoint(base+o-65);if(o>=97&&o<=122)return String.fromCodePoint(baseL+o-97);if(base0&&o>=48&&o<=57)return String.fromCodePoint(base0+o-48);return c})}
+ function circled(s){return s.replace(/[A-Za-z0-9]/g,function(c){var o=c.charCodeAt(0);if(o>=65&&o<=90)return String.fromCodePoint(0x24B6+o-65);if(o>=97&&o<=122)return String.fromCodePoint(0x24D0+o-97);if(o===48)return '⓪';if(o>=49&&o<=57)return String.fromCodePoint(0x2460+o-49);return c})}
+ function wide(s){return s.replace(/[!-~]/g,function(c){return String.fromCharCode(c.charCodeAt(0)+0xFEE0)}).replace(/ /g,'　')}
+ function festive(s){return '❄️ '+s.split('').join(' ')+' ❄️'}
+ var STYLES=[['Fett',function(s){return map(s,0x1D5D4,0x1D5EE,0x1D7EC)}],['Kursiv',function(s){return map(s,0x1D608,0x1D622)}],['Kringel',circled],['Breit',wide],['Festlich',festive]];
+ function render(){var t=inp.value||'Text';out.innerHTML='';STYLES.forEach(function(st){var v=st[1](t);var d=document.createElement('div');d.className='tgline';d.innerHTML='<span>'+v.replace(/</g,'&lt;')+'</span><small>'+st[0]+' · kopieren</small>';d.onclick=function(){copy(v,d)};out.appendChild(d)})}
+ function copy(v,d){var done=function(){var s=d.querySelector('small');var o=s.textContent;s.textContent='Kopiert ✔';setTimeout(function(){s.textContent=o},1200)};try{navigator.clipboard.writeText(v).then(done,function(){fb(v,done)})}catch(e){fb(v,done)}}
+ function fb(v,done){var ta=document.createElement('textarea');ta.value=v;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(e){}ta.remove()}
+ inp.addEventListener('input',render);render();
+ var ST=['🎄','🎅','🤶','⛄','❄️','🎁','🔔','⭐','🕯️','🦌','🍪','🥛','🧦','🎶','✨','🌟','🍷','🧑‍🎄'];
+ var sc=document.getElementById('tgstick');ST.forEach(function(e){var b=document.createElement('button');b.textContent=e;b.onclick=function(){copy(e,b);b.textContent='✔';setTimeout(function(){b.textContent=e},800)};sc.appendChild(b)});
+})();
+(function(){/* ASMR-Sound-Mixer */var host=document.getElementById('mixrows');if(!host)return;var AC,noise,layers={},started=false;
+ var DEF=[['rain','🌧️ Regen'],['fire','🔥 Kaminfeuer'],['wind','💨 Wind'],['bells','🔔 Glöckchen']];
+ function ctx(){if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();var n=AC.sampleRate*2,b=AC.createBuffer(1,n,AC.sampleRate),d=b.getChannelData(0);for(var i=0;i<n;i++)d[i]=Math.random()*2-1;noise=b}if(AC.state==='suspended')AC.resume();return AC}
+ function src(){var s=ctx().createBufferSource();s.buffer=noise;s.loop=true;return s}
+ function build(id){var a=ctx();var g=a.createGain();g.gain.value=0;g.connect(a.destination);var o={gain:g};
+  if(id==='rain'){var s=src();var f=a.createBiquadFilter();f.type='lowpass';f.frequency.value=1800;s.connect(f);f.connect(g);s.start()}
+  else if(id==='fire'){var s=src();var f=a.createBiquadFilter();f.type='lowpass';f.frequency.value=500;s.connect(f);f.connect(g);s.start();o.crackle=setInterval(function(){if(g.gain.value<=0)return;var t=a.currentTime,cg=a.createGain();var cs=src();var cf=a.createBiquadFilter();cf.type='bandpass';cf.frequency.value=800+Math.random()*1500;cs.connect(cf);cf.connect(cg);cg.connect(g);cg.gain.setValueAtTime(.4*Math.random(),t);cg.gain.exponentialRampToValueAtTime(.001,t+.06);cs.start(t);cs.stop(t+.07)},120)}
+  else if(id==='wind'){var s=src();var f=a.createBiquadFilter();f.type='bandpass';f.frequency.value=500;f.Q.value=2;var lfo=a.createOscillator(),lg=a.createGain();lfo.frequency.value=.12;lg.gain.value=300;lfo.connect(lg);lg.connect(f.frequency);lfo.start();s.connect(f);f.connect(g);s.start()}
+  else if(id==='bells'){o.bells=setInterval(function(){if(g.gain.value<=0)return;var t=a.currentTime,f=[523,659,784,1047][Math.floor(Math.random()*4)];[1,2].forEach(function(h,i){var o2=a.createOscillator(),g2=a.createGain();o2.type='sine';o2.frequency.value=f*h;g2.gain.setValueAtTime(.3/(i+1),t);g2.gain.exponentialRampToValueAtTime(.001,t+1.2);o2.connect(g2);g2.connect(g);o2.start(t);o2.stop(t+1.3)})},1800+Math.random()*1500)}
+  return o}
+ DEF.forEach(function(d){var row=document.createElement('div');row.className='mixrow';row.innerHTML='<span>'+d[1]+'</span>';var r=document.createElement('input');r.type='range';r.min=0;r.max=100;r.value=0;
+  r.addEventListener('input',function(){if(!layers[d[0]])layers[d[0]]=build(d[0]);layers[d[0]].gain.gain.setTargetAtTime((+r.value)/100*0.5,ctx().currentTime,.05)});
+  row.appendChild(r);host.appendChild(row)})
+})();
+(function(){/* Musik-Player */var host=document.getElementById('mubtns');if(!host)return;var AC,timer=null,stopf=false;
+ function ac(){AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}
+ var NF={C:261.63,D:293.66,E:329.63,F:349.23,G:392.0,A:440.0,B:493.88,c:523.25,d:587.33,e:659.25,f:698.46,g:783.99,a:880,b:987.77,R:0};
+ function note(n,dur){if(window.__mute||n==='R'||!NF[n])return;var a=ac(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime;o.type='triangle';o.frequency.value=NF[n];g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.2,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+dur*.0009);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+dur/1000)}
+ var SONGS={'Jingle Bells':[['E',3],['E',3],['E',6],['E',3],['E',3],['E',6],['E',3],['G',3],['C',4],['D',2],['E',9]],
+  'Stille Nacht':[['G',3],['A',1],['G',2],['E',6],['G',3],['A',1],['G',2],['E',6],['d',4],['d',2],['B',6],['c',4],['c',2],['G',6]],
+  'O Tannenbaum':[['C',3],['F',3],['F',1],['F',2],['F',3],['G',3],['A',3],['A',1],['A',2],['A',3],['G',2],['A',1],['B',4],['e',2],['d',3]]};
+ function play(name){stop();stopf=false;var seq=SONGS[name],i=0;document.getElementById('munow').textContent='▶ '+name;
+  (function nxt(){if(stopf||i>=seq.length){document.getElementById('munow').textContent='';return}var d=seq[i][1]*115;note(seq[i][0],d);i++;timer=setTimeout(nxt,d+20)})()}
+ function stop(){stopf=true;if(timer)clearTimeout(timer);document.getElementById('munow').textContent=''}
+ Object.keys(SONGS).forEach(function(n){var b=document.createElement('button');b.textContent=n;b.onclick=function(){play(n)};host.appendChild(b)});
+ document.getElementById('mustop').onclick=stop;
+})();
+(function(){/* Elf-Namen */var go=document.getElementById('elgo');if(!go)return;var inp=document.getElementById('elin'),out=document.getElementById('elname');
+ var A=['Zucker','Glitzer','Tannen','Schnee','Lebkuchen','Zimt','Kerzen','Kling','Frost','Stern','Mistel','Pfeffer','Flausch','Glöckchen','Pinsel'];
+ var B=['spitz','söckchen','wichtel','zauber','stern','fuß','flöckchen','glanz','mütze','nase','herz','pol','schlitten','feder','punsch'];
+ function hash(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h}
+ function gen(){var s=(inp.value||'').trim();var h=s?hash(s.toLowerCase()):Math.floor(Math.random()*1e9);out.textContent=A[h%A.length]+B[(Math.floor(h/7))%B.length]+' '+['🧝','🎅','⛄','🦌'][h%4]}
+ go.onclick=gen;inp.addEventListener('keydown',function(e){if(e.key==='Enter')gen()});
+})();</script>
 
 </body>
 </html>
