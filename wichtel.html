@@ -1498,6 +1498,18 @@ body.facing .duel .p1{transform:rotate(180deg)}
 .c4 .cell.r{background:radial-gradient(circle at 35% 30%,#ff8aa8,#e01e3c)}
 .c4 .cell.y{background:radial-gradient(circle at 35% 30%,#ffe98a,#e0b400)}
 .arena{display:block;margin:6px auto;border-radius:14px;background:#0d0626;border:2px solid var(--mint);width:min(94vw,420px);touch-action:none}
+
+/* --- Duelle Welle 2 --- */
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:min(94vw,460px);margin:6px auto}
+.qgrid .qa{padding:14px;font-size:.95rem;background:#ffffff1f;color:var(--ink)}
+.qgrid .qa.ok{background:#1a9a5a}.qgrid .qa.bad{background:#a11}
+.md{display:grid;gap:8px;width:min(94vw,420px);margin:6px auto}
+.md .card{aspect-ratio:1;border-radius:12px;background:#ffffff1f;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;user-select:none}
+.md .card.up{background:#ffffff33}
+.md .card.done{opacity:.35;cursor:default}
+#t2g div{aspect-ratio:1;border-radius:14px;background:#ffffff14;display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:800;cursor:pointer}
+.ep-opts{display:flex;gap:10px;justify-content:center;margin:8px 0}
+.ep-opts button{font-size:1.6rem;padding:14px 18px}
 &lt;/style&gt;&lt;/head&gt;&lt;body&gt;
 &lt;h1&gt;Spielhalle 🕹️&lt;/h1&gt;
 &lt;nav id=&quot;tabs&quot;&gt;&lt;/nav&gt;
@@ -1622,6 +1634,54 @@ Tanz 10 Sekunden 🕺&lt;/textarea&gt;
  &lt;canvas id=&quot;kbc&quot; width=&quot;380&quot; height=&quot;520&quot; class=&quot;arena&quot;&gt;&lt;/canvas&gt;
  &lt;p style=&quot;opacity:.75;font-size:.85rem;margin:6px 0 0&quot;&gt;Zieh auf deiner Hälfte, um dein Auto zu steuern, und schieb den Ball ins gegnerische Tor. 🔴 unten, 🟢 oben. Erster mit 5 gewinnt.&lt;/p&gt;
 &lt;/section&gt;
+&lt;section id=&quot;s-pg&quot;&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;pggo&quot;&gt;Start&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;🟢 &lt;b id=&quot;pgs2&quot;&gt;0&lt;/b&gt; : &lt;b id=&quot;pgs1&quot;&gt;0&lt;/b&gt; 🔴&lt;/span&gt;&lt;/div&gt;
+ &lt;canvas id=&quot;pgc&quot; width=&quot;360&quot; height=&quot;520&quot; class=&quot;arena&quot;&gt;&lt;/canvas&gt;
+ &lt;p style=&quot;opacity:.75;font-size:.85rem&quot;&gt;Zieh auf deiner Hälfte, um den Schläger zu bewegen. 🔴 unten, 🟢 oben. Erster mit 7 gewinnt.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;s-ah&quot;&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;ahgo&quot;&gt;Start&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;🟢 &lt;b id=&quot;ahs2&quot;&gt;0&lt;/b&gt; : &lt;b id=&quot;ahs1&quot;&gt;0&lt;/b&gt; 🔴&lt;/span&gt;&lt;/div&gt;
+ &lt;canvas id=&quot;ahc&quot; width=&quot;360&quot; height=&quot;520&quot; class=&quot;arena&quot;&gt;&lt;/canvas&gt;
+ &lt;p style=&quot;opacity:.75;font-size:.85rem&quot;&gt;Zieh deinen Schläger auf deiner Hälfte. Puck ins gegnerische Tor. Erster mit 7 gewinnt.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;s-sd&quot;&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;sdgo&quot;&gt;Start (30 s)&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;Zeit: &lt;b id=&quot;sdt&quot;&gt;30&lt;/b&gt;s&lt;/span&gt;&lt;button class=&quot;faceBtn&quot; style=&quot;background:#ffffff26&quot;&gt;🔄&lt;/button&gt;&lt;/div&gt;
+ &lt;div class=&quot;duel&quot;&gt;&lt;div class=&quot;duel-half p1&quot; id=&quot;sdf1&quot; style=&quot;position:relative;overflow:hidden;min-height:20vh&quot;&gt;&lt;span style=&quot;position:absolute;top:6px;left:10px&quot;&gt;🔴 &lt;b id=&quot;sds1&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+ &lt;div class=&quot;duel&quot;&gt;&lt;div class=&quot;duel-half p2&quot; id=&quot;sdf2&quot; style=&quot;position:relative;overflow:hidden;min-height:20vh&quot;&gt;&lt;span style=&quot;position:absolute;top:6px;left:10px&quot;&gt;🟢 &lt;b id=&quot;sds2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+ &lt;p style=&quot;opacity:.75;font-size:.85rem;margin:6px 0 0&quot;&gt;Jeder trifft die Schneeflocken auf seiner eigenen Hälfte. Wer in 30 s mehr trifft, gewinnt.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;s-ep&quot;&gt;
+ &lt;div class=&quot;res&quot; id=&quot;epmsg&quot;&gt;Spieler 1 schießt – Richtung wählen&lt;/div&gt;
+ &lt;div class=&quot;ep-opts&quot; id=&quot;epopts&quot;&gt;&lt;button data-d=&quot;0&quot;&gt;⬅️&lt;/button&gt;&lt;button data-d=&quot;1&quot;&gt;⬆️&lt;/button&gt;&lt;button data-d=&quot;2&quot;&gt;➡️&lt;/button&gt;&lt;/div&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;span class=&quot;st&quot;&gt;🔴 &lt;b id=&quot;eps1&quot;&gt;0&lt;/b&gt; · 🟢 &lt;b id=&quot;eps2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Schuss &lt;b id=&quot;epn&quot;&gt;1&lt;/b&gt;/10&lt;/span&gt;&lt;button id=&quot;epnext&quot; style=&quot;display:none&quot;&gt;Weiter&lt;/button&gt;&lt;button id=&quot;epgo&quot; style=&quot;background:#ffffff26&quot;&gt;Neu&lt;/button&gt;&lt;/div&gt;
+ &lt;p style=&quot;opacity:.75;font-size:.85rem&quot;&gt;Erst schießt einer (heimlich Richtung tippen), dann hält der andere. Gleiche Richtung = gehalten.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;s-qz&quot;&gt;
+ &lt;div class=&quot;res&quot; id=&quot;qzq&quot;&gt;Tippe „Start&quot; für die erste Frage&lt;/div&gt;
+ &lt;div class=&quot;qgrid&quot; id=&quot;qzans&quot;&gt;&lt;/div&gt;
+ &lt;div class=&quot;duel&quot;&gt;
+  &lt;div class=&quot;duel-half p1&quot;&gt;&lt;button id=&quot;qzb1&quot;&gt;🔴 BUZZ&lt;/button&gt;&lt;span&gt;Punkte: &lt;b id=&quot;qzs1&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;duel-half p2&quot;&gt;&lt;button id=&quot;qzb2&quot;&gt;🟢 BUZZ&lt;/button&gt;&lt;span&gt;Punkte: &lt;b id=&quot;qzs2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;qzgo&quot;&gt;Start / Nächste Frage&lt;/button&gt;&lt;button class=&quot;faceBtn&quot; style=&quot;background:#ffffff26&quot;&gt;🔄&lt;/button&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;section id=&quot;s-t2&quot;&gt;
+ &lt;div class=&quot;res&quot; id=&quot;t2s&quot;&gt;🔴 Spieler 1 (✖) ist dran&lt;/div&gt;
+ &lt;div id=&quot;t2g&quot; style=&quot;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(80vw,300px);margin:6px auto&quot;&gt;&lt;/div&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;t2new&quot; style=&quot;background:#ffffff26&quot;&gt;Neu&lt;/button&gt;&lt;span class=&quot;st&quot;&gt;✖ &lt;b id=&quot;t2w1&quot;&gt;0&lt;/b&gt; · ⭕ &lt;b id=&quot;t2w2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;section id=&quot;s-db&quot;&gt;
+ &lt;div class=&quot;res&quot; id=&quot;dbs&quot;&gt;🔴 Spieler 1 ist dran&lt;/div&gt;
+ &lt;canvas id=&quot;dbc&quot; width=&quot;340&quot; height=&quot;340&quot; class=&quot;arena&quot; style=&quot;border:0;background:#0d0626&quot;&gt;&lt;/canvas&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;dbnew&quot; style=&quot;background:#ffffff26&quot;&gt;Neu&lt;/button&gt;&lt;span class=&quot;st&quot;&gt;🔴 &lt;b id=&quot;dbw1&quot;&gt;0&lt;/b&gt; · 🔵 &lt;b id=&quot;dbw2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
+ &lt;p style=&quot;opacity:.75;font-size:.85rem&quot;&gt;Tippe auf eine Linie. Schließt du ein Kästchen, bist du nochmal dran. Meiste Kästchen gewinnt.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id=&quot;s-md&quot;&gt;
+ &lt;div class=&quot;res&quot; id=&quot;mds&quot;&gt;🔴 Spieler 1 ist dran&lt;/div&gt;
+ &lt;div class=&quot;md&quot; id=&quot;mdg&quot; style=&quot;grid-template-columns:repeat(4,1fr)&quot;&gt;&lt;/div&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;mdnew&quot; style=&quot;background:#ffffff26&quot;&gt;Neu&lt;/button&gt;&lt;span class=&quot;st&quot;&gt;🔴 &lt;b id=&quot;mdw1&quot;&gt;0&lt;/b&gt; · 🟢 &lt;b id=&quot;mdw2&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/section&gt;
+
 
 
 
@@ -1631,7 +1691,7 @@ function rnd(n){return Math.floor(Math.random()*n)}
 var AC;function beep(f,d,t){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state===&#x27;suspended&#x27;)AC.resume();var o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime;o.type=t||&#x27;square&#x27;;o.frequency.value=f;g.gain.setValueAtTime(.08,n);g.gain.exponentialRampToValueAtTime(.001,n+(d||.08));o.connect(g);g.connect(AC.destination);o.start();o.stop(n+(d||.08)+.02)}catch(e){}}
 function ls(k,v){try{if(v===undefined)return parseFloat(localStorage.getItem(k));localStorage.setItem(k,v)}catch(e){return NaN}}
 var tab=&#x27;menu&#x27;;
-var GG=[[&#x27;sn&#x27;,&#x27;Snake&#x27;,&#x27;🐍&#x27;,&#x27;Klassiker&#x27;],[&#x27;tt&#x27;,&#x27;Tetris&#x27;,&#x27;🧱&#x27;,&#x27;Blöcke stapeln&#x27;],[&#x27;2048&#x27;,&#x27;2048&#x27;,&#x27;🔢&#x27;,&#x27;Verschmelzen&#x27;],[&#x27;bo&#x27;,&#x27;Breakout&#x27;,&#x27;🏓&#x27;,&#x27;Ziegel zerstören&#x27;],[&#x27;mw&#x27;,&#x27;Maulwurf&#x27;,&#x27;🔨&#x27;,&#x27;Drauf hauen&#x27;],[&#x27;ttt&#x27;,&#x27;3 Gewinnt&#x27;,&#x27;⭕&#x27;,&#x27;Gegen CPU&#x27;],[&#x27;rd&#x27;,&#x27;Reaktions-Duell&#x27;,&#x27;⚡&#x27;,&#x27;2 Spieler&#x27;],[&#x27;bm&#x27;,&#x27;Button-Mash&#x27;,&#x27;👆&#x27;,&#x27;2 Spieler&#x27;],[&#x27;tug&#x27;,&#x27;Seilziehen&#x27;,&#x27;🪢&#x27;,&#x27;2 Spieler&#x27;],[&#x27;c4&#x27;,&#x27;Vier Gewinnt&#x27;,&#x27;🔴&#x27;,&#x27;2 Spieler&#x27;],[&#x27;kb&#x27;,&#x27;Kickbot&#x27;,&#x27;🚗&#x27;,&#x27;2 Spieler&#x27;],[&#x27;fb&#x27;,&#x27;Flappy&#x27;,&#x27;🦌&#x27;,&#x27;Fliegen&#x27;],[&#x27;rz&#x27;,&#x27;Reaktion&#x27;,&#x27;⚡&#x27;,&#x27;Schnell tippen&#x27;],[&#x27;kl&#x27;,&#x27;Klick&#x27;,&#x27;👆&#x27;,&#x27;10 s Speed&#x27;],[&#x27;wh&#x27;,&#x27;Glücksrad&#x27;,&#x27;🎡&#x27;,&#x27;Drehen&#x27;],[&#x27;dc&#x27;,&#x27;Würfel &amp; Münze&#x27;,&#x27;🎲&#x27;,&#x27;Zufall&#x27;],[&#x27;fg&#x27;,&#x27;Fidget&#x27;,&#x27;🫧&#x27;,&#x27;Entspannen&#x27;],[&#x27;ss&#x27;,&#x27;Schneesturm&#x27;,&#x27;⛄&#x27;,&#x27;Physik&#x27;],[&#x27;sk&#x27;,&#x27;Tasten-Duell&#x27;,&#x27;⌨️&#x27;,&#x27;Tasten finden&#x27;],[&#x27;rk&#x27;,&#x27;Rekorde&#x27;,&#x27;🏆&#x27;,&#x27;Bestenliste&#x27;]];
+var GG=[[&#x27;sn&#x27;,&#x27;Snake&#x27;,&#x27;🐍&#x27;,&#x27;Klassiker&#x27;],[&#x27;tt&#x27;,&#x27;Tetris&#x27;,&#x27;🧱&#x27;,&#x27;Blöcke stapeln&#x27;],[&#x27;2048&#x27;,&#x27;2048&#x27;,&#x27;🔢&#x27;,&#x27;Verschmelzen&#x27;],[&#x27;bo&#x27;,&#x27;Breakout&#x27;,&#x27;🏓&#x27;,&#x27;Ziegel zerstören&#x27;],[&#x27;mw&#x27;,&#x27;Maulwurf&#x27;,&#x27;🔨&#x27;,&#x27;Drauf hauen&#x27;],[&#x27;ttt&#x27;,&#x27;3 Gewinnt&#x27;,&#x27;⭕&#x27;,&#x27;Gegen CPU&#x27;],[&#x27;rd&#x27;,&#x27;Reaktions-Duell&#x27;,&#x27;⚡&#x27;,&#x27;2 Spieler&#x27;],[&#x27;bm&#x27;,&#x27;Button-Mash&#x27;,&#x27;👆&#x27;,&#x27;2 Spieler&#x27;],[&#x27;tug&#x27;,&#x27;Seilziehen&#x27;,&#x27;🪢&#x27;,&#x27;2 Spieler&#x27;],[&#x27;c4&#x27;,&#x27;Vier Gewinnt&#x27;,&#x27;🔴&#x27;,&#x27;2 Spieler&#x27;],[&#x27;kb&#x27;,&#x27;Kickbot&#x27;,&#x27;🚗&#x27;,&#x27;2 Spieler&#x27;],[&#x27;pg&#x27;,&#x27;Pong 2P&#x27;,&#x27;🏓&#x27;,&#x27;2 Spieler&#x27;],[&#x27;ah&#x27;,&#x27;Air-Hockey&#x27;,&#x27;🏒&#x27;,&#x27;2 Spieler&#x27;],[&#x27;sd&#x27;,&#x27;Schneeball-Duell&#x27;,&#x27;❄️&#x27;,&#x27;2 Spieler&#x27;],[&#x27;ep&#x27;,&#x27;Elfmeter&#x27;,&#x27;🥅&#x27;,&#x27;2 Spieler&#x27;],[&#x27;qz&#x27;,&#x27;Quiz-Buzzer&#x27;,&#x27;❓&#x27;,&#x27;2 Spieler&#x27;],[&#x27;t2&#x27;,&#x27;3 Gewinnt 2P&#x27;,&#x27;⭕&#x27;,&#x27;2 Spieler&#x27;],[&#x27;db&#x27;,&#x27;Käsekästchen&#x27;,&#x27;🟦&#x27;,&#x27;2 Spieler&#x27;],[&#x27;md&#x27;,&#x27;Memory-Duell&#x27;,&#x27;🧩&#x27;,&#x27;2 Spieler&#x27;],[&#x27;fb&#x27;,&#x27;Flappy&#x27;,&#x27;🦌&#x27;,&#x27;Fliegen&#x27;],[&#x27;rz&#x27;,&#x27;Reaktion&#x27;,&#x27;⚡&#x27;,&#x27;Schnell tippen&#x27;],[&#x27;kl&#x27;,&#x27;Klick&#x27;,&#x27;👆&#x27;,&#x27;10 s Speed&#x27;],[&#x27;wh&#x27;,&#x27;Glücksrad&#x27;,&#x27;🎡&#x27;,&#x27;Drehen&#x27;],[&#x27;dc&#x27;,&#x27;Würfel &amp; Münze&#x27;,&#x27;🎲&#x27;,&#x27;Zufall&#x27;],[&#x27;fg&#x27;,&#x27;Fidget&#x27;,&#x27;🫧&#x27;,&#x27;Entspannen&#x27;],[&#x27;ss&#x27;,&#x27;Schneesturm&#x27;,&#x27;⛄&#x27;,&#x27;Physik&#x27;],[&#x27;sk&#x27;,&#x27;Tasten-Duell&#x27;,&#x27;⌨️&#x27;,&#x27;Tasten finden&#x27;],[&#x27;rk&#x27;,&#x27;Rekorde&#x27;,&#x27;🏆&#x27;,&#x27;Bestenliste&#x27;]];
 var BESTKEY={sn:&#x27;sn_hi&#x27;,tt:&#x27;tt_hi&#x27;,fb:&#x27;fb_hi&#x27;,&#x27;2048&#x27;:&#x27;g2048_hi&#x27;,bo:&#x27;bo_hi&#x27;,mw:&#x27;mw_hi&#x27;,kl:&#x27;kl_hi&#x27;};
 function buildMenu(){var gl=$(&#x27;glist&#x27;);gl.innerHTML=&#x27;&#x27;;GG.forEach(function(g){var c=document.createElement(&#x27;div&#x27;);c.className=&#x27;gcard&#x27;;c.tabIndex=0;
  var bs=&#x27;&#x27;;if(BESTKEY[g[0]]){var v=ls(BESTKEY[g[0]]);if(v&amp;&amp;!isNaN(v))bs=&#x27;Rekord: &#x27;+v}
@@ -2014,6 +2074,117 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
  $(&#x27;kbgo&#x27;).onclick=function(){s1=s2=0;$(&#x27;kbs1&#x27;).textContent=0;$(&#x27;kbs2&#x27;).textContent=0;reset();run=true};
  reset();loop();
 })();&lt;/script&gt;
+&lt;script&gt;/* Pong 2P */(function(){var cv=$(&#x27;pgc&#x27;);if(!cv)return;var x=cv.getContext(&#x27;2d&#x27;),W=cv.width,H=cv.height;
+ var s1=0,s2=0,pad={1:W/2,2:W/2},pw=74,ball,run=false,pmap={};
+ function reset(dir){ball={x:W/2,y:H/2,vx:(Math.random()-.5)*4,vy:(dir||(Math.random()&lt;.5?-1:1))*4.2,r:9}}
+ function pt(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
+ cv.addEventListener(&#x27;pointerdown&#x27;,function(e){var p=pt(e),s=p.y&lt;H/2?2:1;pmap[e.pointerId]=s;pad[s]=p.x;try{cv.setPointerCapture(e.pointerId)}catch(_){}});
+ cv.addEventListener(&#x27;pointermove&#x27;,function(e){var s=pmap[e.pointerId];if(s)pad[s]=pt(e).x});
+ function up(e){delete pmap[e.pointerId]}cv.addEventListener(&#x27;pointerup&#x27;,up);cv.addEventListener(&#x27;pointercancel&#x27;,up);
+ function goal(who){if(who===1)s1++;else s2++;$(&#x27;pgs1&#x27;).textContent=s1;$(&#x27;pgs2&#x27;).textContent=s2;beep(600,.2,&#x27;triangle&#x27;);if(s1&gt;=7||s2&gt;=7)run=false;else reset(who===1?-1:1)}
+ function step(){ball.x+=ball.vx;ball.y+=ball.vy;if(ball.x&lt;ball.r){ball.x=ball.r;ball.vx*=-1}if(ball.x&gt;W-ball.r){ball.x=W-ball.r;ball.vx*=-1}
+  if(ball.vy&lt;0&amp;&amp;ball.y&lt;26&amp;&amp;ball.y&gt;12&amp;&amp;Math.abs(ball.x-pad[2])&lt;pw/2){ball.vy*=-1;ball.vx+=(ball.x-pad[2])/16;beep(440,.03)}
+  if(ball.vy&gt;0&amp;&amp;ball.y&gt;H-26&amp;&amp;ball.y&lt;H-12&amp;&amp;Math.abs(ball.x-pad[1])&lt;pw/2){ball.vy*=-1;ball.vx+=(ball.x-pad[1])/16;beep(440,.03)}
+  if(ball.y&lt;0)goal(1);else if(ball.y&gt;H)goal(2)}
+ function draw(){x.clearRect(0,0,W,H);x.strokeStyle=&#x27;#ffffff22&#x27;;x.setLineDash([6,6]);x.beginPath();x.moveTo(0,H/2);x.lineTo(W,H/2);x.stroke();x.setLineDash([]);
+  x.fillStyle=&#x27;#3ddc97&#x27;;x.fillRect(pad[2]-pw/2,14,pw,8);x.fillStyle=&#x27;#ff3d81&#x27;;x.fillRect(pad[1]-pw/2,H-22,pw,8);
+  x.fillStyle=&#x27;#fff&#x27;;x.beginPath();x.arc(ball.x,ball.y,ball.r,0,6.28);x.fill();
+  if(!run){x.fillStyle=&#x27;#fff&#x27;;x.textAlign=&#x27;center&#x27;;x.font=&#x27;bold 20px system-ui&#x27;;x.fillText(s1&gt;=7?&#x27;🔴 gewinnt!&#x27;:s2&gt;=7?&#x27;🟢 gewinnt!&#x27;:&#x27;Start drücken&#x27;,W/2,H/2-14)}}
+ function loop(){requestAnimationFrame(loop);if(tab!==&#x27;pg&#x27;||document.body.classList.contains(&#x27;disguise&#x27;))return;if(run)step();draw()}
+ $(&#x27;pggo&#x27;).onclick=function(){s1=s2=0;$(&#x27;pgs1&#x27;).textContent=0;$(&#x27;pgs2&#x27;).textContent=0;reset();run=true};reset();loop();})();&lt;/script&gt;
+&lt;script&gt;/* Air-Hockey */(function(){var cv=$(&#x27;ahc&#x27;);if(!cv)return;var x=cv.getContext(&#x27;2d&#x27;),W=cv.width,H=cv.height,GW=W*0.44;
+ var s1=0,s2=0,puck,mal={1:{x:W/2,y:H-60,r:24},2:{x:W/2,y:60,r:24}},prev={1:{x:W/2,y:H-60},2:{x:W/2,y:60}},targets={1:null,2:null},pmap={},run=false;
+ function reset(){puck={x:W/2,y:H/2,vx:(Math.random()-.5)*2,vy:(Math.random()&lt;.5?-1:1)*3,r:12}}
+ function pt(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
+ cv.addEventListener(&#x27;pointerdown&#x27;,function(e){var p=pt(e),s=p.y&lt;H/2?2:1;pmap[e.pointerId]=s;targets[s]=p;try{cv.setPointerCapture(e.pointerId)}catch(_){}});
+ cv.addEventListener(&#x27;pointermove&#x27;,function(e){var s=pmap[e.pointerId];if(s)targets[s]=pt(e)});
+ function up(e){var s=pmap[e.pointerId];if(s){targets[s]=null;delete pmap[e.pointerId]}}cv.addEventListener(&#x27;pointerup&#x27;,up);cv.addEventListener(&#x27;pointercancel&#x27;,up);
+ function goal(who){if(who===1)s1++;else s2++;$(&#x27;ahs1&#x27;).textContent=s1;$(&#x27;ahs2&#x27;).textContent=s2;beep(600,.2,&#x27;triangle&#x27;);if(s1&gt;=7||s2&gt;=7)run=false;else reset()}
+ function step(){[1,2].forEach(function(k){var mv=mal[k],t=targets[k];prev[k].x=mv.x;prev[k].y=mv.y;if(t){mv.x=Math.max(mv.r,Math.min(W-mv.r,t.x));mv.y=Math.max(mv.r,Math.min(H-mv.r,t.y))}
+   var dx=puck.x-mv.x,dy=puck.y-mv.y,d=Math.hypot(dx,dy),md=puck.r+mv.r;if(d&lt;md&amp;&amp;d&gt;0){var nx=dx/d,ny=dy/d;puck.x=mv.x+nx*md;puck.y=mv.y+ny*md;puck.vx=nx*7+(mv.x-prev[k].x);puck.vy=ny*7+(mv.y-prev[k].y);beep(500,.03)}});
+  puck.x+=puck.vx;puck.y+=puck.vy;puck.vx*=.995;puck.vy*=.995;
+  if(puck.x&lt;puck.r){puck.x=puck.r;puck.vx*=-1}if(puck.x&gt;W-puck.r){puck.x=W-puck.r;puck.vx*=-1}
+  var ig=puck.x&gt;(W-GW)/2&amp;&amp;puck.x&lt;(W+GW)/2;
+  if(puck.y&lt;puck.r){if(ig){goal(1);return}puck.y=puck.r;puck.vy*=-1}
+  if(puck.y&gt;H-puck.r){if(ig){goal(2);return}puck.y=H-puck.r;puck.vy*=-1}}
+ function draw(){x.clearRect(0,0,W,H);x.fillStyle=&#x27;#ff3d8112&#x27;;x.fillRect(0,H/2,W,H/2);x.fillStyle=&#x27;#3ddc9712&#x27;;x.fillRect(0,0,W,H/2);
+  x.strokeStyle=&#x27;#ffffff26&#x27;;x.beginPath();x.arc(W/2,H/2,40,0,6.28);x.moveTo(0,H/2);x.lineTo(W,H/2);x.stroke();
+  x.fillStyle=&#x27;#3ddc97&#x27;;x.fillRect((W-GW)/2,0,GW,7);x.fillStyle=&#x27;#ff3d81&#x27;;x.fillRect((W-GW)/2,H-7,GW,7);
+  x.fillStyle=&#x27;#ff3d81&#x27;;x.beginPath();x.arc(mal[1].x,mal[1].y,mal[1].r,0,6.28);x.fill();x.fillStyle=&#x27;#3ddc97&#x27;;x.beginPath();x.arc(mal[2].x,mal[2].y,mal[2].r,0,6.28);x.fill();
+  x.fillStyle=&#x27;#fff&#x27;;x.beginPath();x.arc(puck.x,puck.y,puck.r,0,6.28);x.fill();
+  if(!run){x.fillStyle=&#x27;#fff&#x27;;x.textAlign=&#x27;center&#x27;;x.font=&#x27;bold 20px system-ui&#x27;;x.fillText(s1&gt;=7?&#x27;🔴 gewinnt!&#x27;:s2&gt;=7?&#x27;🟢 gewinnt!&#x27;:&#x27;Start drücken&#x27;,W/2,H/2-50)}}
+ function loop(){requestAnimationFrame(loop);if(tab!==&#x27;ah&#x27;||document.body.classList.contains(&#x27;disguise&#x27;))return;if(run)step();draw()}
+ $(&#x27;ahgo&#x27;).onclick=function(){s1=s2=0;$(&#x27;ahs1&#x27;).textContent=0;$(&#x27;ahs2&#x27;).textContent=0;reset();run=true};reset();loop();})();&lt;/script&gt;
+&lt;script&gt;/* Schneeball-Duell */(function(){var f1=$(&#x27;sdf1&#x27;),f2=$(&#x27;sdf2&#x27;);if(!f1)return;var s1=0,s2=0,run=false,iv,sp,t=30;
+ function spawn(f,which){if(!run)return;var el=document.createElement(&#x27;div&#x27;);el.className=&#x27;sbtarget&#x27;;el.textContent=&#x27;❄️&#x27;;el.style.left=(12+Math.random()*76)+&#x27;%&#x27;;el.style.top=(30+Math.random()*55)+&#x27;%&#x27;;
+  var life=setTimeout(function(){el.remove()},1100);
+  el.addEventListener(&#x27;pointerdown&#x27;,function(e){e.stopPropagation();clearTimeout(life);el.remove();if(which===1){s1++;$(&#x27;sds1&#x27;).textContent=s1}else{s2++;$(&#x27;sds2&#x27;).textContent=s2}beep(760,.03)});
+  f.appendChild(el)}
+ $(&#x27;sdgo&#x27;).onclick=function(){if(run)return;run=true;s1=s2=0;$(&#x27;sds1&#x27;).textContent=0;$(&#x27;sds2&#x27;).textContent=0;t=30;$(&#x27;sdt&#x27;).textContent=30;
+  iv=setInterval(function(){t--;$(&#x27;sdt&#x27;).textContent=t;if(t&lt;=0){clearInterval(iv);clearInterval(sp);run=false;[f1,f2].forEach(function(f){[].forEach.call(f.querySelectorAll(&#x27;.sbtarget&#x27;),function(e){e.remove()})});beep(700,.2,&#x27;triangle&#x27;)}},1000);
+  sp=setInterval(function(){spawn(f1,1);spawn(f2,2)},600)};})();&lt;/script&gt;
+&lt;script&gt;/* Elfmeter */(function(){var sec=$(&#x27;s-ep&#x27;);if(!sec)return;var n=1,s1=0,s2=0,phase=&#x27;shoot&#x27;,shootDir=null,shooter=1,opts=$(&#x27;epopts&#x27;),msg=$(&#x27;epmsg&#x27;);
+ function enable(v){[].forEach.call(opts.children,function(b){b.disabled=!v})}
+ function start(){n=1;s1=s2=0;$(&#x27;eps1&#x27;).textContent=0;$(&#x27;eps2&#x27;).textContent=0;$(&#x27;epn&#x27;).textContent=1;shooter=1;phase=&#x27;shoot&#x27;;shootDir=null;msg.textContent=&#x27;Spieler 1 schießt – Richtung wählen&#x27;;$(&#x27;epnext&#x27;).style.display=&#x27;none&#x27;;enable(true)}
+ opts.querySelectorAll(&#x27;button&#x27;).forEach(function(b){b.onclick=function(){var d=+b.dataset.d;
+  if(phase===&#x27;shoot&#x27;){shootDir=d;phase=&#x27;keep&#x27;;var keeper=shooter===1?2:1;msg.textContent=&#x27;Spieler &#x27;+keeper+&#x27; hält – Richtung tippen&#x27;;beep(400,.05)}
+  else if(phase===&#x27;keep&#x27;){enable(false);if(d===shootDir){msg.textContent=&#x27;🧤 Gehalten!&#x27;;beep(300,.2,&#x27;square&#x27;)}else{if(shooter===1){s1++;$(&#x27;eps1&#x27;).textContent=s1}else{s2++;$(&#x27;eps2&#x27;).textContent=s2}msg.textContent=&#x27;⚽ TOR für Spieler &#x27;+shooter+&#x27;!&#x27;;beep(700,.2,&#x27;triangle&#x27;)}phase=&#x27;done&#x27;;$(&#x27;epnext&#x27;).style.display=&#x27;&#x27;}}})
+ $(&#x27;epnext&#x27;).onclick=function(){if(n&gt;=10){msg.textContent=(s1&gt;s2?&#x27;🔴 Spieler 1 gewinnt!&#x27;:s2&gt;s1?&#x27;🟢 Spieler 2 gewinnt!&#x27;:&#x27;Unentschieden 🤝&#x27;);$(&#x27;epnext&#x27;).style.display=&#x27;none&#x27;;return}
+  n++;$(&#x27;epn&#x27;).textContent=n;shooter=(n%2===1)?1:2;phase=&#x27;shoot&#x27;;shootDir=null;msg.textContent=&#x27;Spieler &#x27;+shooter+&#x27; schießt – Richtung wählen&#x27;;$(&#x27;epnext&#x27;).style.display=&#x27;none&#x27;;enable(true)}
+ $(&#x27;epgo&#x27;).onclick=start;start();})();&lt;/script&gt;
+&lt;script&gt;/* Quiz-Buzzer */(function(){var sec=$(&#x27;s-qz&#x27;);if(!sec)return;var ansEl=$(&#x27;qzans&#x27;),cur=null,s1=0,s2=0,player=0,answered=false;
+ var Q=[{q:&#x27;Wie heißt Rudolfs leuchtendes Körperteil?&#x27;,a:[&#x27;Nase&#x27;,&#x27;Ohr&#x27;,&#x27;Schwanz&#x27;,&#x27;Huf&#x27;],c:0},
+  {q:&#x27;Wie viele Rentiere ziehen den Schlitten klassisch (ohne Rudolf)?&#x27;,a:[&#x27;8&#x27;,&#x27;6&#x27;,&#x27;9&#x27;,&#x27;12&#x27;],c:0},
+  {q:&#x27;Was ist Glühwein?&#x27;,a:[&#x27;Heißer Wein&#x27;,&#x27;Kalter Saft&#x27;,&#x27;Tee&#x27;,&#x27;Kakao&#x27;],c:0},
+  {q:&#x27;Wann ist Heiligabend?&#x27;,a:[&#x27;24.12.&#x27;,&#x27;25.12.&#x27;,&#x27;31.12.&#x27;,&#x27;6.12.&#x27;],c:0},
+  {q:&#x27;Wer ist der Grinch?&#x27;,a:[&#x27;Weihnachtsmuffel&#x27;,&#x27;Rentier&#x27;,&#x27;Elf&#x27;,&#x27;Schneemann&#x27;],c:0},
+  {q:&#x27;Welche Farbe hat Santas Mantel meistens?&#x27;,a:[&#x27;Rot&#x27;,&#x27;Grün&#x27;,&#x27;Blau&#x27;,&#x27;Gold&#x27;],c:0},
+  {q:&#x27;Welches Gebäck ist typisch zu Weihnachten?&#x27;,a:[&#x27;Lebkuchen&#x27;,&#x27;Laugenbrezel&#x27;,&#x27;Croissant&#x27;,&#x27;Donut&#x27;],c:0},
+  {q:&#x27;Was schmückt klassisch die Baumspitze?&#x27;,a:[&#x27;Stern&#x27;,&#x27;Kugel&#x27;,&#x27;Glocke&#x27;,&#x27;Kerze&#x27;],c:0},
+  {q:&#x27;In welchem Monat ist Weihnachten?&#x27;,a:[&#x27;Dezember&#x27;,&#x27;November&#x27;,&#x27;Januar&#x27;,&#x27;Oktober&#x27;],c:0},
+  {q:&#x27;Was hängt man an den Kamin für Geschenke?&#x27;,a:[&#x27;Socken&#x27;,&#x27;Schuhe&#x27;,&#x27;Hüte&#x27;,&#x27;Schals&#x27;],c:0}];
+ function show(){cur=Q[Math.floor(Math.random()*Q.length)];answered=false;player=0;$(&#x27;qzq&#x27;).textContent=cur.q;ansEl.innerHTML=&#x27;&#x27;;
+  cur.a.forEach(function(t,i){var b=document.createElement(&#x27;button&#x27;);b.className=&#x27;qa&#x27;;b.textContent=t;b.disabled=true;b.onclick=function(){answer(i,b)};ansEl.appendChild(b)});
+  $(&#x27;qzb1&#x27;).disabled=false;$(&#x27;qzb2&#x27;).disabled=false}
+ function buzz(p){if(!cur||player||answered)return;player=p;[].forEach.call(ansEl.children,function(b){b.disabled=false});$(&#x27;qzq&#x27;).textContent=&#x27;Spieler &#x27;+p+&#x27; antwortet!&#x27;;$(&#x27;qzb1&#x27;).disabled=true;$(&#x27;qzb2&#x27;).disabled=true;beep(600,.1,&#x27;triangle&#x27;)}
+ function answer(i,b){if(answered||!player)return;answered=true;var ok=i===cur.c;
+  [].forEach.call(ansEl.children,function(bb,idx){bb.disabled=true;if(idx===cur.c)bb.classList.add(&#x27;ok&#x27;)});if(!ok)b.classList.add(&#x27;bad&#x27;);
+  var who=ok?player:(player===1?2:1);if(who===1){s1++;$(&#x27;qzs1&#x27;).textContent=s1}else{s2++;$(&#x27;qzs2&#x27;).textContent=s2}beep(ok?800:160,.18,ok?&#x27;triangle&#x27;:&#x27;sawtooth&#x27;)}
+ $(&#x27;qzb1&#x27;).onclick=function(){buzz(1)};$(&#x27;qzb2&#x27;).onclick=function(){buzz(2)};$(&#x27;qzgo&#x27;).onclick=show;})();&lt;/script&gt;
+&lt;script&gt;/* 3 Gewinnt 2P */(function(){var g=$(&#x27;t2g&#x27;);if(!g)return;var b,turn,over,w1=0,w2=0,cells=[],L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+ for(var i=0;i&lt;9;i++){(function(i){var c=document.createElement(&#x27;div&#x27;);c.onclick=function(){play(i)};cells.push(c);g.appendChild(c)})(i)}
+ function wins(p){return L.some(function(l){return l.every(function(i){return b[i]===p})})}
+ function newg(){b=[&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;,&#x27;&#x27;];turn=1;over=false;draw();$(&#x27;t2s&#x27;).textContent=&#x27;🔴 Spieler 1 (✖) ist dran&#x27;}
+ function draw(){cells.forEach(function(c,i){c.textContent=b[i];c.style.color=b[i]===&#x27;✖&#x27;?&#x27;#ff3d81&#x27;:&#x27;#3ddc97&#x27;})}
+ function play(i){if(over||b[i])return;var sym=turn===1?&#x27;✖&#x27;:&#x27;⭕&#x27;;b[i]=sym;draw();beep(500,.04);
+  if(wins(sym)){over=true;if(turn===1){w1++;$(&#x27;t2w1&#x27;).textContent=w1}else{w2++;$(&#x27;t2w2&#x27;).textContent=w2}$(&#x27;t2s&#x27;).textContent=(turn===1?&#x27;🔴 Spieler 1&#x27;:&#x27;🟢 Spieler 2&#x27;)+&#x27; gewinnt! 🎉&#x27;;beep(760,.2,&#x27;triangle&#x27;);return}
+  if(b.every(function(x){return x})){over=true;$(&#x27;t2s&#x27;).textContent=&#x27;Unentschieden 🤝&#x27;;return}
+  turn=turn===1?2:1;$(&#x27;t2s&#x27;).textContent=(turn===1?&#x27;🔴 Spieler 1 (✖)&#x27;:&#x27;🟢 Spieler 2 (⭕)&#x27;)+&#x27; ist dran&#x27;}
+ $(&#x27;t2new&#x27;).onclick=newg;newg();})();&lt;/script&gt;
+&lt;script&gt;/* Käsekästchen */(function(){var cv=$(&#x27;dbc&#x27;);if(!cv)return;var x=cv.getContext(&#x27;2d&#x27;),N=4,cs=70,m=30,W=cv.width,H=cv.height,hE,vE,boxes,turn,over,sc;
+ function newg(){hE=[];vE=[];boxes=[];var r,c;for(r=0;r&lt;=N;r++){hE.push([]);for(c=0;c&lt;N;c++)hE[r].push(0)}for(r=0;r&lt;N;r++){vE.push([]);for(c=0;c&lt;=N;c++)vE[r].push(0)}for(r=0;r&lt;N;r++){boxes.push([]);for(c=0;c&lt;N;c++)boxes[r].push(0)}turn=1;over=false;sc={1:0,2:0};upd();draw()}
+ function upd(){$(&#x27;dbs&#x27;).textContent=over?(sc[1]&gt;sc[2]?&#x27;🔴 gewinnt!&#x27;:sc[2]&gt;sc[1]?&#x27;🔵 gewinnt!&#x27;:&#x27;Unentschieden 🤝&#x27;):(turn===1?&#x27;🔴 Spieler 1&#x27;:&#x27;🔵 Spieler 2&#x27;)+&#x27; ist dran&#x27;;$(&#x27;dbw1&#x27;).textContent=sc[1];$(&#x27;dbw2&#x27;).textContent=sc[2]}
+ function draw(){x.clearRect(0,0,W,H);var r,c;for(r=0;r&lt;N;r++)for(c=0;c&lt;N;c++){if(boxes[r][c]){x.fillStyle=boxes[r][c]===1?&#x27;#ff3d8155&#x27;:&#x27;#4d94ff55&#x27;;x.fillRect(m+c*cs+3,m+r*cs+3,cs-6,cs-6)}}
+  x.lineWidth=5;x.lineCap=&#x27;round&#x27;;for(r=0;r&lt;=N;r++)for(c=0;c&lt;N;c++){x.strokeStyle=hE[r][c]?&#x27;#fff&#x27;:&#x27;#ffffff22&#x27;;x.beginPath();x.moveTo(m+c*cs,m+r*cs);x.lineTo(m+c*cs+cs,m+r*cs);x.stroke()}
+  for(r=0;r&lt;N;r++)for(c=0;c&lt;=N;c++){x.strokeStyle=vE[r][c]?&#x27;#fff&#x27;:&#x27;#ffffff22&#x27;;x.beginPath();x.moveTo(m+c*cs,m+r*cs);x.lineTo(m+c*cs,m+r*cs+cs);x.stroke()}
+  x.fillStyle=&#x27;#ffd23f&#x27;;for(r=0;r&lt;=N;r++)for(c=0;c&lt;=N;c++){x.beginPath();x.arc(m+c*cs,m+r*cs,4,0,6.28);x.fill()}}
+ function claim(){var got=false,r,c;for(r=0;r&lt;N;r++)for(c=0;c&lt;N;c++){if(!boxes[r][c]&amp;&amp;hE[r][c]&amp;&amp;hE[r+1][c]&amp;&amp;vE[r][c]&amp;&amp;vE[r][c+1]){boxes[r][c]=turn;sc[turn]++;got=true}}return got}
+ cv.addEventListener(&#x27;pointerdown&#x27;,function(e){if(over)return;var rc=cv.getBoundingClientRect(),px=(e.clientX-rc.left)/rc.width*W,py=(e.clientY-rc.top)/rc.height*H,best=null,bd=cs*.5,r,c,d;
+  for(r=0;r&lt;=N;r++)for(c=0;c&lt;N;c++){if(hE[r][c])continue;d=Math.hypot(px-(m+c*cs+cs/2),py-(m+r*cs));if(d&lt;bd){bd=d;best={t:&#x27;h&#x27;,r:r,c:c}}}
+  for(r=0;r&lt;N;r++)for(c=0;c&lt;=N;c++){if(vE[r][c])continue;d=Math.hypot(px-(m+c*cs),py-(m+r*cs+cs/2));if(d&lt;bd){bd=d;best={t:&#x27;v&#x27;,r:r,c:c}}}
+  if(!best)return;if(best.t===&#x27;h&#x27;)hE[best.r][best.c]=1;else vE[best.r][best.c]=1;beep(400,.04);
+  if(claim())beep(720,.1,&#x27;triangle&#x27;);else turn=turn===1?2:1;
+  var full=true;for(r=0;r&lt;N;r++)for(c=0;c&lt;N;c++)if(!boxes[r][c])full=false;if(full){over=true;beep(880,.2,&#x27;triangle&#x27;)}upd();draw()});
+ $(&#x27;dbnew&#x27;).onclick=newg;newg();})();&lt;/script&gt;
+&lt;script&gt;/* Memory-Duell */(function(){var g=$(&#x27;mdg&#x27;);if(!g)return;var EM=[&#x27;🎄&#x27;,&#x27;🎁&#x27;,&#x27;⛄&#x27;,&#x27;🦌&#x27;,&#x27;🔔&#x27;,&#x27;⭐&#x27;,&#x27;🍪&#x27;,&#x27;🕯️&#x27;],flip=[],lock=false,turn=1,sc,done;
+ function upd(){$(&#x27;mds&#x27;).textContent=done===EM.length?(sc[1]&gt;sc[2]?&#x27;🔴 gewinnt!&#x27;:sc[2]&gt;sc[1]?&#x27;🟢 gewinnt!&#x27;:&#x27;Unentschieden 🤝&#x27;):(turn===1?&#x27;🔴 Spieler 1&#x27;:&#x27;🟢 Spieler 2&#x27;)+&#x27; ist dran&#x27;;$(&#x27;mdw1&#x27;).textContent=sc[1];$(&#x27;mdw2&#x27;).textContent=sc[2]}
+ function newg(){var cards=EM.concat(EM).sort(function(){return Math.random()-.5});flip=[];lock=false;turn=1;sc={1:0,2:0};done=0;g.innerHTML=&#x27;&#x27;;
+  cards.forEach(function(em){var c=document.createElement(&#x27;div&#x27;);c.className=&#x27;card&#x27;;c.dataset.em=em;c.onclick=function(){pick(c)};g.appendChild(c)});upd()}
+ function pick(c){if(lock||c.classList.contains(&#x27;up&#x27;)||c.classList.contains(&#x27;done&#x27;))return;c.classList.add(&#x27;up&#x27;);c.textContent=c.dataset.em;flip.push(c);beep(500,.03);
+  if(flip.length===2){lock=true;var a=flip[0],bb=flip[1];
+   if(a.dataset.em===bb.dataset.em){setTimeout(function(){a.classList.add(&#x27;done&#x27;);bb.classList.add(&#x27;done&#x27;);a.classList.remove(&#x27;up&#x27;);bb.classList.remove(&#x27;up&#x27;);sc[turn]++;done++;flip=[];lock=false;beep(800,.1,&#x27;triangle&#x27;);upd()},450)}
+   else{setTimeout(function(){a.classList.remove(&#x27;up&#x27;);bb.classList.remove(&#x27;up&#x27;);a.textContent=&#x27;&#x27;;bb.textContent=&#x27;&#x27;;flip=[];lock=false;turn=turn===1?2:1;upd()},750)}}}
+ $(&#x27;mdnew&#x27;).onclick=newg;newg();})();&lt;/script&gt;
 &lt;/body&gt;&lt;/html&gt;
 "></iframe><button id="shx" style="position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);right:10px;opacity:.85">✕ Zurück</button></div>
 <script>(function(){var w=document.getElementById('shw'),f=document.getElementById('shf');
