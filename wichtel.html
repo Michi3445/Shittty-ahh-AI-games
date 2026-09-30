@@ -491,6 +491,7 @@ body:not([data-skin="neon"]):not(.crazy):not(.trip) #bgc{display:none}
         <label class="sw2"><input type="checkbox" id="fxIntro"><span class="trk"></span>Intro-Show</label>
         <label class="sw2"><input type="checkbox" id="fxTabs"><span class="trk"></span>Tab-Übergänge</label>
         <label class="sw2"><input type="checkbox" id="fxTitle"><span class="trk"></span>Titel-Animation</label>
+        <label class="sw2"><input type="checkbox" id="fxBalls"><span class="trk"></span>Schneebälle beim Klicken</label>
       </div>
       <div class="setrow" style="margin-top:8px"><button id="fxBoom" class="gold">Feuerwerk 🎆</button></div></section>
     <section><h3>💾 Sichern</h3><div class="setrow">
@@ -754,6 +755,7 @@ addEventListener('pointerdown',function(e){
  var h=null;
  for(var i=B.length-1;i>=0;i--){if(B[i].k==='gun'&&Math.hypot(e.clientX-B[i].x,e.clientY-B[i].y)<B[i].r+14){h=B[i];break}}
  if(!h)for(i=B.length-1;i>=0;i--){if(Math.hypot(e.clientX-B[i].x,e.clientY-B[i].y)<B[i].r+8){h=B[i];break}}
+ if(!h&&window.__snowoff)return; /* Klick-Schneebälle optional abschaltbar */
  G=h||spawn(e.clientX,e.clientY);G.g=true;
  G.ox=h?e.clientX-G.x:0;G.oy=h?e.clientY-G.y:0;G.tx=G.x;G.ty=G.y;
  if(G.k==='gun')aimNear(G);
@@ -2710,7 +2712,7 @@ $('tyi').addEventListener('input',function(){if(!ty.run)return;var v=this.value;
  $('setName').addEventListener('input',function(){var n=this.value.trim();applyName(n);if(n)s('uname',n);else rm('uname');});
  $('setNameC').onclick=function(){applyName('');rm('uname');};
  /* Export / Import / Zurücksetzen */
- var KEYS=['skin','acc','theme','mute','uname','crazybg','fx_bg','fx_trail','fx_tilt','fx_click','fx_glow','fx_neon','fx_lights','fx_marquee','fx_intro','fx_tabs','fx_title'];
+ var KEYS=['skin','acc','theme','mute','uname','crazybg','fx_bg','fx_trail','fx_tilt','fx_click','fx_glow','fx_neon','fx_lights','fx_marquee','fx_intro','fx_tabs','fx_title','fx_balls'];
  $('setExp').onclick=function(){var o={};KEYS.forEach(function(k){var v=g(k,null);if(v!=null)o[k]=v;});var io=$('setIO');io.hidden=false;io.value=JSON.stringify(o);io.focus();io.select();};
  $('setImp').onclick=function(){var io=$('setIO');if(io.hidden||!io.value.trim()){io.hidden=false;io.focus();return;}try{var o=JSON.parse(io.value);KEYS.forEach(function(k){if(o[k]!=null)s(k,o[k]);else rm(k);});location.reload();}catch(e){alert('Code ungültig.');}};
  $('setRst').onclick=function(){if(confirm('Alle Einstellungen zurücksetzen?')){KEYS.forEach(rm);location.reload();}};
@@ -2907,6 +2909,7 @@ body.fxtitle .hero h1{animation:flow 5s linear infinite,titlepop .9s ease-out}
  tog('fxIntro','fx_intro',null,true,function(v){introOn=v});
  tog('fxTabs','fx_tabs','fxtabs',true);
  tog('fxTitle','fx_title','fxtitle',true);
+ tog('fxBalls','fx_balls',null,true,function(v){window.__snowoff=!v});
  if($('fxBg')){$('fxBg').value=g('fx_bg','aurora');$('fxBg').addEventListener('change',function(){setBg(this.value)})}
  if($('fxBoom'))$('fxBoom').onclick=bigShow;
  size();setBg(g('fx_bg','aurora'));
