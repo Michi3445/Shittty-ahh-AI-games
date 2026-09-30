@@ -1521,6 +1521,7 @@ body.facing .duel .p1{transform:rotate(180deg)}
 .ep-opts button{font-size:1.6rem;padding:14px 18px}
 .gfilter{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:2px 0 12px}.gfilter button{background:#ffffff14;border:1px solid #ffffff2e;padding:7px 14px;border-radius:999px;color:var(--ink);font-size:.85rem}.gfilter button.on{background:var(--gold);color:#221}.gcard.two{border-color:#ffd23f66}.gcard.two .sb{color:var(--gold)}
 .simg{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:min(80vw,300px);margin:8px auto}.simg .sp{aspect-ratio:1;border-radius:18px;background:var(--c);opacity:.5;box-shadow:none;transition:opacity .1s,transform .1s,box-shadow .1s;cursor:pointer}.simg .sp.lit{opacity:1;transform:scale(1.04);box-shadow:0 0 26px var(--c)}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,textarea{-webkit-user-select:text;user-select:text}button,.gcard,.seg button,.gfilter button,.qa,.md .card,#tttgrid .c,#t2g div,.simg .sp,nav button{transition:background .22s ease,color .2s ease,box-shadow .22s ease,transform .16s ease,opacity .2s ease}
 &lt;/style&gt;&lt;/head&gt;&lt;body&gt;
 &lt;h1&gt;Spielhalle 🕹️&lt;/h1&gt;
 &lt;nav id=&quot;tabs&quot;&gt;&lt;/nav&gt;
@@ -2981,6 +2982,14 @@ button.ghost:hover{background:color-mix(in srgb,var(--glass),#fff 12%)}
    x.fillStyle='#ffffffaa';x.beginPath();x.arc(b.x-b.r*.35,b.y-b.r*.35,Math.max(1,b.r*.18),0,6.28);x.fill();x.restore();return true})}
  function loop(){requestAnimationFrame(loop);if(!fun||!fun.classList.contains('on')||document.body.classList.contains('disguise'))return;draw()}
  loop();})();</script>
+
+<style>/* ===== Keine Textauswahl + Übergänge überall ===== */
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select,[contenteditable]{-webkit-user-select:text;-moz-user-select:text;user-select:text}
+*{transition:background-color .25s ease,border-color .25s ease,color .2s ease,box-shadow .25s ease,fill .2s ease}
+button,.btn,a,label,.pill,.eyebrow,.ti,.gcard,.seg button,.mtabs button,.msub button,.gfilter button,#cd div,.trk,.trk::after{transition:background-color .25s ease,border-color .25s ease,color .2s ease,box-shadow .25s ease,transform .22s cubic-bezier(.2,.7,.3,1),opacity .25s ease}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+</style>
 
 </body>
 </html>
