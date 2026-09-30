@@ -526,7 +526,7 @@ t();setInterval(t,1000)})();</script>
   <div hidden><button id="ssgo" tabindex="-1"></button><button id="skgo" tabindex="-1"></button></div>
 
   <nav class="mtabs" id="mtabs" aria-label="Bereiche">
-    <button data-p="home" class="on">🏠 Zentrale</button><button data-p="cook">🍪 Kekse</button><button data-p="party">🎉 Party</button><button data-p="chaos">💥 Chaos</button><button data-p="tools">🧰 Tools</button>
+    <button data-p="home" class="on">🏠 Zentrale</button><button data-p="cook">🍪 Kekse</button><button data-p="party">🎉 Party</button><button data-p="fun">🎡 Spaß</button><button data-p="chaos">💥 Chaos</button><button data-p="tools">🧰 Tools</button>
   </nav>
   <div class="mp on" data-p="home"><div class="grid">
     <section class="card tile s4 hall">
@@ -572,6 +572,26 @@ t();setInterval(t,1000)})();</script>
     <section class="card tile"><div class="th"><div class="ti">🔊</div><div><h2>Soundboard</h2><small>12 Sounds, erzeugt direkt im Browser</small></div></div><div class="sbg" id="sbg"></div></section>
 </div>
   </div>
+  <style>
+  .bwrap{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin:6px 0}
+  .bwrap button{aspect-ratio:1;border-radius:50%;padding:0;background:radial-gradient(circle at 35% 30%,#ffffffd0,var(--glass));border:1px solid var(--line);box-shadow:inset 0 -3px 6px #0003,0 2px 4px #0002;transition:transform .06s,opacity .1s}
+  .bwrap button.pop{background:var(--glass);box-shadow:inset 0 2px 5px #0004;transform:scale(.88);opacity:.55;cursor:default}
+  .sbfield{position:relative;height:240px;border-radius:18px;border:1px solid var(--line);background:var(--glass);overflow:hidden;margin:6px 0;touch-action:manipulation}
+  .sbtarget{position:absolute;font-size:2rem;line-height:1;cursor:pointer;user-select:none;-webkit-user-select:none;transform:translate(-50%,-50%);animation:sbpop .18s ease-out}
+  @keyframes sbpop{from{transform:translate(-50%,-50%) scale(0)}to{transform:translate(-50%,-50%) scale(1)}}
+  </style>
+  <div class="mp" data-p="fun"><div class="grid">
+    <section class="card tile s3">
+      <div class="th"><div class="ti">🫧</div><div><h2>Luftpolsterfolie</h2><small>Zum Entspannen: alle Blasen zerdrücken</small></div></div>
+      <div id="bwrap" class="bwrap" role="group" aria-label="Luftpolsterfolie"></div>
+      <div class="btnrow"><button id="bwnew" class="ghost">Neu aufpumpen 🔄</button><span class="hint" id="bwct"></span></div>
+    </section>
+    <section class="card tile s3">
+      <div class="th"><div class="ti">❄️</div><div><h2>Schneeball-Wurf</h2><small>Triff so viele Ziele wie möglich in 30 s</small></div></div>
+      <div id="sbfield" class="sbfield" aria-label="Spielfeld"></div>
+      <div class="btnrow"><button id="sbstart">Start ❄️</button><span class="stt2">Punkte: <b id="sbsc">0</b></span><span class="stt2">Zeit: <b id="sbtm">30</b> s</span><span class="stt2">Rekord: <b id="sbbest">0</b></span></div>
+    </section>
+  </div></div>
   <div class="mp" data-p="chaos"><div class="msub"><button data-v="cf" class="on">💥 Konfetti</button><button data-v="sh">🔫 Schießstand</button><button data-v="pr">🎭 Streiche</button></div>
 <div class="grid mv on" data-v="cf">
     <section class="card tile s2">
@@ -707,6 +727,7 @@ function draw(){
  bx.clearRect(0,0,bc.width,bc.height);
  B.forEach(function(b){
   if(b.k==='bt'){drawBt(b);return}if(b.k==='gun')return;
+  if(!isFinite(b.x)||!isFinite(b.y)||!isFinite(b.r)||b.r<=0)return; /* kaputte Bälle nicht zeichnen (verhindert non-finite Gradient-Crash) */
   var g=bx.createRadialGradient(b.x-b.r*.3,b.y-b.r*.35,b.r*.1,b.x,b.y,b.r);
   g.addColorStop(0,'#fff');g.addColorStop(1,'#a9c4ee');
   bx.fillStyle=g;bx.beginPath();bx.arc(b.x,b.y,b.r,0,6.28);bx.fill();
@@ -2183,6 +2204,37 @@ $('tyi').addEventListener('input',function(){if(!ty.run)return;var v=this.value;
  $('setExp').onclick=function(){var o={};KEYS.forEach(function(k){var v=g(k,null);if(v!=null)o[k]=v;});var io=$('setIO');io.hidden=false;io.value=JSON.stringify(o);io.focus();io.select();};
  $('setImp').onclick=function(){var io=$('setIO');if(io.hidden||!io.value.trim()){io.hidden=false;io.focus();return;}try{var o=JSON.parse(io.value);KEYS.forEach(function(k){if(o[k]!=null)s(k,o[k]);else rm(k);});location.reload();}catch(e){alert('Code ungültig.');}};
  $('setRst').onclick=function(){if(confirm('Alle Einstellungen zurücksetzen?')){KEYS.forEach(rm);location.reload();}};
+})();</script>
+<script>/* ---- Spaß-Widgets: eigener, Mute-bewusster Piepser (snd lebt in einem anderen Scope) ---- */
+var __AC;function beep(f,t){if(window.__mute)return;try{__AC=__AC||new(window.AudioContext||window.webkitAudioContext)();var o=__AC.createOscillator(),g=__AC.createGain(),n=__AC.currentTime;o.type=t||'sine';o.frequency.value=f;g.gain.setValueAtTime(.12,n);g.gain.exponentialRampToValueAtTime(.001,n+.09);o.connect(g);g.connect(__AC.destination);o.start();o.stop(n+.1);}catch(e){}}
+/* ---- Luftpolsterfolie (Toy) ---- */(function(){
+ var wrap=document.getElementById('bwrap');if(!wrap)return;
+ var N=48, ct=document.getElementById('bwct');
+ function count(){var left=wrap.querySelectorAll('button:not(.pop)').length;ct.textContent=left?(left+' übrig'):'Alle zerdrückt! 🎉';return left;}
+ function pop(e){var b=e.currentTarget;if(b.classList.contains('pop'))return;b.classList.add('pop');beep(680+Math.random()*520,'triangle');if(navigator.vibrate)navigator.vibrate(8);if(count()===0)beep(1250,'triangle');}
+ function build(){wrap.innerHTML='';for(var i=0;i<N;i++){var b=document.createElement('button');b.setAttribute('aria-label','Blase');b.addEventListener('pointerdown',pop);wrap.appendChild(b);}count();}
+ document.getElementById('bwnew').onclick=build;
+ build();
+})();
+/* ---- Schneeball-Wurf (Spiel) ---- */(function(){
+ var field=document.getElementById('sbfield');if(!field)return;
+ var EM=['❄️','⛄','🎁','🔔','⭐','🍪'],score=0,time=30,iv,spawn,running=false;
+ var best=0;try{best=parseInt(localStorage.getItem('sb_best'),10)||0;}catch(e){}
+ var elSc=document.getElementById('sbsc'),elTm=document.getElementById('sbtm'),elBest=document.getElementById('sbbest'),btn=document.getElementById('sbstart');
+ elBest.textContent=best;
+ function rnd(a,b){return a+Math.random()*(b-a);}
+ function addTarget(){if(!running)return;var t=document.createElement('div');t.className='sbtarget';t.textContent=EM[Math.floor(Math.random()*EM.length)];
+  t.style.left=rnd(12,88)+'%';t.style.top=rnd(16,84)+'%';
+  var life=setTimeout(function(){t.remove();},1100);
+  t.addEventListener('pointerdown',function(){clearTimeout(life);t.remove();score++;elSc.textContent=score;beep(880+score*8,'triangle');if(navigator.vibrate)navigator.vibrate(10);});
+  field.appendChild(t);}
+ function stop(){running=false;clearInterval(iv);clearInterval(spawn);
+  [].forEach.call(field.querySelectorAll('.sbtarget'),function(t){t.remove();});
+  if(score>best){best=score;try{localStorage.setItem('sb_best',best);}catch(e){}elBest.textContent=best;}
+  btn.disabled=false;btn.textContent='Nochmal ❄️';}
+ btn.onclick=function(){if(running)return;running=true;score=0;time=30;elSc.textContent=0;elTm.textContent=30;btn.disabled=true;
+  iv=setInterval(function(){time--;elTm.textContent=time;if(time<=0)stop();},1000);
+  spawn=setInterval(addTarget,600);addTarget();};
 })();</script>
 </body>
 </html>
