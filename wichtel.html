@@ -613,6 +613,7 @@ t();setInterval(t,1000)})();</script>
   .fc.crack{animation:fccr .4s}
   .fire{width:100%;max-width:300px;border-radius:14px;background:#0a0410;display:block;margin:4px auto}
   .spin{width:min(70vw,240px);height:auto;aspect-ratio:1;display:block;margin:4px auto;cursor:grab;touch-action:none}
+  .toycv{width:100%;max-width:320px;height:auto;aspect-ratio:auto;display:block;margin:4px auto;border-radius:14px;touch-action:none;cursor:pointer;background:#0d0626}
   </style>
   <div class="mp" data-p="fun"><div class="grid">
     <section class="card tile s3">
@@ -650,6 +651,14 @@ t();setInterval(t,1000)})();</script>
       <div class="th"><div class="ti">🌀</div><div><h2>Fidget-Spinner</h2><small>Ziehen &amp; loslassen zum Schleudern</small></div></div>
       <canvas id="spin" width="240" height="240" class="spin" aria-label="Fidget-Spinner"></canvas>
       <div class="btnrow"><span class="stt2">Tempo: <b id="spinrpm">0</b></span><span class="stt2">Umdrehungen: <b id="spinturns">0</b></span></div>
+    </section>
+    <section class="card tile s2">
+      <div class="th"><div class="ti">🪀</div><div><h2>Kugelstoßpendel</h2><small>Zieh eine Kugel und lass los</small></div></div>
+      <canvas id="cradle" width="320" height="210" class="toycv" aria-label="Kugelstoßpendel"></canvas>
+    </section>
+    <section class="card tile s2">
+      <div class="th"><div class="ti">🫧</div><div><h2>Seifenblasen</h2><small>Tippen erzeugt Blasen – nochmal tippen zerplatzt</small></div></div>
+      <canvas id="bubbles" width="320" height="240" class="toycv" aria-label="Seifenblasen"></canvas>
     </section>
   </div></div>
   <div class="mp" data-p="chaos"><div class="msub"><button data-v="cf" class="on">💥 Konfetti</button><button data-v="sh">🔫 Schießstand</button><button data-v="pr">🎭 Streiche</button></div>
@@ -1511,6 +1520,7 @@ body.facing .duel .p1{transform:rotate(180deg)}
 .ep-opts{display:flex;gap:10px;justify-content:center;margin:8px 0}
 .ep-opts button{font-size:1.6rem;padding:14px 18px}
 .gfilter{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:2px 0 12px}.gfilter button{background:#ffffff14;border:1px solid #ffffff2e;padding:7px 14px;border-radius:999px;color:var(--ink);font-size:.85rem}.gfilter button.on{background:var(--gold);color:#221}.gcard.two{border-color:#ffd23f66}.gcard.two .sb{color:var(--gold)}
+.simg{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:min(80vw,300px);margin:8px auto}.simg .sp{aspect-ratio:1;border-radius:18px;background:var(--c);opacity:.5;box-shadow:none;transition:opacity .1s,transform .1s,box-shadow .1s;cursor:pointer}.simg .sp.lit{opacity:1;transform:scale(1.04);box-shadow:0 0 26px var(--c)}
 &lt;/style&gt;&lt;/head&gt;&lt;body&gt;
 &lt;h1&gt;Spielhalle 🕹️&lt;/h1&gt;
 &lt;nav id=&quot;tabs&quot;&gt;&lt;/nav&gt;
@@ -1602,6 +1612,11 @@ Tanz 10 Sekunden 🕺&lt;/textarea&gt;
  &lt;div id=&quot;tttgrid&quot;&gt;&lt;/div&gt;
  &lt;div class=&quot;hud&quot; style=&quot;width:min(80vw,300px);margin-top:8px&quot;&gt;&lt;span&gt;Du: &lt;b id=&quot;tttw&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;span&gt;CPU: &lt;b id=&quot;tttl&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Remis: &lt;b id=&quot;tttd&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
  &lt;button id=&quot;tttnew&quot; style=&quot;background:#ffffff26;margin-top:8px&quot;&gt;Neu&lt;/button&gt;
+&lt;/section&gt;
+&lt;section id=&quot;s-sim&quot;&gt;
+ &lt;div class=&quot;res&quot; id=&quot;simmsg&quot;&gt;Tippe Start und merke dir die Folge&lt;/div&gt;
+ &lt;div class=&quot;simg&quot; id=&quot;simg&quot;&gt;&lt;button class=&quot;sp&quot; data-s=&quot;0&quot; style=&quot;--c:#3ddc97&quot;&gt;&lt;/button&gt;&lt;button class=&quot;sp&quot; data-s=&quot;1&quot; style=&quot;--c:#ff5252&quot;&gt;&lt;/button&gt;&lt;button class=&quot;sp&quot; data-s=&quot;2&quot; style=&quot;--c:#ffd23f&quot;&gt;&lt;/button&gt;&lt;button class=&quot;sp&quot; data-s=&quot;3&quot; style=&quot;--c:#4d94ff&quot;&gt;&lt;/button&gt;&lt;/div&gt;
+ &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;simgo&quot;&gt;Start&lt;/button&gt;&lt;span class=&quot;st&quot; style=&quot;line-height:1;padding-top:8px&quot;&gt;Runde: &lt;b id=&quot;simsc&quot;&gt;0&lt;/b&gt; · Rekord: &lt;b id=&quot;simbest&quot;&gt;0&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
 &lt;/section&gt;
 &lt;section id=&quot;s-rd&quot;&gt;
  &lt;div class=&quot;duelbar&quot;&gt;&lt;button id=&quot;rdgo&quot;&gt;Runde starten&lt;/button&gt;&lt;button class=&quot;faceBtn&quot; style=&quot;background:#ffffff26&quot;&gt;🔄 Ausrichtung&lt;/button&gt;&lt;/div&gt;
@@ -1700,7 +1715,7 @@ function rnd(n){return Math.floor(Math.random()*n)}
 var AC;function beep(f,d,t){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state===&#x27;suspended&#x27;)AC.resume();var o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime;o.type=t||&#x27;square&#x27;;o.frequency.value=f;g.gain.setValueAtTime(.08,n);g.gain.exponentialRampToValueAtTime(.001,n+(d||.08));o.connect(g);g.connect(AC.destination);o.start();o.stop(n+(d||.08)+.02)}catch(e){}}
 function ls(k,v){try{if(v===undefined)return parseFloat(localStorage.getItem(k));localStorage.setItem(k,v)}catch(e){return NaN}}
 var tab=&#x27;menu&#x27;;
-var GG=[[&#x27;sn&#x27;,&#x27;Snake&#x27;,&#x27;🐍&#x27;,&#x27;Klassiker&#x27;],[&#x27;tt&#x27;,&#x27;Tetris&#x27;,&#x27;🧱&#x27;,&#x27;Blöcke stapeln&#x27;],[&#x27;2048&#x27;,&#x27;2048&#x27;,&#x27;🔢&#x27;,&#x27;Verschmelzen&#x27;],[&#x27;bo&#x27;,&#x27;Breakout&#x27;,&#x27;🏓&#x27;,&#x27;Ziegel zerstören&#x27;],[&#x27;mw&#x27;,&#x27;Maulwurf&#x27;,&#x27;🔨&#x27;,&#x27;Drauf hauen&#x27;],[&#x27;ttt&#x27;,&#x27;3 Gewinnt&#x27;,&#x27;⭕&#x27;,&#x27;Gegen CPU&#x27;],[&#x27;rd&#x27;,&#x27;Reaktions-Duell&#x27;,&#x27;⚡&#x27;,&#x27;2 Spieler&#x27;],[&#x27;bm&#x27;,&#x27;Button-Mash&#x27;,&#x27;👆&#x27;,&#x27;2 Spieler&#x27;],[&#x27;tug&#x27;,&#x27;Seilziehen&#x27;,&#x27;🪢&#x27;,&#x27;2 Spieler&#x27;],[&#x27;c4&#x27;,&#x27;Vier Gewinnt&#x27;,&#x27;🔴&#x27;,&#x27;2 Spieler&#x27;],[&#x27;kb&#x27;,&#x27;Kickbot&#x27;,&#x27;🚗&#x27;,&#x27;2 Spieler&#x27;],[&#x27;pg&#x27;,&#x27;Pong 2P&#x27;,&#x27;🏓&#x27;,&#x27;2 Spieler&#x27;],[&#x27;ah&#x27;,&#x27;Air-Hockey&#x27;,&#x27;🏒&#x27;,&#x27;2 Spieler&#x27;],[&#x27;sd&#x27;,&#x27;Schneeball-Duell&#x27;,&#x27;❄️&#x27;,&#x27;2 Spieler&#x27;],[&#x27;ep&#x27;,&#x27;Elfmeter&#x27;,&#x27;🥅&#x27;,&#x27;2 Spieler&#x27;],[&#x27;qz&#x27;,&#x27;Quiz-Buzzer&#x27;,&#x27;❓&#x27;,&#x27;2 Spieler&#x27;],[&#x27;t2&#x27;,&#x27;3 Gewinnt 2P&#x27;,&#x27;⭕&#x27;,&#x27;2 Spieler&#x27;],[&#x27;db&#x27;,&#x27;Käsekästchen&#x27;,&#x27;🟦&#x27;,&#x27;2 Spieler&#x27;],[&#x27;md&#x27;,&#x27;Memory-Duell&#x27;,&#x27;🧩&#x27;,&#x27;2 Spieler&#x27;],[&#x27;fb&#x27;,&#x27;Flappy&#x27;,&#x27;🦌&#x27;,&#x27;Fliegen&#x27;],[&#x27;rz&#x27;,&#x27;Reaktion&#x27;,&#x27;⚡&#x27;,&#x27;Schnell tippen&#x27;],[&#x27;kl&#x27;,&#x27;Klick&#x27;,&#x27;👆&#x27;,&#x27;10 s Speed&#x27;],[&#x27;wh&#x27;,&#x27;Glücksrad&#x27;,&#x27;🎡&#x27;,&#x27;Drehen&#x27;],[&#x27;dc&#x27;,&#x27;Würfel &amp; Münze&#x27;,&#x27;🎲&#x27;,&#x27;Zufall&#x27;],[&#x27;fg&#x27;,&#x27;Fidget&#x27;,&#x27;🫧&#x27;,&#x27;Entspannen&#x27;],[&#x27;ss&#x27;,&#x27;Schneesturm&#x27;,&#x27;⛄&#x27;,&#x27;Physik&#x27;],[&#x27;sk&#x27;,&#x27;Tasten-Duell&#x27;,&#x27;⌨️&#x27;,&#x27;Tasten finden&#x27;],[&#x27;rk&#x27;,&#x27;Rekorde&#x27;,&#x27;🏆&#x27;,&#x27;Bestenliste&#x27;]];
+var GG=[[&#x27;sn&#x27;,&#x27;Snake&#x27;,&#x27;🐍&#x27;,&#x27;Klassiker&#x27;],[&#x27;tt&#x27;,&#x27;Tetris&#x27;,&#x27;🧱&#x27;,&#x27;Blöcke stapeln&#x27;],[&#x27;2048&#x27;,&#x27;2048&#x27;,&#x27;🔢&#x27;,&#x27;Verschmelzen&#x27;],[&#x27;bo&#x27;,&#x27;Breakout&#x27;,&#x27;🏓&#x27;,&#x27;Ziegel zerstören&#x27;],[&#x27;sim&#x27;,&#x27;Simon&#x27;,&#x27;🎨&#x27;,&#x27;Farben merken&#x27;],[&#x27;mw&#x27;,&#x27;Maulwurf&#x27;,&#x27;🔨&#x27;,&#x27;Drauf hauen&#x27;],[&#x27;ttt&#x27;,&#x27;3 Gewinnt&#x27;,&#x27;⭕&#x27;,&#x27;Gegen CPU&#x27;],[&#x27;rd&#x27;,&#x27;Reaktions-Duell&#x27;,&#x27;⚡&#x27;,&#x27;2 Spieler&#x27;],[&#x27;bm&#x27;,&#x27;Button-Mash&#x27;,&#x27;👆&#x27;,&#x27;2 Spieler&#x27;],[&#x27;tug&#x27;,&#x27;Seilziehen&#x27;,&#x27;🪢&#x27;,&#x27;2 Spieler&#x27;],[&#x27;c4&#x27;,&#x27;Vier Gewinnt&#x27;,&#x27;🔴&#x27;,&#x27;2 Spieler&#x27;],[&#x27;kb&#x27;,&#x27;Kickbot&#x27;,&#x27;🚗&#x27;,&#x27;2 Spieler&#x27;],[&#x27;pg&#x27;,&#x27;Pong 2P&#x27;,&#x27;🏓&#x27;,&#x27;2 Spieler&#x27;],[&#x27;ah&#x27;,&#x27;Air-Hockey&#x27;,&#x27;🏒&#x27;,&#x27;2 Spieler&#x27;],[&#x27;sd&#x27;,&#x27;Schneeball-Duell&#x27;,&#x27;❄️&#x27;,&#x27;2 Spieler&#x27;],[&#x27;ep&#x27;,&#x27;Elfmeter&#x27;,&#x27;🥅&#x27;,&#x27;2 Spieler&#x27;],[&#x27;qz&#x27;,&#x27;Quiz-Buzzer&#x27;,&#x27;❓&#x27;,&#x27;2 Spieler&#x27;],[&#x27;t2&#x27;,&#x27;3 Gewinnt 2P&#x27;,&#x27;⭕&#x27;,&#x27;2 Spieler&#x27;],[&#x27;db&#x27;,&#x27;Käsekästchen&#x27;,&#x27;🟦&#x27;,&#x27;2 Spieler&#x27;],[&#x27;md&#x27;,&#x27;Memory-Duell&#x27;,&#x27;🧩&#x27;,&#x27;2 Spieler&#x27;],[&#x27;fb&#x27;,&#x27;Flappy&#x27;,&#x27;🦌&#x27;,&#x27;Fliegen&#x27;],[&#x27;rz&#x27;,&#x27;Reaktion&#x27;,&#x27;⚡&#x27;,&#x27;Schnell tippen&#x27;],[&#x27;kl&#x27;,&#x27;Klick&#x27;,&#x27;👆&#x27;,&#x27;10 s Speed&#x27;],[&#x27;wh&#x27;,&#x27;Glücksrad&#x27;,&#x27;🎡&#x27;,&#x27;Drehen&#x27;],[&#x27;dc&#x27;,&#x27;Würfel &amp; Münze&#x27;,&#x27;🎲&#x27;,&#x27;Zufall&#x27;],[&#x27;fg&#x27;,&#x27;Fidget&#x27;,&#x27;🫧&#x27;,&#x27;Entspannen&#x27;],[&#x27;ss&#x27;,&#x27;Schneesturm&#x27;,&#x27;⛄&#x27;,&#x27;Physik&#x27;],[&#x27;sk&#x27;,&#x27;Tasten-Duell&#x27;,&#x27;⌨️&#x27;,&#x27;Tasten finden&#x27;],[&#x27;rk&#x27;,&#x27;Rekorde&#x27;,&#x27;🏆&#x27;,&#x27;Bestenliste&#x27;]];
 var BESTKEY={sn:&#x27;sn_hi&#x27;,tt:&#x27;tt_hi&#x27;,fb:&#x27;fb_hi&#x27;,&#x27;2048&#x27;:&#x27;g2048_hi&#x27;,bo:&#x27;bo_hi&#x27;,mw:&#x27;mw_hi&#x27;,kl:&#x27;kl_hi&#x27;};
 var curFilter=&#x27;all&#x27;;
 function buildMenu(){var gl=$(&#x27;glist&#x27;);gl.innerHTML=&#x27;&#x27;;GG.forEach(function(g){var two=g[3]===&#x27;2 Spieler&#x27;;if(curFilter===&#x27;2&#x27;&amp;&amp;!two)return;if(curFilter===&#x27;1&#x27;&amp;&amp;two)return;var c=document.createElement(&#x27;div&#x27;);c.className=&#x27;gcard&#x27;+(two?&#x27; two&#x27;:&#x27;&#x27;);c.tabIndex=0;var bs=&#x27;&#x27;;if(BESTKEY[g[0]]){var v=ls(BESTKEY[g[0]]);if(v&amp;&amp;!isNaN(v))bs=&#x27;Rekord: &#x27;+v}c.innerHTML=&#x27;&lt;span class=&quot;em&quot;&gt;&#x27;+g[2]+&#x27;&lt;/span&gt;&lt;span class=&quot;nm&quot;&gt;&#x27;+g[1]+&#x27;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;&#x27;+g[3]+&#x27;&lt;/span&gt;&lt;span class=&quot;bs&quot;&gt;&#x27;+bs+&#x27;&lt;/span&gt;&#x27;;c.onclick=function(){goTab(g[0])};c.onkeydown=function(e){if(e.key===&#x27;Enter&#x27;||e.key===&#x27; &#x27;){e.preventDefault();goTab(g[0])}};gl.appendChild(c)})}
@@ -2193,7 +2208,8 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
    if(a.dataset.em===bb.dataset.em){setTimeout(function(){a.classList.add(&#x27;done&#x27;);bb.classList.add(&#x27;done&#x27;);a.classList.remove(&#x27;up&#x27;);bb.classList.remove(&#x27;up&#x27;);sc[turn]++;done++;flip=[];lock=false;beep(800,.1,&#x27;triangle&#x27;);upd()},450)}
    else{setTimeout(function(){a.classList.remove(&#x27;up&#x27;);bb.classList.remove(&#x27;up&#x27;);a.textContent=&#x27;&#x27;;bb.textContent=&#x27;&#x27;;flip=[];lock=false;turn=turn===1?2:1;upd()},750)}}}
  $(&#x27;mdnew&#x27;).onclick=newg;newg();})();&lt;/script&gt;
-&lt;/body&gt;&lt;/html&gt;
+
+&lt;script&gt;/* Simon */(function(){var g=$(&#x27;simg&#x27;);if(!g)return;var seq=[],pos=0,input=false,best=ls(&#x27;sim_hi&#x27;)||0,pads=g.querySelectorAll(&#x27;.sp&#x27;),F=[392,523,659,784];$(&#x27;simbest&#x27;).textContent=best||0;function lit(i,ms){pads[i].classList.add(&#x27;lit&#x27;);beep(F[i],.2,&#x27;sine&#x27;);setTimeout(function(){pads[i].classList.remove(&#x27;lit&#x27;)},ms||240)}function play(){input=false;$(&#x27;simmsg&#x27;).textContent=&#x27;Merken…&#x27;;var i=0,iv=setInterval(function(){if(tab!==&#x27;sim&#x27;){clearInterval(iv);return}lit(seq[i]);i++;if(i&gt;=seq.length){clearInterval(iv);input=true;pos=0;$(&#x27;simmsg&#x27;).textContent=&#x27;Du bist dran!&#x27;}},560)}function next(){seq.push(rnd(4));$(&#x27;simsc&#x27;).textContent=seq.length;setTimeout(play,650)}function press(i){if(!input)return;lit(i);if(seq[pos]===i){pos++;if(pos&gt;=seq.length){input=false;if(seq.length&gt;best){best=seq.length;ls(&#x27;sim_hi&#x27;,best);$(&#x27;simbest&#x27;).textContent=best}next()}}else{input=false;$(&#x27;simmsg&#x27;).textContent=&#x27;Falsch! Runde &#x27;+seq.length+&#x27;. Nochmal?&#x27;;beep(120,.4,&#x27;sawtooth&#x27;)}}pads.forEach(function(p,i){p.onclick=function(){if(tab!==&#x27;sim&#x27;)return;press(i)}});$(&#x27;simgo&#x27;).onclick=function(){seq=[];pos=0;$(&#x27;simsc&#x27;).textContent=0;next()};})();&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
 "></iframe><button id="shx" style="position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);right:10px;opacity:.85">✕ Zurück</button></div>
 <script>(function(){var w=document.getElementById('shw'),f=document.getElementById('shf');
 function open2(){return !document.getElementById('ssw').hidden||!document.getElementById('skw').hidden}
@@ -2894,6 +2910,77 @@ body.fxtitle .hero h1{animation:flow 5s linear infinite,titlepop .9s ease-out}
  if($('fxBoom'))$('fxBoom').onclick=bigShow;
  size();setBg(g('fx_bg','aurora'));
 })();</script>
+
+<style>/* ===== Design-Refresh (Hauptseite) ===== */
+::selection{background:var(--pink);color:#fff}
+html{scroll-behavior:smooth}
+*::-webkit-scrollbar{width:11px;height:11px}
+*::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px;border:3px solid transparent;background-clip:padding-box}
+*::-webkit-scrollbar-thumb:hover{background:var(--pink)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:12px}
+/* Hero entschlacken – Designs & Crazy leben jetzt im Zahnrad-Panel */
+.hero .sw2,.hero .skins{display:none}
+.hero h1{filter:drop-shadow(0 6px 22px #ff3d8140);margin:.12em 0 .04em}
+.hero .sub{margin:.1em 0 .5em}
+.cdw{margin-top:14px}
+/* Countdown-Kacheln */
+#cd{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+#cd div{min-width:86px;padding:14px 14px 10px;border-radius:20px;background:linear-gradient(165deg,color-mix(in srgb,var(--glass),#fff 5%),transparent);border:1px solid var(--line);box-shadow:var(--shadow);text-align:center;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;opacity:.95}
+#cd strong{display:block;font-size:2.3rem;font-weight:800;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,var(--gold),color-mix(in srgb,var(--pink),#fff 12%));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* Karten: Glanzkante, Hover-Glow, gestaffelter Eintritt */
+.grid>.card.tile{position:relative;overflow:hidden}
+.grid>.card.tile::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#ffffff45,transparent);pointer-events:none}
+.grid>.card.tile:hover{transform:translateY(-5px);box-shadow:0 20px 46px -14px var(--pink),var(--shadow)}
+.mp.on .grid>.card.tile{animation:tilein .5s both}
+.mp.on .grid>.card.tile:nth-child(2){animation-delay:.07s}
+.mp.on .grid>.card.tile:nth-child(3){animation-delay:.14s}
+.mp.on .grid>.card.tile:nth-child(4){animation-delay:.21s}
+.mp.on .grid>.card.tile:nth-child(n+5){animation-delay:.28s}
+@keyframes tilein{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+/* Icon-Kacheln mit Tiefe */
+.ti{box-shadow:0 6px 16px -4px var(--pink),inset 0 1px 0 #ffffff55}
+.th h2{letter-spacing:-.01em}
+/* Buttons & Tabs */
+button.ghost:hover{background:color-mix(in srgb,var(--glass),#fff 12%)}
+.mtabs button.on{box-shadow:0 6px 18px -6px var(--pink)}
+.msub button.on{box-shadow:0 4px 12px -4px var(--gold)}
+@media (prefers-reduced-motion:reduce){.mp.on .grid>.card.tile{animation:none}}
+</style>
+
+<script>/* ---- Kugelstoßpendel & Seifenblasen (nutzen globales SFX) ---- */
+(function(){var cv=document.getElementById('cradle');if(!cv)return;var x=cv.getContext('2d'),W=cv.width,H=cv.height;
+ var N=5,R=17,L=150,topY=14,k=0.02,damp=0.999,cx=W/2,rest=[],d=[],v=[],drag=-1;
+ for(var i=0;i<N;i++){rest.push(cx+(i-(N-1)/2)*2*R);d.push(0);v.push(0)}
+ function pos(i){return rest[i]+d[i]}
+ function yy(i){var dd=Math.min(L-1,Math.abs(d[i]));return topY+Math.sqrt(L*L-dd*dd)}
+ function pt(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
+ cv.addEventListener('pointerdown',function(e){var p=pt(e);for(var i=0;i<N;i++){if(Math.hypot(p.x-pos(i),p.y-yy(i))<R+10){drag=i;v[i]=0;break}}try{cv.setPointerCapture(e.pointerId)}catch(_){}});
+ cv.addEventListener('pointermove',function(e){if(drag<0)return;var p=pt(e);d[drag]=Math.max(-L*0.7,Math.min(L*0.7,p.x-rest[drag]));v[drag]=0});
+ function end(){drag=-1}cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+ function step(){var i;for(i=0;i<N;i++){if(i===drag)continue;v[i]+=-k*d[i];v[i]*=damp;d[i]+=v[i]}
+  for(i=0;i<N-1;i++){var ov=(pos(i)+R)-(pos(i+1)-R);if(ov>0){var sh=ov/2;d[i]-=sh;d[i+1]+=sh;if(v[i]-v[i+1]>0){var rel=v[i]-v[i+1];var t=v[i];v[i]=v[i+1];v[i+1]=t;if(rel>0.5)SFX.tone(1300,.02,'sine',.05)}}}}
+ function draw(){x.clearRect(0,0,W,H);x.fillStyle='#0d0626';x.fillRect(0,0,W,H);
+  x.fillStyle='#3a3350';x.fillRect(cx-N*R-12,topY-8,2*(N*R+12),5);var i;
+  for(i=0;i<N;i++){x.strokeStyle='#aab';x.lineWidth=1.5;x.beginPath();x.moveTo(rest[i],topY);x.lineTo(pos(i),yy(i));x.stroke();
+   var g=x.createRadialGradient(pos(i)-6,yy(i)-6,2,pos(i),yy(i),R);g.addColorStop(0,'#fff');g.addColorStop(1,'#8aa0c8');x.fillStyle=g;x.beginPath();x.arc(pos(i),yy(i),R,0,6.28);x.fill()}}
+ var fun=document.querySelector('.mp[data-p="fun"]');
+ function loop(){requestAnimationFrame(loop);if(!fun||!fun.classList.contains('on')||document.body.classList.contains('disguise'))return;step();draw()}
+ loop();})();
+(function(){var cv=document.getElementById('bubbles');if(!cv)return;var x=cv.getContext('2d'),W=cv.width,H=cv.height,B=[];
+ function pt(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
+ function spawn(px,py){if(B.length>44)return;B.push({x:px,y:py,r:10+Math.random()*22,vx:(Math.random()-.5)*.4,vy:-.4-Math.random()*.6,ph:Math.random()*6.28,pop:0})}
+ function popAt(px,py){for(var i=B.length-1;i>=0;i--){if(!B[i].pop&&Math.hypot(px-B[i].x,py-B[i].y)<B[i].r+4){B[i].pop=0.01;SFX.pop();return true}}return false}
+ cv.addEventListener('pointerdown',function(e){var p=pt(e);if(!popAt(p.x,p.y)){spawn(p.x,p.y);SFX.tone(520+Math.random()*220,.04,'sine',.06)}});
+ var fun=document.querySelector('.mp[data-p="fun"]');
+ function draw(){var bg=x.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#10203a');bg.addColorStop(1,'#0a1428');x.fillStyle=bg;x.fillRect(0,0,W,H);
+  if(Math.random()<.03)spawn(Math.random()*W,H+10);
+  B=B.filter(function(b){if(b.pop){b.pop+=.12;b.r+=2.5;if(b.pop>1.6)return false}else{b.ph+=.05;b.x+=b.vx+Math.sin(b.ph)*.5;b.y+=b.vy;b.vy-=.002;if(b.y<-30)return false}
+   x.save();x.globalAlpha=b.pop?Math.max(0,1.6-b.pop):.85;
+   var g=x.createRadialGradient(b.x-b.r*.3,b.y-b.r*.3,1,b.x,b.y,b.r);g.addColorStop(0,'#ffffffcc');g.addColorStop(.7,'#9fd0ff33');g.addColorStop(1,'#ffffff10');x.fillStyle=g;x.beginPath();x.arc(b.x,b.y,b.r,0,6.28);x.fill();
+   x.strokeStyle='hsla('+((b.ph*40)%360)+',80%,80%,.6)';x.lineWidth=1.5;x.stroke();
+   x.fillStyle='#ffffffaa';x.beginPath();x.arc(b.x-b.r*.35,b.y-b.r*.35,Math.max(1,b.r*.18),0,6.28);x.fill();x.restore();return true})}
+ function loop(){requestAnimationFrame(loop);if(!fun||!fun.classList.contains('on')||document.body.classList.contains('disguise'))return;draw()}
+ loop();})();</script>
 
 </body>
 </html>
