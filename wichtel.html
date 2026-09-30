@@ -13,7 +13,7 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root[data-theme="dark"]{--bg:#150b38;--ink:#f3ecff;--pink:#ff3d81;--gold:#ffd23f;--mint:#3ddc97;--card:#ffffff14}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden;min-height:100vh}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji',sans-serif;overflow-x:hidden;min-height:100vh}
 #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
 #balls{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
 .hint{text-align:center;opacity:.8;margin:0}
@@ -1364,7 +1364,7 @@ addEventListener('keydown',function(e){if(e.key==='Escape'&&!w.hidden)document.g
 &lt;style&gt;
 :root{--bg:#150b38;--ink:#f3ecff;--pink:#ff3d81;--gold:#ffd23f;--mint:#3ddc97}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#2a1170,var(--bg)) fixed;color:var(--ink);font-family:system-ui,sans-serif}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#2a1170,var(--bg)) fixed;color:var(--ink);font-family:system-ui,&#x27;Segoe UI Emoji&#x27;,&#x27;Noto Color Emoji&#x27;,&#x27;Apple Color Emoji&#x27;,sans-serif}
 body{display:flex;flex-direction:column;align-items:center;padding:env(safe-area-inset-top,0) 10px 80px}
 h1{font-family:&#x27;Bungee&#x27;,Impact,sans-serif;font-size:1.4rem;margin:10px 0 6px;font-weight:400;background:linear-gradient(90deg,var(--pink),var(--gold),var(--mint));-webkit-background-clip:text;background-clip:text;color:transparent}
 nav{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;max-width:640px}
@@ -1418,6 +1418,7 @@ body.ingame #homebtn{display:block}
 #mwgrid .hole.up{background:#3a2170}
 #tttgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(80vw,300px);margin:8px auto}
 #tttgrid .c{aspect-ratio:1;border-radius:14px;background:#ffffff14;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;cursor:pointer}
+.gcard .em,#mwgrid .hole,.dice,#dv,#coin,nav button{font-family:&#x27;Segoe UI Emoji&#x27;,&#x27;Noto Color Emoji&#x27;,&#x27;Apple Color Emoji&#x27;,system-ui,sans-serif}
 &lt;/style&gt;&lt;/head&gt;&lt;body&gt;
 &lt;h1&gt;Spielhalle 🕹️&lt;/h1&gt;
 &lt;nav id=&quot;tabs&quot;&gt;&lt;/nav&gt;
@@ -1793,7 +1794,7 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
   if(ball.y&gt;H-24-ball.r&amp;&amp;ball.y&lt;H-12&amp;&amp;ball.x&gt;paddle.x&amp;&amp;ball.x&lt;paddle.x+paddle.w&amp;&amp;ball.vy&gt;0){ball.vy*=-1;ball.vx+=(ball.x-(paddle.x+paddle.w/2))/40;beep(500,.03)}
   for(var k=0;k&lt;bricks.length;k++){var b=bricks[k];if(!b.a)continue;if(ball.x&gt;b.x&amp;&amp;ball.x&lt;b.x+b.w&amp;&amp;ball.y&gt;b.y&amp;&amp;ball.y&lt;b.y+b.h){b.a=0;ball.vy*=-1;score++;$(&#x27;bosc&#x27;).textContent=score;beep(700+score*10,.03);if(score&gt;best){best=score;ls(&#x27;bo_hi&#x27;,best);$(&#x27;bobest&#x27;).textContent=best}break}}
   if(ball.y&gt;H){lives--;$(&#x27;bolife&#x27;).textContent=lives;beep(150,.2,&#x27;sawtooth&#x27;);if(lives&lt;=0){run=false;msg(&#x27;Game Over – tippen&#x27;);return}ball.x=W/2;ball.y=H-60;ball.vx=3;ball.vy=-4}
-  if(bricks.every(function(b){return !b.a})){run=false;msg(&#x27;Gewonnen! \U0001f389&#x27;);return}
+  if(bricks.every(function(b){return !b.a})){run=false;msg(&#x27;Gewonnen! 🎉&#x27;);return}
   draw();requestAnimationFrame(step)}
  function start(){if(run)return;if(lives&lt;=0||bricks.every(function(b){return !b.a}))init();run=true;requestAnimationFrame(step)}
  function mv(e){var r=cv.getBoundingClientRect();var px=(e.clientX-r.left)/r.width*W;paddle.x=Math.max(0,Math.min(W-paddle.w,px-paddle.w/2))}
@@ -1803,13 +1804,13 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
 })();&lt;/script&gt;
 &lt;script&gt;/* Maulwurf */(function(){
  var grid=$(&#x27;mwgrid&#x27;);if(!grid)return;var holes=[],score=0,time=30,iv,spawn,run=false,best=ls(&#x27;mw_hi&#x27;)||0;$(&#x27;mwbest&#x27;).textContent=best||0;
- var EM=[&#x27;\U0001f994&#x27;,&#x27;\U0001f385&#x27;,&#x27;⛄&#x27;,&#x27;\U0001f98c&#x27;,&#x27;\U0001f47a&#x27;];
+ var EM=[&#x27;🦔&#x27;,&#x27;🎅&#x27;,&#x27;⛄&#x27;,&#x27;🦌&#x27;,&#x27;👺&#x27;];
  for(var i=0;i&lt;9;i++){var h=document.createElement(&#x27;div&#x27;);h.className=&#x27;hole&#x27;;h.dataset.up=&#x27;0&#x27;;
   (function(h){h.addEventListener(&#x27;pointerdown&#x27;,function(){if(!run||h.dataset.up!==&#x27;1&#x27;)return;h.dataset.up=&#x27;0&#x27;;h.classList.remove(&#x27;up&#x27;);h.textContent=&#x27;&#x27;;score++;$(&#x27;mwsc&#x27;).textContent=score;beep(700,.05);if(navigator.vibrate)navigator.vibrate(10)})})(h);
   holes.push(h);grid.appendChild(h)}
  function pop(){if(!run)return;var free=holes.filter(function(h){return h.dataset.up===&#x27;0&#x27;});if(!free.length)return;var h=free[rnd(free.length)];h.dataset.up=&#x27;1&#x27;;h.classList.add(&#x27;up&#x27;);h.textContent=EM[rnd(EM.length)];
   setTimeout(function(){if(h.dataset.up===&#x27;1&#x27;){h.dataset.up=&#x27;0&#x27;;h.classList.remove(&#x27;up&#x27;);h.textContent=&#x27;&#x27;}},700+rnd(500))}
- function stop(){run=false;clearInterval(iv);clearInterval(spawn);holes.forEach(function(h){h.dataset.up=&#x27;0&#x27;;h.classList.remove(&#x27;up&#x27;);h.textContent=&#x27;&#x27;});if(score&gt;best){best=score;ls(&#x27;mw_hi&#x27;,best);$(&#x27;mwbest&#x27;).textContent=best}$(&#x27;mwstart&#x27;).disabled=false;$(&#x27;mwstart&#x27;).textContent=&#x27;Nochmal \U0001f528&#x27;}
+ function stop(){run=false;clearInterval(iv);clearInterval(spawn);holes.forEach(function(h){h.dataset.up=&#x27;0&#x27;;h.classList.remove(&#x27;up&#x27;);h.textContent=&#x27;&#x27;});if(score&gt;best){best=score;ls(&#x27;mw_hi&#x27;,best);$(&#x27;mwbest&#x27;).textContent=best}$(&#x27;mwstart&#x27;).disabled=false;$(&#x27;mwstart&#x27;).textContent=&#x27;Nochmal 🔨&#x27;}
  $(&#x27;mwstart&#x27;).onclick=function(){if(run)return;run=true;score=0;time=30;$(&#x27;mwsc&#x27;).textContent=0;$(&#x27;mwtm&#x27;).textContent=30;this.disabled=true;
   iv=setInterval(function(){if(tab!==&#x27;mw&#x27;){stop();return}time--;$(&#x27;mwtm&#x27;).textContent=time;if(time&lt;=0)stop()},1000);spawn=setInterval(pop,650);pop()}
 })();&lt;/script&gt;
@@ -1824,11 +1825,11 @@ addEventListener(&#x27;keydown&#x27;,function(e){var k=e.key,l=k.toLowerCase();
  function cpu(){var e=empties(b),i,c;for(i=0;i&lt;e.length;i++){c=b.slice();c[e[i]]=&#x27;◯&#x27;;if(wins(c,&#x27;◯&#x27;))return e[i]}
   for(i=0;i&lt;e.length;i++){c=b.slice();c[e[i]]=&#x27;✖&#x27;;if(wins(c,&#x27;✖&#x27;))return e[i]}if(!b[4])return 4;return e[rnd(e.length)]}
  function play(i){if(over||b[i])return;b[i]=&#x27;✖&#x27;;draw();beep(600,.04);
-  if(wins(b,&#x27;✖&#x27;)){over=true;w++;$(&#x27;tttw&#x27;).textContent=w;$(&#x27;ttts&#x27;).textContent=&#x27;Du gewinnst! \U0001f389&#x27;;return}
-  if(!empties(b).length){over=true;d++;$(&#x27;tttd&#x27;).textContent=d;$(&#x27;ttts&#x27;).textContent=&#x27;Remis \U0001f91d&#x27;;return}
+  if(wins(b,&#x27;✖&#x27;)){over=true;w++;$(&#x27;tttw&#x27;).textContent=w;$(&#x27;ttts&#x27;).textContent=&#x27;Du gewinnst! 🎉&#x27;;return}
+  if(!empties(b).length){over=true;d++;$(&#x27;tttd&#x27;).textContent=d;$(&#x27;ttts&#x27;).textContent=&#x27;Remis 🤝&#x27;;return}
   var m=cpu();b[m]=&#x27;◯&#x27;;draw();beep(400,.04);
-  if(wins(b,&#x27;◯&#x27;)){over=true;l++;$(&#x27;tttl&#x27;).textContent=l;$(&#x27;ttts&#x27;).textContent=&#x27;CPU gewinnt \U0001f916&#x27;;return}
-  if(!empties(b).length){over=true;d++;$(&#x27;tttd&#x27;).textContent=d;$(&#x27;ttts&#x27;).textContent=&#x27;Remis \U0001f91d&#x27;}}
+  if(wins(b,&#x27;◯&#x27;)){over=true;l++;$(&#x27;tttl&#x27;).textContent=l;$(&#x27;ttts&#x27;).textContent=&#x27;CPU gewinnt 🤖&#x27;;return}
+  if(!empties(b).length){over=true;d++;$(&#x27;tttd&#x27;).textContent=d;$(&#x27;ttts&#x27;).textContent=&#x27;Remis 🤝&#x27;}}
  $(&#x27;tttnew&#x27;).onclick=newg;newg();
 })();&lt;/script&gt;
 &lt;/body&gt;&lt;/html&gt;
