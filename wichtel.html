@@ -402,32 +402,39 @@ html.lite .emo-row span,html.lite #bgc{animation:none!important}
 <div id="cover">
   <div id="scv" aria-label="Lernportal">
     <header class="scv-top"><button id="scvL" class="scv-logo" aria-label="Lernportal">📘 <b>Lernportal</b></button>
-      <nav class="scv-nav"><span class="on">Dashboard</span><span>Kurse</span><span>Aufgaben</span><span>Kalender</span><span>Nachrichten</span></nav>
+      <nav class="scv-nav" id="scvNav"><button data-view="dash" class="on">Dashboard</button><button data-view="kurse">Kurse</button><button data-view="aufg">Aufgaben <span class="scv-cnt" id="scvCnt" hidden></span></button><button data-view="plan">Stundenplan</button><button data-view="notes">Notizen</button><button data-view="tools">Werkzeuge</button></nav>
       <span class="scv-av" aria-hidden="true">9b</span></header>
     <main class="scv-main">
-      <p class="scv-bc">Kurse › Mathematik 9 › Lineare Funktionen</p>
-      <div class="scv-cols">
+      <p class="scv-bc" id="scvBc">Dashboard</p>
+      <section class="scv-view on" data-view="dash"><div class="scv-cols">
         <div>
           <section class="scv-card">
-            <p class="scv-kick">Lektion 4 von 7</p>
+            <p class="scv-kick">Mathematik 9 · Lektion 4 von 7</p>
             <h1>Steigung und y-Achsenabschnitt</h1>
-            <div class="scv-prog"><div><i style="width:63%"></i></div><span>Fortschritt: <b id="scvP">63 %</b></span></div>
+            <div class="scv-prog"><div><i id="scvPB" style="width:63%"></i></div><span>Fortschritt: <b id="scvP">63 %</b></span></div>
             <p>Eine lineare Funktion hat die Form <b>f(x) = m·x + b</b>. Dabei ist <b>m</b> die Steigung und <b>b</b> der y-Achsenabschnitt, also die Stelle, an der der Graph die y-Achse schneidet.</p>
             <svg class="scv-graph" viewBox="0 0 240 160" aria-hidden="true"><path d="M20 0V160M0 140H240" stroke="#94a3b8" stroke-width="1.2"/><path d="M0 128 240 32" stroke="#2563eb" stroke-width="3"/><path d="M80 104H140V80" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4 3"/><text x="104" y="118" font-size="11" fill="#475569">Δx</text><text x="146" y="96" font-size="11" fill="#475569">Δy</text><text x="100" y="30" font-size="12" fill="#2563eb">f(x) = 0,4x + 1</text></svg>
             <p>Die Steigung berechnest du mit zwei Punkten P(x₁|y₁) und Q(x₂|y₂): <b>m = (y₂ − y₁) / (x₂ − x₁)</b>. Ist m positiv, steigt der Graph; ist m negativ, fällt er.</p>
           </section>
           <section class="scv-card">
-            <h2>✏️ Übung</h2><p id="scvQ"></p>
+            <h2>✏️ Übung <small class="scv-streak" id="scvS"></small></h2><p id="scvQ"></p>
             <div class="scv-row"><input id="scvA" class="si" type="text" inputmode="decimal" placeholder="m = ?" aria-label="Antwort"><button id="scvC">Prüfen</button><button id="scvN" class="alt">Neue Aufgabe</button></div>
             <p id="scvF" class="scv-fb"></p>
+            <p class="scv-small">Mehr Übungen in Mathe, Englisch, Chemie und Kopfrechnen findest du unter <a href="#" data-go="kurse">Kurse</a>.</p>
           </section>
         </div>
         <aside>
+          <section class="scv-card"><h2>🕒 Heute</h2><div id="scvToday"></div></section>
           <section class="scv-card"><h2>📅 Nächste Abgaben</h2><ul class="scv-due" id="scvDue"></ul></section>
-          <section class="scv-card"><h2>📢 Mitteilungen</h2><p class="scv-small"><b>Mathe:</b> Bitte bis zur nächsten Stunde S. 84 Nr. 3–5 bearbeiten.</p><p class="scv-small"><b>Klassenleitung:</b> Denkt an die Einverständniserklärung für den Wandertag.</p></section>
+          <section class="scv-card"><h2>⏱️ Fokus-Timer</h2><div id="scvFocus"></div></section>
         </aside>
-      </div>
-      <section class="scv-card"><h2>🧰 Werkzeuge</h2><div id="scvTools"></div></section>
+      </div></section>
+      <section class="scv-view" data-view="kurse"><div id="scvCourses" class="scv-courses"></div><section class="scv-card" id="scvPrac" hidden></section></section>
+      <section class="scv-view" data-view="aufg"><div class="scv-cols"><div><section class="scv-card"><h2>➕ Neue Aufgabe</h2><div id="scvTF"></div></section><section class="scv-card"><h2>📋 Offen</h2><ul class="scv-tasks" id="scvTO"></ul></section><section class="scv-card"><h2>✅ Erledigt</h2><ul class="scv-tasks" id="scvTD"></ul></section></div>
+        <aside><section class="scv-card"><h2>📊 Überblick</h2><div id="scvTS"></div></section></aside></div></section>
+      <section class="scv-view" data-view="plan"><section class="scv-card"><h2>🗓️ Stundenplan</h2><p class="scv-small">Feld antippen zum Eintragen. Die Uhrzeit-Spalte antippen, um die Zeiten anzupassen.</p><div class="scv-tw"><table class="scv-tt" id="scvTT"></table></div><div id="scvPE" class="scv-pe" hidden></div></section></section>
+      <section class="scv-view" data-view="notes"><section class="scv-card"><h2>🗒️ Notizen</h2><div class="scv-chips" id="scvNC"></div><textarea id="scvNT" class="scv-nt" placeholder="Hier mitschreiben … (wird automatisch gespeichert)"></textarea><p class="scv-small" id="scvNI"></p></section></section>
+      <section class="scv-view" data-view="tools"><section class="scv-card"><h2>🧰 Werkzeuge</h2><div id="scvTools"></div></section></section>
       <p class="scv-foot">Lernportal · Hilfe · Datenschutz · Impressum</p>
     </main>
   </div>
@@ -2106,7 +2113,7 @@ o'')}____//
       <p class="hint">Personalisiert die Begrüßung oben.</p></section>
     <section><h3>🙈 Tarnseite</h3><div class="setrow"><label for="setCover">Aussehen:</label>
       <select id="setCover" aria-label="Tarnseite"><option value="xmas">🎄 Weihnachts-Countdown</option><option value="school">📘 Lernplattform (Schule)</option></select></div>
-      <p class="hint">Das wird beim Tarnen (Esc / Alt+T) angezeigt. Lernplattform entsperren: 3× auf „63 %“ tippen, dann das 📘-Logo gedrückt halten (oder das Geheimwort tippen).</p></section>
+      <p class="hint">Das wird beim Tarnen (Esc / Alt+T) angezeigt. Lernplattform entsperren: 3× auf die Prozentzahl bei „Fortschritt“ tippen, dann das 📘-Logo gedrückt halten (oder das Geheimwort tippen).</p></section>
     <section><h3>✨ Show-Effekte</h3>
       <div class="setrow"><label for="fxBg">Hintergrund:</label>
         <select id="fxBg" aria-label="Hintergrund-Effekt">
@@ -5194,7 +5201,7 @@ function pos(z){/* [Spalte, Zeile] */if(z===1)return[1,1];if(z===2)return[18,1];
  if(z>=57&&z<=71)return[z-57+3,9];if(z>=89&&z<=103)return[z-89+3,10];
  var p3=z<=86?6:7,b=p3===6?54:86,o3=z-b;return[o3<=2?o3:o3-14,p3]}
 function state(z){if([1,2,7,8,9,10,17,18,36,54,86].indexOf(z)>=0)return'gasförmig';if(z===35||z===80)return'flüssig';return z>=100?'unbekannt (künstlich)':'fest'}
-ELS.forEach(function(e){e.c=catOf(e.z);var q=pos(e.z);e.x=q[0];e.y=q[1]});
+window.__ELS=ELS;ELS.forEach(function(e){e.c=catOf(e.z);var q=pos(e.z);e.x=q[0];e.y=q[1]});
 P.pt.innerHTML='<div class="scard"><h3>⚗️ Periodensystem</h3><div class="srow"><input class="si" id="ptQ" type="search" placeholder="Suchen: Name, Symbol oder Ordnungszahl"></div>'+
  '<div class="chips legend" id="ptL"></div><div class="ptw" style="margin-top:10px"><div class="pt" id="ptG"></div></div><div id="ptD" style="margin-top:12px"></div></div>'+
  '<div class="scard"><h3>⚖️ Molare Masse berechnen</h3><div class="srow"><input class="si" id="mmQ" type="text" placeholder="z. B. H2SO4, Ca(OH)2, CuSO4·5H2O" autocomplete="off" spellcheck="false"></div><div class="sout" id="mmO"></div><div id="mmT" class="shint"></div></div>';
@@ -5251,16 +5258,244 @@ var sc=$('setCover');if(sc){sc.value=g('cover_mode','xmas');sc.addEventListener(
  tz.addEventListener('click',function(){taps++;clearTimeout(tt);tt=setTimeout(function(){taps=0},2500)});
  lg.addEventListener('pointerdown',function(e){if(e.cancelable)e.preventDefault();clearTimeout(ht);ht=setTimeout(function(){if(taps>=3&&window.__reveal)window.__reveal();taps=0},700)});
  ['pointerup','pointerleave','pointercancel'].forEach(function(v){lg.addEventListener(v,function(){clearTimeout(ht)})});lg.addEventListener('contextmenu',function(e){e.preventDefault()})})();
-/* Uebungsaufgabe + Abgaben */
-var QA;function newQ(){var x1=Math.floor(Math.random()*5)-1,x2=x1+1+Math.floor(Math.random()*4),m=[-3,-2,-1,1,2,3,0.5][Math.floor(Math.random()*7)],b=Math.floor(Math.random()*7)-3,y1=m*x1+b,y2=m*x2+b;QA=m;
- $('scvQ').innerHTML='Bestimme die Steigung m der Geraden durch <b>P('+de(x1)+' | '+de(y1)+')</b> und <b>Q('+de(x2)+' | '+de(y2)+')</b>.';$('scvA').value='';$('scvF').textContent='';$('scvF').className='scv-fb'}
-if($('scvQ')){newQ();$('scvN').onclick=newQ;
- function chk(){var v=num($('scvA').value),f=$('scvF');if(!isFinite(v)){f.textContent='Bitte eine Zahl eingeben.';f.className='scv-fb no';return}
-  if(Math.abs(v-QA)<1e-9){f.textContent='✔ Richtig! m = '+de(QA);f.className='scv-fb ok'}else{f.textContent='✘ Leider falsch. Tipp: m = (y₂ − y₁) / (x₂ − x₁)';f.className='scv-fb no'}}
- $('scvC').onclick=chk;$('scvA').addEventListener('keydown',function(e){if(e.key!=='Escape')e.stopPropagation();if(e.key==='Enter')chk()});
- var D=[['Mathe: Arbeitsblatt Lineare Funktionen',2],['Deutsch: Erörterung – Gliederung',4],['Biologie: Versuchsprotokoll Fotosynthese',6],['Englisch: Vocabulary Unit 3',9]];
- $('scvDue').innerHTML=D.map(function(d){var t=new Date();t.setDate(t.getDate()+d[1]);return '<li><span>'+d[0]+'</span><small>'+t.toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit'})+'</small></li>'}).join('')}
 (function(){var t=g('sch_tab','no'),b=nav.querySelector('[data-v="'+t+'"]');if(b&&t!=='no')b.click()})();
+})();</script>
+<style>/* ---- Lernportal: Ansichten ---- */
+.scv-nav{-webkit-mask-image:none!important;mask-image:none!important;overflow-x:auto;scrollbar-width:none;gap:4px!important}
+.scv-nav::-webkit-scrollbar{display:none}
+#scv .scv-nav button{background:none;color:#475569;padding:6px 10px;border-radius:6px;font-weight:500;flex:none}
+#scv .scv-nav button:hover{background:#f1f5f9}
+#scv .scv-nav button.on{color:#2563eb;font-weight:600;background:#eff6ff}
+.scv-cnt{display:inline-block;min-width:18px;padding:0 5px;border-radius:99px;background:#ef4444;color:#fff;font-size:.72rem;line-height:18px;text-align:center}
+.scv-view{display:none}.scv-view.on{display:block;animation:mpin .25s ease-out}
+#scv a{color:#2563eb}
+.scv-streak{font-size:.8rem;font-weight:600;color:#ea580c;margin-left:6px}
+/* Heute */
+.scv-les{display:grid;grid-template-columns:62px 1fr;gap:8px;padding:7px 8px;border-radius:8px;font-size:.9rem;align-items:center}
+.scv-les small{color:#64748b;font-variant-numeric:tabular-nums}
+.scv-les.now{background:#eff6ff;outline:1px solid #bfdbfe}.scv-les.past{opacity:.45}
+.scv-tag{display:inline-block;font-size:.72rem;font-weight:700;border-radius:99px;padding:1px 8px;margin-left:6px;background:#2563eb;color:#fff}
+.scv-tag.nx{background:#e2e8f0;color:#334155}
+/* Fokus */
+.scv-ft{font:700 2.4rem ui-monospace,Menlo,Consolas,monospace;text-align:center;margin:4px 0;font-variant-numeric:tabular-nums}
+.scv-fm{display:flex;gap:4px;justify-content:center;margin-bottom:6px}
+#scv .scv-fm button{background:#f1f5f9;color:#334155;padding:4px 10px;font-size:.8rem}#scv .scv-fm button.on{background:#2563eb;color:#fff}
+.scv-fbar{height:6px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:6px 0}.scv-fbar i{display:block;height:100%;background:#2563eb;transition:width 1s linear}
+/* Kurse */
+.scv-courses{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:16px}
+#scv .scv-course{all:unset;box-sizing:border-box;cursor:pointer;background:#fff;border:1px solid #d6dbe3;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;transition:box-shadow .15s,transform .15s}
+#scv .scv-course:hover{box-shadow:0 6px 18px #0f172a14;transform:translateY(-2px)}
+#scv .scv-course.on{outline:2px solid #2563eb}
+.scv-course .ic{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-size:1.4rem}
+.scv-course b{font-size:1rem;color:#0f172a}.scv-course span{font-size:.82rem;color:#64748b}
+.scv-mini{height:6px;background:#e2e8f0;border-radius:99px;overflow:hidden}.scv-mini i{display:block;height:100%;background:#22c55e}
+.scv-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+#scv .scv-chips button{background:#f1f5f9;color:#334155;padding:4px 12px;font-size:.82rem;border-radius:99px}
+#scv .scv-chips button.on{background:#2563eb;color:#fff}
+.scv-q{font-size:1.25rem;font-weight:600;margin:10px 0;color:#0f172a}
+.scv-stats{display:flex;gap:16px;flex-wrap:wrap;font-size:.85rem;color:#475569;margin-top:8px}
+/* Aufgaben */
+.scv-tasks{list-style:none;padding:0;margin:0}
+.scv-tasks li{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #eef1f5;font-size:.92rem}
+.scv-tasks li.done span.tx{text-decoration:line-through;color:#94a3b8}
+.scv-tasks input[type=checkbox]{width:18px;height:18px;accent-color:#2563eb}
+.scv-sub{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:5px;background:#e0e7ff;color:#3730a3;margin-right:6px}
+.scv-due-l{font-size:.78rem;color:#64748b;white-space:nowrap}.scv-due-l.late{color:#dc2626;font-weight:700}.scv-due-l.soon{color:#ea580c;font-weight:700}
+#scv .scv-x{background:none;color:#94a3b8;padding:2px 6px;font-size:1rem}
+#scv .scv-x:hover{color:#dc2626}
+.scv-form{display:grid;gap:8px}.scv-form .scv-row input{flex:1}
+.scv-big{font-size:1.8rem;font-weight:800;color:#0f172a}
+/* Stundenplan */
+.scv-tw{overflow-x:auto}
+.scv-tt{width:100%;border-collapse:separate;border-spacing:3px;table-layout:fixed;min-width:340px}
+.scv-tt th{font-size:.78rem;color:#64748b;font-weight:600;padding:4px}
+.scv-tt th.today{color:#2563eb}
+.scv-tt td{background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;height:42px;padding:3px 4px;font-size:.78rem;cursor:pointer;overflow:hidden;vertical-align:middle;text-align:center;line-height:1.15}
+.scv-tt td:hover{border-color:#93c5fd}
+.scv-tt td b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#0f172a}
+.scv-tt td small{color:#64748b;font-size:.68rem}
+.scv-tt td.tm{background:none;border-color:transparent;color:#64748b;font-size:.68rem;width:52px}
+.scv-tt td.now{outline:2px solid #2563eb;background:#eff6ff}
+.scv-tt td.sel{outline:2px solid #f59e0b}
+.scv-pe{margin-top:12px;padding:12px;border:1px solid #d6dbe3;border-radius:10px;background:#f8fafc}
+/* Notizen */
+.scv-nt{width:100%;min-height:300px;resize:vertical;font:inherit;line-height:1.55;padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:#fffef7;color:#1f2937;box-sizing:border-box}
+@media (max-width:520px){.scv-tasks li{grid-template-columns:auto 1fr auto}.scv-tasks li .scv-due-l{grid-column:2}.scv-ft{font-size:2rem}}
+</style>
+<script>/* ---- Lernportal: echte Ansichten (Stundenplan, Aufgaben, Kurse, Notizen, Fokus-Timer) ---- */
+(function(){
+var $=function(i){return document.getElementById(i)},root=$('scv');if(!root)return;
+function g(k,d){try{var v=localStorage.getItem(k);return v==null?d:v}catch(e){return d}}
+function s(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function gj(k,d){try{var v=JSON.parse(g(k,''));return v==null?d:v}catch(e){return d}}
+function sj(k,v){s(k,JSON.stringify(v))}
+function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function de(n,d){return Number(n).toLocaleString('de-DE',{maximumFractionDigits:d==null?2:d})}
+function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1))}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function pd(str){var p=str.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+function today0(){var d=new Date();d.setHours(0,0,0,0);return d}
+function mins(t){var p=String(t||'0:0').split(':');return (+p[0])*60+(+p[1]||0)}
+/* Eingaben duerfen keine Hotkeys/Geheimwort ausloesen */
+root.addEventListener('keydown',function(e){if(e.target.matches('input,textarea,select')&&e.key!=='Escape')e.stopPropagation()});
+
+/* ---------- Navigation ---------- */
+var VN={dash:'Dashboard',kurse:'Kurse',aufg:'Aufgaben',plan:'Stundenplan',notes:'Notizen',tools:'Werkzeuge'},VIEW=g('scv_view','dash');if(!VN[VIEW])VIEW='dash';
+function go(v){VIEW=v;s('scv_view',v);root.querySelectorAll('#scvNav button').forEach(function(b){b.classList.toggle('on',b.dataset.view===v);if(b.dataset.view===v){var n=$('scvNav');n.scrollLeft=b.offsetLeft-n.offsetLeft-(n.clientWidth-b.offsetWidth)/2}});
+ root.querySelectorAll('.scv-view').forEach(function(x){x.classList.toggle('on',x.dataset.view===v)});$('scvBc').textContent=v==='dash'?'Dashboard':'Dashboard › '+VN[v];
+ if(document.body.classList.contains('disguise')&&document.documentElement.classList.contains('schoolcv'))document.title=window.__cvTitle();
+ if(v==='plan')ttR();if(v==='aufg')tkR();if(v==='notes')ntR();if(v==='kurse')crR();if(v==='dash')dashR();root.scrollTop=0;var c=$('cover');if(c)c.scrollTop=0}
+$('scvNav').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(b)go(b.dataset.view)});
+root.addEventListener('click',function(e){var a=e.target.closest('[data-go]');if(a){e.preventDefault();go(a.dataset.go)}});
+window.__cvTitle=function(){return 'Lernportal – '+(VIEW==='dash'?'Mathematik 9':VN[VIEW])};
+
+/* ---------- Stundenplan ---------- */
+var DAYS=['Mo','Di','Mi','Do','Fr'],DEFT=[['08:00','08:45'],['08:50','09:35'],['09:55','10:40'],['10:45','11:30'],['11:50','12:35'],['12:40','13:25'],['13:35','14:20'],['14:25','15:10']];
+var PL=gj('sch_plan',null)||{t:DEFT,c:{}},SEL=null;
+function plSave(){sj('sch_plan',PL)}
+function subjects(){var o={};Object.keys(PL.c).forEach(function(k){if(PL.c[k].f)o[PL.c[k].f]=1});gj('sch_grades',{subs:[]}).subs.forEach(function(x){o[x.n]=1});
+ ['Mathe','Deutsch','Englisch','Biologie','Chemie','Physik','Geschichte','Erdkunde','Sport','Kunst','Musik','Informatik','Religion','Ethik','Französisch','Latein','Politik'].forEach(function(x){o[x]=1});return Object.keys(o)}
+function dl(){return '<datalist id="scvSubs">'+subjects().map(function(x){return '<option value="'+esc(x)+'">'}).join('')+'</datalist>'}
+function nowSlot(){var n=new Date(),d=n.getDay()-1,m=n.getHours()*60+n.getMinutes();if(d<0||d>4)return null;for(var h=0;h<PL.t.length;h++){if(m>=mins(PL.t[h][0])&&m<mins(PL.t[h][1]))return [d,h]}return null}
+function ttR(){var t=$('scvTT'),td=new Date().getDay()-1,ns=nowSlot(),h='<tr><th></th>'+DAYS.map(function(d,i){return '<th class="'+(i===td?'today':'')+'">'+d+'</th>'}).join('')+'</tr>';
+ PL.t.forEach(function(tm,i){h+='<tr><td class="tm" data-tm="'+i+'"><b style="color:#475569">'+(i+1)+'.</b>'+tm[0]+'<br>'+tm[1]+'</td>';
+  for(var d=0;d<5;d++){var c=PL.c[d+'-'+i],cl=(ns&&ns[0]===d&&ns[1]===i?'now ':'')+(SEL===d+'-'+i?'sel':'');h+='<td class="'+cl+'" data-c="'+d+'-'+i+'">'+(c&&c.f?'<b>'+esc(c.f)+'</b><small>'+esc(c.r||'')+'</small>':'')+'</td>'}h+='</tr>'});
+ t.innerHTML=h}
+$('scvTT').addEventListener('click',function(e){var c=e.target.closest('td');if(!c)return;var pe=$('scvPE');
+ if(c.dataset.tm!=null){var i=+c.dataset.tm;SEL=null;pe.hidden=false;pe.innerHTML='<b>'+(i+1)+'. Stunde – Uhrzeit</b><div class="scv-row" style="margin-top:8px"><input class="si" type="time" id="peA" value="'+PL.t[i][0]+'"><input class="si" type="time" id="peB" value="'+PL.t[i][1]+'"><button id="peSave">Speichern</button></div><p class="scv-small"><a href="#" id="peAdd">+ Stunde hinzufügen</a>'+(PL.t.length>4?' · <a href="#" id="peDel">letzte Stunde entfernen</a>':'')+'</p>';
+  $('peSave').onclick=function(){PL.t[i]=[$('peA').value||PL.t[i][0],$('peB').value||PL.t[i][1]];plSave();pe.hidden=true;ttR();dashR()};
+  $('peAdd').onclick=function(ev){ev.preventDefault();var l=PL.t[PL.t.length-1],e2=mins(l[1])+5,f=function(m){return String(Math.floor(m/60)%24).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};PL.t.push([f(e2),f(e2+45)]);plSave();pe.hidden=true;ttR()};
+  if($('peDel'))$('peDel').onclick=function(ev){ev.preventDefault();var n=PL.t.length-1;PL.t.pop();for(var d=0;d<5;d++)delete PL.c[d+'-'+n];plSave();pe.hidden=true;ttR();dashR()};return}
+ var k=c.dataset.c;if(!k)return;SEL=k;var p=k.split('-'),cur=PL.c[k]||{};pe.hidden=false;
+ pe.innerHTML='<b>'+DAYS[+p[0]]+', '+(+p[1]+1)+'. Stunde ('+PL.t[+p[1]][0]+'–'+PL.t[+p[1]][1]+')</b>'+dl()+'<div class="scv-row" style="margin-top:8px"><input class="si" id="peF" list="scvSubs" placeholder="Fach" value="'+esc(cur.f||'')+'"><input class="si" id="peR" placeholder="Raum" style="max-width:110px" value="'+esc(cur.r||'')+'"></div><div class="scv-row" style="margin-top:8px"><button id="peSave">Speichern</button><button class="alt" id="peClr">Leeren</button><button class="alt" id="peCopy" title="Gleiches Fach auch in die nächste Stunde">↓ auch nächste Stunde</button></div>';
+ ttR();var f=$('peF');setTimeout(function(){f.focus()},30);
+ function save(also){var v={f:$('peF').value.trim(),r:$('peR').value.trim()};if(v.f)PL.c[k]=v;else delete PL.c[k];if(also&&v.f&&+p[1]+1<PL.t.length)PL.c[p[0]+'-'+(+p[1]+1)]={f:v.f,r:v.r};plSave();SEL=null;pe.hidden=true;ttR();dashR()}
+ $('peSave').onclick=function(){save(false)};$('peCopy').onclick=function(){save(true)};$('peClr').onclick=function(){$('peF').value='';$('peR').value='';save(false)};
+ pe.querySelectorAll('input').forEach(function(i){i.addEventListener('keydown',function(e){if(e.key==='Enter')save(false)})})});
+function nextLessonDate(f){if(!f)return null;f=f.toLowerCase();var d=today0();for(var i=1;i<=14;i++){d.setDate(d.getDate()+1);var wd=d.getDay()-1;if(wd<0||wd>4)continue;for(var h=0;h<PL.t.length;h++){var c=PL.c[wd+'-'+h];if(c&&c.f&&c.f.toLowerCase()===f)return new Date(d)}}return null}
+
+/* ---------- Aufgaben ---------- */
+var TK=gj('sch_tasks',[]);function tkSave(){sj('sch_tasks',TK);cnt()}
+function dueTxt(str){var d=pd(str),t=today0(),diff=Math.round((d-t)/864e5);
+ if(diff<0)return['überfällig ('+d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'})+')','late'];if(diff===0)return['heute','soon'];if(diff===1)return['morgen','soon'];
+ return[d.toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit'}),diff<=3?'soon':'']}
+function tkLi(t){var dt=dueTxt(t.d);return '<li class="'+(t.done?'done':'')+'"><input type="checkbox" data-tk="'+t.id+'"'+(t.done?' checked':'')+' aria-label="erledigt"><span class="tx"><span class="scv-sub">'+esc(t.f||'Allg.')+'</span>'+esc(t.t)+'</span><span class="scv-due-l '+(t.done?'':dt[1])+'">'+dt[0]+'</span><button class="scv-x" data-tx="'+t.id+'" aria-label="Löschen">✕</button></li>'}
+function openT(){return TK.filter(function(t){return!t.done}).sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0})}
+function cnt(){var n=openT().filter(function(t){return dueTxt(t.d)[1]}).length,c=$('scvCnt');c.hidden=!n;c.textContent=n}
+function tkFormR(){var tm=new Date();tm.setDate(tm.getDate()+1);
+ $('scvTF').innerHTML=dl()+'<div class="scv-form"><div class="scv-row"><input class="si" id="tkF" list="scvSubs" placeholder="Fach" style="max-width:150px"><input class="si" id="tkT" placeholder="Was ist zu tun? z. B. S. 84 Nr. 3–5" style="flex:1 1 220px"></div>'+
+  '<div class="scv-row"><input class="si" type="date" id="tkD" value="'+ymd(tm)+'" style="max-width:170px"><button class="alt" id="tkTm">Morgen</button><button class="alt" id="tkNx">Nächste Stunde</button><button id="tkAdd">Eintragen</button></div><p class="scv-fb" id="tkE"></p></div>'}
+function tkR(){var o=openT(),d=TK.filter(function(t){return t.done}).slice(-30).reverse();
+ $('scvTO').innerHTML=o.length?o.map(tkLi).join(''):'<li style="display:block;color:#64748b">Keine offenen Aufgaben 🎉</li>';
+ $('scvTD').innerHTML=d.length?d.map(tkLi).join('')+'<li style="display:block"><a href="#" id="tkClr">Erledigte löschen</a></li>':'<li style="display:block;color:#64748b">Noch nichts erledigt.</li>';
+ var late=o.filter(function(t){return dueTxt(t.d)[1]==='late'}).length,wk=o.filter(function(t){return (pd(t.d)-today0())/864e5<=7}).length,done7=TK.filter(function(t){return t.done&&t.dn&&Date.now()-t.dn<7*864e5}).length;
+ $('scvTS').innerHTML='<div class="scv-big">'+o.length+'</div><p class="scv-small">offene Aufgaben</p><p class="scv-small">⏰ '+late+' überfällig · 📆 '+wk+' in den nächsten 7 Tagen · ✅ '+done7+' diese Woche erledigt</p>';cnt()}
+root.addEventListener('change',function(e){var id=e.target.dataset&&e.target.dataset.tk;if(!id)return;var t=TK.filter(function(x){return x.id===id})[0];if(t){t.done=e.target.checked;t.dn=t.done?Date.now():0;tkSave();tkR();dashR()}});
+root.addEventListener('click',function(e){var b=e.target.closest('[data-tx]');if(b){TK=TK.filter(function(x){return x.id!==b.dataset.tx});tkSave();tkR();dashR();return}
+ var t=e.target;if(t.id==='tkClr'){e.preventDefault();TK=TK.filter(function(x){return!x.done});tkSave();tkR()}
+ else if(t.id==='tkTm'){var d=new Date();d.setDate(d.getDate()+1);$('tkD').value=ymd(d)}
+ else if(t.id==='tkNx'){var f=$('tkF').value.trim(),nd=nextLessonDate(f);if(!f)$('tkE').textContent='Erst das Fach eintragen.';else if(!nd)$('tkE').textContent='„'+f+'“ steht nicht im Stundenplan.';else{$('tkD').value=ymd(nd);$('tkE').textContent=''}}
+ else if(t.id==='tkAdd'){var tx=$('tkT').value.trim();if(!tx){$('tkT').focus();return}TK.push({id:Date.now().toString(36)+rnd(0,999),f:$('tkF').value.trim(),t:tx,d:$('tkD').value||ymd(new Date()),done:false});tkSave();$('tkT').value='';$('tkE').textContent='';tkR();dashR();$('tkT').focus()}});
+root.addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.target.id==='tkT'||e.target.id==='tkF'))$('tkAdd').click()});
+
+/* ---------- Notizen ---------- */
+var NT=gj('sch_notes',{'Allgemein':''}),NCUR=g('sch_note_cur','Allgemein');if(!(NCUR in NT))NCUR=Object.keys(NT)[0]||'Allgemein';if(!(NCUR in NT))NT[NCUR]='';
+function ntR(){$('scvNC').innerHTML=Object.keys(NT).map(function(k){return '<button data-nt="'+esc(k)+'" class="'+(k===NCUR?'on':'')+'">'+esc(k)+'</button>'}).join('')+'<button data-nt-new="1">+ Neu</button>'+(Object.keys(NT).length>1?'<button data-nt-del="1" title="Aktuelle Notiz löschen">🗑</button>':'');
+ var ta=$('scvNT');if(document.activeElement!==ta)ta.value=NT[NCUR]||'';ntInfo()}
+function ntInfo(){var t=NT[NCUR]||'';$('scvNI').textContent=NCUR+' · '+(t.trim()?t.trim().split(/\s+/).length:0)+' Wörter · automatisch gespeichert'}
+var ntT;$('scvNT').addEventListener('input',function(){NT[NCUR]=this.value;clearTimeout(ntT);ntT=setTimeout(function(){sj('sch_notes',NT)},300);ntInfo()});
+$('scvNC').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;sj('sch_notes',NT);
+ if(b.dataset.nt){NCUR=b.dataset.nt;s('sch_note_cur',NCUR);$('scvNT').value=NT[NCUR]||''}
+ else if(b.dataset.ntNew){var n=(prompt('Name der Notiz (z. B. Bio – Zelle):')||'').trim().slice(0,30);if(!n)return;if(!(n in NT))NT[n]='';NCUR=n;s('sch_note_cur',n);$('scvNT').value=NT[n];sj('sch_notes',NT)}
+ else if(b.dataset.ntDel){if(!confirm('Notiz „'+NCUR+'“ löschen?'))return;delete NT[NCUR];NCUR=Object.keys(NT)[0];s('sch_note_cur',NCUR);$('scvNT').value=NT[NCUR]||'';sj('sch_notes',NT)}
+ ntR()});
+
+/* ---------- Kurse + Uebungsgeneratoren ---------- */
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){var t=b;b=a%b;a=t}return a||1}
+function sg(n){return n<0?'− '+(-n):'+ '+n}
+function numAns(v){v=String(v).trim().replace(/\s/g,'').replace(',','.').replace('−','-');var m=v.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);if(m)return +m[1]/+m[2];return v===''?NaN:Number(v)}
+function nq(q,a,hint,ph,sol){return{q:q,ok:function(v){var x=numAns(v);return isFinite(x)&&Math.abs(x-a)<1e-6*Math.max(1,Math.abs(a))},sol:sol||de(a,4),hint:hint,ph:ph||'Zahl'}}
+var VB='be|was/were|been|sein;become|became|become|werden;begin|began|begun|beginnen;break|broke|broken|brechen;bring|brought|brought|bringen;build|built|built|bauen;buy|bought|bought|kaufen;catch|caught|caught|fangen;choose|chose|chosen|wählen;come|came|come|kommen;cost|cost|cost|kosten;do|did|done|tun;draw|drew|drawn|zeichnen;drink|drank|drunk|trinken;drive|drove|driven|fahren;eat|ate|eaten|essen;fall|fell|fallen|fallen;feel|felt|felt|fühlen;find|found|found|finden;fly|flew|flown|fliegen;forget|forgot|forgotten|vergessen;get|got|got/gotten|bekommen;give|gave|given|geben;go|went|gone|gehen;grow|grew|grown|wachsen;have|had|had|haben;hear|heard|heard|hören;keep|kept|kept|behalten;know|knew|known|wissen;leave|left|left|verlassen;lose|lost|lost|verlieren;make|made|made|machen;meet|met|met|treffen;pay|paid|paid|bezahlen;read|read|read|lesen;ride|rode|ridden|reiten;run|ran|run|rennen;say|said|said|sagen;see|saw|seen|sehen;sell|sold|sold|verkaufen;send|sent|sent|schicken;sing|sang|sung|singen;sit|sat|sat|sitzen;sleep|slept|slept|schlafen;speak|spoke|spoken|sprechen;stand|stood|stood|stehen;swim|swam|swum|schwimmen;take|took|taken|nehmen;teach|taught|taught|unterrichten;tell|told|told|erzählen;think|thought|thought|denken;throw|threw|thrown|werfen;understand|understood|understood|verstehen;wear|wore|worn|tragen;win|won|won|gewinnen;write|wrote|written|schreiben'.split(';').map(function(x){return x.split('|')});
+var ALT={silicium:['silizium'],calcium:['kalzium'],iod:['jod'],bismut:['wismut'],caesium:['cäsium','zäsium'],cobalt:['kobalt'],zirconium:['zirkonium'],titan:['titanium'],chrom:['chromium']};
+var COURSES=[
+ {id:'mathe',ic:'📐',bg:'#dbeafe',n:'Mathematik 9',d:'Steigung, Gleichungen, Brüche, Prozent, Potenzen',topics:{
+  'Steigung':function(){var x1=rnd(-2,3),x2=x1+rnd(1,4),m=pick([-3,-2,-1,1,2,3,.5,-.5]),b=rnd(-3,3);return nq('Steigung m durch P('+de(x1)+' | '+de(m*x1+b)+') und Q('+de(x2)+' | '+de(m*x2+b)+')?',m,'m = (y₂ − y₁) / (x₂ − x₁)','m')},
+  'Gleichungen':function(){var x=rnd(-9,9),a=pick([2,3,4,5,6,7,8,9,-2,-3,-4]),b=rnd(-20,20);return nq('Löse: '+a+'x '+sg(b)+' = '+(a*x+b),x,'Erst '+(b<0?'+'+(-b):'−'+b)+' auf beiden Seiten, dann durch '+a+' teilen.','x')},
+  'Brüche':function(){var b=rnd(2,9),d=rnd(2,9),a=rnd(1,b-1||1),c=rnd(1,d-1||1),op=pick(['+','−','·']),zn=op==='+'?a*d+c*b:op==='−'?a*d-c*b:a*c,nn=b*d,k=gcd(zn,nn);zn/=k;nn/=k;return nq(a+'/'+b+' '+op+' '+c+'/'+d+' = ?',zn/nn,op==='·'?'Zähler mal Zähler, Nenner mal Nenner.':'Gleichnamig machen: Hauptnenner '+(b*d/gcd(b,d))+'.','Bruch, z. B. 7/12',nn===1?String(zn):(zn<0?'−':'')+Math.abs(zn)+'/'+nn)},
+  'Prozent':function(){var p=pick([5,10,12,15,20,25,30,40,50,75]),G=rnd(1,20)*20,t=rnd(0,1);return t?nq(p+' % von '+G+' = ?',G*p/100,'W = G · p / 100'):nq(G*p/100+' von '+G+' sind wie viel Prozent?',p,'p = W / G · 100','%')},
+  'Potenzen':function(){var t=rnd(0,2);if(t===0){var n=rnd(2,20);return nq(n+'² = ?',n*n,'n · n')}if(t===1){var r=rnd(2,20);return nq('√'+(r*r)+' = ?',r,'Welche Zahl mal sich selbst ergibt '+r*r+'?')}var k=rnd(2,10);return nq('2^'+k+' = ?',Math.pow(2,k),'Immer verdoppeln.')}}},
+ {id:'kopf',ic:'⚡',bg:'#fef3c7',n:'Kopfrechnen',d:'Plus, Minus, Mal und Geteilt – so schnell wie möglich',topics:{
+  'Plus/Minus':function(){var a=rnd(12,99),b=rnd(12,99);return rnd(0,1)?nq(a+' + '+b,a+b,'Erst Zehner, dann Einer.'):nq(Math.max(a,b)+' − '+Math.min(a,b),Math.abs(a-b),'Erst Zehner, dann Einer.')},
+  'Mal':function(){var a=rnd(2,12),b=rnd(2,12);if(rnd(0,2)===0){a=rnd(11,25);b=rnd(2,9)}return nq(a+' · '+b,a*b,'Zerlegen: z. B. 17·6 = 10·6 + 7·6')},
+  'Geteilt':function(){var b=rnd(2,12),q=rnd(2,12);return nq((b*q)+' : '+b,q,'Welche Zahl mal '+b+' ergibt '+(b*q)+'?')}}},
+ {id:'engl',ic:'🇬🇧',bg:'#fee2e2',n:'Englisch',d:'Unregelmäßige Verben (Simple Past & Past Participle)',topics:{
+  'Beide Formen':function(){var v=pick(VB);return{q:'to '+v[0]+' ('+v[3]+') → Simple Past, Past Participle?',ph:'z. B. went, gone',sol:v[1]+', '+v[2],hint:'Zwei Formen, durch Komma getrennt.',ok:function(a){var w=a.toLowerCase().split(/[\s,;\/–-]+/).filter(Boolean),p=v[1].split('/'),q=v[2].split('/');return w.length>=2&&w.length<=p.length+q.length&&p.indexOf(w[0])>=0&&q.indexOf(w[w.length-1])>=0&&w.every(function(x){return p.indexOf(x)>=0||q.indexOf(x)>=0})}}},
+  'Simple Past':function(){var v=pick(VB);return{q:'Simple Past von „to '+v[0]+'“ ('+v[3]+')?',ph:'Simple Past',sol:v[1],hint:'Unregelmäßig – auswendig lernen!',ok:function(a){return v[1].split('/').indexOf(a.trim().toLowerCase())>=0}}},
+  'Deutsch → Englisch':function(){var v=pick(VB);return{q:'Wie heißt „'+v[3]+'“ auf Englisch? (Infinitiv)',ph:'to …',sol:'to '+v[0],hint:'Ohne „to“ geht auch.',ok:function(a){return a.trim().toLowerCase().replace(/^to\s+/,'')===v[0]}}}}},
+ {id:'chem',ic:'⚗️',bg:'#dcfce7',n:'Chemie',d:'Elementsymbole und Namen (Ordnungszahl 1–56)',topics:{
+  'Symbol → Name':function(){var e=pick((window.__ELS||[]).slice(0,56));return{q:'Welches Element hat das Symbol „'+e.s+'“?',ph:'Name',sol:e.n,hint:'Ordnungszahl '+e.z,ok:function(a){a=a.trim().toLowerCase();var n=e.n.toLowerCase();return a===n||(ALT[n]||[]).indexOf(a)>=0}}},
+  'Name → Symbol':function(){var e=pick((window.__ELS||[]).slice(0,56));return{q:'Symbol von '+e.n+'?',ph:'Symbol',sol:e.s,hint:'Ordnungszahl '+e.z,ok:function(a){return a.trim().toLowerCase()===e.s.toLowerCase()}}},
+  'Ordnungszahl':function(){var e=pick((window.__ELS||[]).slice(0,36));return nq('Welche Ordnungszahl hat '+e.n+' ('+e.s+')?',e.z,'= Anzahl der Protonen')}}}];
+var PR=gj('sch_prog',{}),CC=null,CT=null,CQ=null,STRK=0;
+function pr(id){return PR[id]||(PR[id]={ok:0,n:0,best:0})}
+function pct(id){return Math.min(100,Math.round(pr(id).ok/50*100))}
+function crR(){$('scvCourses').innerHTML=COURSES.map(function(c){var p=pr(c.id);return '<button class="scv-course'+(CC===c?' on':'')+'" data-course="'+c.id+'"><div class="ic" style="background:'+c.bg+'">'+c.ic+'</div><b>'+c.n+'</b><span>'+c.d+'</span><div class="scv-mini"><i style="width:'+pct(c.id)+'%"></i></div><span>'+p.ok+' richtig · '+pct(c.id)+' % · Rekord-Serie '+p.best+'</span></button>'}).join('')}
+$('scvCourses').addEventListener('click',function(e){var b=e.target.closest('[data-course]');if(!b)return;CC=COURSES.filter(function(c){return c.id===b.dataset.course})[0];CT=null;STRK=0;crR();pracR();$('scvPrac').scrollIntoView({behavior:'smooth',block:'start'})});
+function pracR(){var P=$('scvPrac');P.hidden=false;var tp=Object.keys(CC.topics);
+ P.innerHTML='<h2>'+CC.ic+' '+CC.n+'</h2><div class="scv-chips" id="prT"><button data-t="" class="'+(CT?'':'on')+'">Gemischt</button>'+tp.map(function(t){return '<button data-t="'+t+'" class="'+(CT===t?'on':'')+'">'+t+'</button>'}).join('')+'</div>'+
+  '<p class="scv-q" id="prQ"></p><div class="scv-row"><input class="si" id="prA" type="text" autocomplete="off" spellcheck="false"><button id="prC">Prüfen</button><button class="alt" id="prN">Überspringen</button></div><p class="scv-fb" id="prF"></p><p class="scv-small"><a href="#" id="prH">💡 Tipp</a> · <a href="#" id="prS">Lösung zeigen</a></p><div class="scv-stats" id="prX"></div>';
+ newP()}
+function stats(){var p=pr(CC.id);$('prX').innerHTML='<span>✅ '+p.ok+' von '+p.n+' richtig'+(p.n?' ('+Math.round(p.ok/p.n*100)+' %)':'')+'</span><span>🔥 Serie: '+STRK+'</span><span>🏆 Rekord: '+p.best+'</span>'}
+function newP(){var tp=Object.keys(CC.topics),t=CT||pick(tp);CQ=CC.topics[t]();CQ.tried=false;$('prQ').textContent=CQ.q;var a=$('prA');a.value='';a.placeholder=CQ.ph||'';a.inputMode=/Zahl|Bruch|%|^x$|^m$/.test(CQ.ph||'')?'decimal':'text';$('prF').textContent='';$('prF').className='scv-fb';stats();setTimeout(function(){a.focus({preventScroll:true})},20)}
+function chkP(){var a=$('prA').value,f=$('prF'),p=pr(CC.id);if(!a.trim()){$('prA').focus();return}
+ if(CQ.ok(a)){if(!CQ.tried){p.ok++;p.n++;STRK++;p.best=Math.max(p.best,STRK)}f.textContent='✔ Richtig!'+(STRK>=5&&STRK%5===0?' 🔥 '+STRK+' in Folge!':'');f.className='scv-fb ok';sj('sch_prog',PR);stats();crR();dashR();setTimeout(function(){if(CQ&&$('prF').className==='scv-fb ok')newP()},900)}
+ else{if(!CQ.tried){p.n++;CQ.tried=true;STRK=0;sj('sch_prog',PR)}f.textContent='✘ Noch nicht richtig – versuch es nochmal.';f.className='scv-fb no';stats();crR()}}
+$('scvPrac').addEventListener('click',function(e){var t=e.target;if(t.closest('#prT button')){CT=t.closest('button').dataset.t||null;$('prT').querySelectorAll('button').forEach(function(b){b.classList.toggle('on',(b.dataset.t||null)===CT)});newP()}
+ else if(t.id==='prC')chkP();else if(t.id==='prN'){STRK=0;newP()}
+ else if(t.id==='prH'){e.preventDefault();$('prF').textContent='💡 '+CQ.hint;$('prF').className='scv-fb'}
+ else if(t.id==='prS'){e.preventDefault();if(!CQ.tried){pr(CC.id).n++;CQ.tried=true;STRK=0;sj('sch_prog',PR);stats()}$('prF').textContent='Lösung: '+CQ.sol;$('prF').className='scv-fb'}});
+$('scvPrac').addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.id==='prA')chkP()});
+
+/* ---------- Dashboard ---------- */
+var DS=0;
+function dashR(){var mp=Math.min(100,63+pr('mathe').ok);$('scvP').textContent=mp+' %';$('scvPB').style.width=mp+'%';$('scvS').textContent=DS>=2?'🔥 '+DS+' in Folge':'';
+ /* Heute */
+ var n=new Date(),wd=n.getDay()-1,m=n.getHours()*60+n.getMinutes(),T=$('scvToday'),has=Object.keys(PL.c).length;
+ if(!has)T.innerHTML='<p class="scv-small">Noch kein Stundenplan. <a href="#" data-go="plan">Jetzt eintragen</a>, dann siehst du hier deine Stunden und was als Nächstes kommt.</p>';
+ else{var day=wd,lbl='Heute';if(wd<0||wd>4||m>=mins(PL.t[PL.t.length-1][1])){day=wd>=4||wd<0?0:wd+1;lbl=day===0&&(wd>=4||wd<0)?'Montag':'Morgen';m=-1}
+  var L=[];PL.t.forEach(function(t,h){var c=PL.c[day+'-'+h];if(c&&c.f)L.push({h:h,c:c,a:mins(t[0]),b:mins(t[1]),t:t})});var nx=false;
+  T.innerHTML=(lbl!=='Heute'?'<p class="scv-small"><b>'+lbl+':</b></p>':'')+(L.length?L.map(function(x){var cl='',tag='';if(m>=x.b)cl='past';else if(m>=x.a){cl='now';tag='<span class="scv-tag">jetzt · noch '+(x.b-m)+' min</span>'}else if(!nx&&m>=0){nx=true;tag='<span class="scv-tag nx">in '+(x.a-m)+' min</span>'}
+   return '<div class="scv-les '+cl+'"><small>'+x.t[0]+'</small><span><b>'+esc(x.c.f)+'</b>'+(x.c.r?' <small>· '+esc(x.c.r)+'</small>':'')+tag+'</span></div>'}).join(''):'<p class="scv-small">Keine Stunden eingetragen.</p>')}
+ /* Abgaben */
+ var o=openT().slice(0,4);$('scvDue').innerHTML=o.length?o.map(function(t){var dt=dueTxt(t.d);return '<li><span><input type="checkbox" data-tk="'+t.id+'" aria-label="erledigt" style="vertical-align:middle;margin-right:6px">'+(t.f?'<b>'+esc(t.f)+':</b> ':'')+esc(t.t)+'</span><small class="scv-due-l '+dt[1]+'">'+dt[0]+'</small></li>'}).join('')+(openT().length>4?'<li><a href="#" data-go="aufg">alle '+openT().length+' anzeigen</a></li>':''):'<li style="display:block;color:#64748b">Keine offenen Aufgaben 🎉 <a href="#" data-go="aufg">Aufgabe eintragen</a></li>';cnt()}
+/* Uebung auf dem Dashboard */
+var QA;function newQ(){var x1=rnd(-1,3),x2=x1+rnd(1,4),mm=pick([-3,-2,-1,1,2,3,.5]),b=rnd(-3,3);QA=mm;
+ $('scvQ').innerHTML='Bestimme die Steigung m der Geraden durch <b>P('+de(x1)+' | '+de(mm*x1+b)+')</b> und <b>Q('+de(x2)+' | '+de(mm*x2+b)+')</b>.';$('scvA').value='';$('scvF').textContent='';$('scvF').className='scv-fb'}
+var QT=false;function chk(){var v=numAns($('scvA').value),f=$('scvF'),p=pr('mathe');if(!isFinite(v)){f.textContent='Bitte eine Zahl eingeben.';f.className='scv-fb no';return}
+ if(Math.abs(v-QA)<1e-9){if(!QT){p.ok++;p.n++;DS++;p.best=Math.max(p.best,DS);sj('sch_prog',PR)}f.textContent='✔ Richtig! m = '+de(QA);f.className='scv-fb ok';dashR();setTimeout(function(){if($('scvF').className==='scv-fb ok'){QT=false;newQ()}},1200)}
+ else{if(!QT){p.n++;QT=true;DS=0;sj('sch_prog',PR)}f.textContent='✘ Leider falsch. Tipp: m = (y₂ − y₁) / (x₂ − x₁)';f.className='scv-fb no';dashR()}}
+$('scvC').onclick=chk;$('scvN').onclick=function(){QT=false;DS=0;newQ();dashR()};$('scvA').addEventListener('keydown',function(e){if(e.key==='Enter')chk()});
+
+/* ---------- Fokus-Timer ---------- */
+var FM=[['Fokus',25],['Kurze Pause',5],['Lange Pause',15]],FI=0,FREM=25*60,FRUN=false,FEND=0,FIV=0,FS=gj('sch_focus',{d:'',s:0,n:0});
+if(FS.d!==ymd(new Date()))FS={d:ymd(new Date()),s:0,n:0};
+$('scvFocus').innerHTML='<div class="scv-fm" id="fcM">'+FM.map(function(x,i){return '<button data-fm="'+i+'">'+x[0]+'</button>'}).join('')+'</div><div class="scv-ft" id="fcT"></div><div class="scv-fbar"><i id="fcB"></i></div><div class="scv-row" style="justify-content:center"><button id="fcGo">Start</button><button class="alt" id="fcR">Zurücksetzen</button></div><p class="scv-small" id="fcS" style="text-align:center"></p>';
+function fcR(){var t=Math.max(0,Math.ceil(FREM));$('fcT').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');$('fcB').style.width=(100-t/(FM[FI][1]*60)*100)+'%';
+ $('fcM').querySelectorAll('button').forEach(function(b){b.classList.toggle('on',+b.dataset.fm===FI)});$('fcGo').textContent=FRUN?'Pause':'Start';
+ $('fcS').textContent='Heute gelernt: '+Math.floor(FS.s/60)+' min · '+FS.n+' Fokus-Runde'+(FS.n===1?'':'n')}
+function fcBeep(){if(g('mute','0')==='1')return;try{var a=new(window.AudioContext||window.webkitAudioContext)();[0,.25,.5].forEach(function(d,i){var o=a.createOscillator(),gg=a.createGain();o.frequency.value=[660,880,990][i];gg.gain.setValueAtTime(.0001,a.currentTime+d);gg.gain.exponentialRampToValueAtTime(.2,a.currentTime+d+.02);gg.gain.exponentialRampToValueAtTime(.0001,a.currentTime+d+.22);o.connect(gg);gg.connect(a.destination);o.start(a.currentTime+d);o.stop(a.currentTime+d+.25)});setTimeout(function(){a.close()},1200)}catch(e){}}
+function fcTick(){var r=(FEND-Date.now())/1000,d=FREM-r;if(FI===0&&d>0){FS.s+=d;if(FS.d!==ymd(new Date()))FS={d:ymd(new Date()),s:0,n:0}}FREM=r;
+ if(FREM<=0){FRUN=false;clearInterval(FIV);if(FI===0){FS.n++;FI=FS.n%4===0?2:1}else FI=0;FREM=FM[FI][1]*60;fcBeep()}sj('sch_focus',FS);fcR()}
+$('scvFocus').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+ if(b.dataset.fm!=null){FRUN=false;clearInterval(FIV);FI=+b.dataset.fm;FREM=FM[FI][1]*60}
+ else if(b.id==='fcGo'){if(FRUN){fcTick();FRUN=false;clearInterval(FIV)}else{FRUN=true;FEND=Date.now()+FREM*1000;FIV=setInterval(fcTick,1000)}}
+ else if(b.id==='fcR'){FRUN=false;clearInterval(FIV);FREM=FM[FI][1]*60}fcR()});
+fcR();
+
+/* ---------- Start ---------- */
+tkFormR();go(VIEW);newQ();dashR();cnt();
+setInterval(function(){if(root.offsetParent===null&&getComputedStyle(root).display==='none')return;if(VIEW==='dash')dashR();else if(VIEW==='plan'&&!SEL&&$('scvPE').hidden)ttR()},30000);
 })();</script>
 </body>
 </html>
