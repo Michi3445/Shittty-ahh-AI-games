@@ -395,7 +395,42 @@ html.lite .emo-row span,html.lite #bgc{animation:none!important}
  /* Sichtbar: normaler Frame. Versteckt/Tarnmodus: nur ~2x pro Sekunde kurz nachsehen statt 60x */
  window.__frame=function(cb){if(document.hidden||document.body.classList.contains('disguise'))return setTimeout(function(){requestAnimationFrame(cb)},450);return requestAnimationFrame(cb)};
 })();</script>
+<script>/* Tarnseite waehlen (Weihnachten oder Lernplattform) - frueh, damit nichts aufblitzt */
+(function(){var m='xmas';try{m=localStorage.getItem('cover_mode')||'xmas'}catch(e){}if(m!=='school')return;
+ document.documentElement.classList.add('schoolcv');document.title='Lernportal – Mathematik 9';
+ var l=document.querySelector('link[rel=icon]');if(l)l.href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%98%3C/text%3E%3C/svg%3E"})();</script>
 <div id="cover">
+  <div id="scv" aria-label="Lernportal">
+    <header class="scv-top"><button id="scvL" class="scv-logo" aria-label="Lernportal">📘 <b>Lernportal</b></button>
+      <nav class="scv-nav"><span class="on">Dashboard</span><span>Kurse</span><span>Aufgaben</span><span>Kalender</span><span>Nachrichten</span></nav>
+      <span class="scv-av" aria-hidden="true">9b</span></header>
+    <main class="scv-main">
+      <p class="scv-bc">Kurse › Mathematik 9 › Lineare Funktionen</p>
+      <div class="scv-cols">
+        <div>
+          <section class="scv-card">
+            <p class="scv-kick">Lektion 4 von 7</p>
+            <h1>Steigung und y-Achsenabschnitt</h1>
+            <div class="scv-prog"><div><i style="width:63%"></i></div><span>Fortschritt: <b id="scvP">63 %</b></span></div>
+            <p>Eine lineare Funktion hat die Form <b>f(x) = m·x + b</b>. Dabei ist <b>m</b> die Steigung und <b>b</b> der y-Achsenabschnitt, also die Stelle, an der der Graph die y-Achse schneidet.</p>
+            <svg class="scv-graph" viewBox="0 0 240 160" aria-hidden="true"><path d="M20 0V160M0 140H240" stroke="#94a3b8" stroke-width="1.2"/><path d="M0 128 240 32" stroke="#2563eb" stroke-width="3"/><path d="M80 104H140V80" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4 3"/><text x="104" y="118" font-size="11" fill="#475569">Δx</text><text x="146" y="96" font-size="11" fill="#475569">Δy</text><text x="100" y="30" font-size="12" fill="#2563eb">f(x) = 0,4x + 1</text></svg>
+            <p>Die Steigung berechnest du mit zwei Punkten P(x₁|y₁) und Q(x₂|y₂): <b>m = (y₂ − y₁) / (x₂ − x₁)</b>. Ist m positiv, steigt der Graph; ist m negativ, fällt er.</p>
+          </section>
+          <section class="scv-card">
+            <h2>✏️ Übung</h2><p id="scvQ"></p>
+            <div class="scv-row"><input id="scvA" class="si" type="text" inputmode="decimal" placeholder="m = ?" aria-label="Antwort"><button id="scvC">Prüfen</button><button id="scvN" class="alt">Neue Aufgabe</button></div>
+            <p id="scvF" class="scv-fb"></p>
+          </section>
+        </div>
+        <aside>
+          <section class="scv-card"><h2>📅 Nächste Abgaben</h2><ul class="scv-due" id="scvDue"></ul></section>
+          <section class="scv-card"><h2>📢 Mitteilungen</h2><p class="scv-small"><b>Mathe:</b> Bitte bis zur nächsten Stunde S. 84 Nr. 3–5 bearbeiten.</p><p class="scv-small"><b>Klassenleitung:</b> Denkt an die Einverständniserklärung für den Wandertag.</p></section>
+        </aside>
+      </div>
+      <section class="scv-card"><h2>🧰 Werkzeuge</h2><div id="scvTools"></div></section>
+      <p class="scv-foot">Lernportal · Hilfe · Datenschutz · Impressum</p>
+    </main>
+  </div>
   <div class="cvsnow" id="cvsnow" aria-hidden="true"></div>
   <nav class="cvtabs" id="cvtabs" aria-label="Bereiche">
     <button data-p="start" class="on">🎄 Start</button><button data-p="cal">🎁 Kalender</button><button data-p="make">🎨 Basteln</button><button data-p="play">🎮 Spiele</button><button data-p="plan">📋 Planen</button>
@@ -2069,6 +2104,9 @@ o'')}____//
       <input type="text" id="setName" maxlength="20" placeholder="z. B. Michi" aria-label="Name">
       <button id="setNameC" class="ghost">Leeren</button></div>
       <p class="hint">Personalisiert die Begrüßung oben.</p></section>
+    <section><h3>🙈 Tarnseite</h3><div class="setrow"><label for="setCover">Aussehen:</label>
+      <select id="setCover" aria-label="Tarnseite"><option value="xmas">🎄 Weihnachts-Countdown</option><option value="school">📘 Lernplattform (Schule)</option></select></div>
+      <p class="hint">Das wird beim Tarnen (Esc / Alt+T) angezeigt. Lernplattform entsperren: 3× auf „63 %“ tippen, dann das 📘-Logo gedrückt halten (oder das Geheimwort tippen).</p></section>
     <section><h3>✨ Show-Effekte</h3>
       <div class="setrow"><label for="fxBg">Hintergrund:</label>
         <select id="fxBg" aria-label="Hintergrund-Effekt">
@@ -2147,7 +2185,7 @@ t();setInterval(t,1000)})();</script>
   <div hidden><button id="ssgo" tabindex="-1"></button><button id="skgo" tabindex="-1"></button></div>
 
   <nav class="mtabs" id="mtabs" aria-label="Bereiche">
-    <button data-p="home" class="on">🏠 Zentrale</button><button data-p="cook">🍪 Kekse</button><button data-p="party">🎉 Party</button><button data-p="fun">🎡 Spaß</button><button data-p="chaos">💥 Chaos</button><button data-p="tools">🧰 Tools</button><button data-p="kreativ">🎨 Kreativ</button>
+    <button data-p="home" class="on">🏠 Zentrale</button><button data-p="cook">🍪 Kekse</button><button data-p="party">🎉 Party</button><button data-p="fun">🎡 Spaß</button><button data-p="chaos">💥 Chaos</button><button data-p="tools">🧰 Tools</button><button data-p="kreativ">🎨 Kreativ</button><button data-p="school">🎒 Schule</button>
   </nav>
   <div class="mp on" data-p="home"><div class="grid">
     <section class="card tile s4 hall">
@@ -2321,6 +2359,7 @@ t();setInterval(t,1000)})();</script>
       <div class="btnrow"><button id="tygo">Start (30 s)</button><span id="tys" class="stt2"></span></div></section>
 </div>
   </div>
+  <div class="mp" data-p="school"><div id="schslot"><div id="sch"></div></div></div>
   <div class="mp" data-p="kreativ"><div class="msub"><button data-v="dr" class="on">✏️ Zeichnen</button><button data-v="tx">🔤 Text</button><button data-v="sf">🎧 Sounds</button><button data-v="mu">🎵 Musik</button><button data-v="el">🧝 Elf-Name</button></div>
     <div class="grid mv on" data-v="dr"><section class="card tile">
       <div class="th"><div class="ti">✏️</div><div><h2>Zeichenbrett</h2><small>Frei malen und speichern</small></div></div>
@@ -2672,7 +2711,8 @@ function reveal(){if(!dis.classList.contains('disguise'))return;cvr.classList.ad
  snd(523,'triangle');setTimeout(function(){snd(784,'triangle')},120);setTimeout(function(){snd(1047,'triangle')},240)}
 function hideAll(){if(dis.classList.contains('disguise'))return;tripOff();
  [['shw','shx'],['ssw','ssx'],['skw','skx']].forEach(function(p){var w=document.getElementById(p[0]);if(w&&!w.hidden){var b=document.getElementById(p[1]);if(b)b.click()}});
- T0='Weihnachts-Countdown 🎄';document.title=T0;cvr.style.display='flex';void cvr.offsetWidth;cvr.classList.remove('gone');dis.classList.add('disguise')}
+ T0=window.__cvTitle?window.__cvTitle():'Weihnachts-Countdown 🎄';document.title=T0;cvr.style.display='flex';void cvr.offsetWidth;cvr.classList.remove('gone');dis.classList.add('disguise')}
+window.__reveal=reveal;
 document.getElementById('hideb').onclick=hideAll;
 /* ---- Geheim-Entsperrung (bewusst schwer, damit niemand zufällig reinkommt) ----
    Handy & Desktop: 3× auf die große Tage-Zahl tippen, dann den Baum 🎄 lang (700 ms) gedrückt halten.
@@ -4347,7 +4387,7 @@ $('tyi').addEventListener('input',function(){if(!ty.run)return;var v=this.value;
  $('setName').addEventListener('input',function(){var n=this.value.trim();applyName(n);if(n)s('uname',n);else rm('uname');});
  $('setNameC').onclick=function(){applyName('');rm('uname');};
  /* Export / Import / Zurücksetzen */
- var KEYS=['skin','acc','theme','mute','uname','crazybg','fx_bg','fx_trail','fx_tilt','fx_click','fx_glow','fx_neon','fx_lights','fx_marquee','fx_intro','fx_tabs','fx_title','fx_balls','perf'];
+ var KEYS=['skin','acc','theme','mute','uname','crazybg','fx_bg','fx_trail','fx_tilt','fx_click','fx_glow','fx_neon','fx_lights','fx_marquee','fx_intro','fx_tabs','fx_title','fx_balls','perf','cover_mode'];
  $('setExp').onclick=function(){var o={};KEYS.forEach(function(k){var v=g(k,null);if(v!=null)o[k]=v;});var io=$('setIO');io.hidden=false;io.value=JSON.stringify(o);io.focus();io.select();};
  $('setImp').onclick=function(){var io=$('setIO');if(io.hidden||!io.value.trim()){io.hidden=false;io.focus();return;}try{var o=JSON.parse(io.value);KEYS.forEach(function(k){if(o[k]!=null)s(k,o[k]);else rm(k);});location.reload();}catch(e){alert('Code ungültig.');}};
  $('setRst').onclick=function(){if(confirm('Alle Einstellungen zurücksetzen?')){KEYS.forEach(rm);location.reload();}};
@@ -4774,6 +4814,453 @@ button,.btn,.mtabs button,.msub button,.gfilter button,.seg button{transition:ba
  var sz=16;function setSz(v){sz=Math.max(10,Math.min(32,v));win.style.setProperty('--asz',sz+'px')}
  document.getElementById('azm').onclick=function(){setSz(sz-2)};document.getElementById('azp').onclick=function(){setSz(sz+2)};
  document.getElementById('acount').textContent=cards.length;
+})();</script>
+<style>/* ---- Schul-Tarnseite (Lernplattform) ---- */
+#scv{display:none}
+html.schoolcv #cover{background:#eef1f5;color:#1f2937;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;display:block}
+html.schoolcv #cover>*:not(#scv){display:none!important}
+html.schoolcv #scv{display:block;width:100%;min-height:100%;text-align:left;--ink:#1f2937;--glass:#fff;--line:#d6dbe3;--shadow:0 1px 3px #0f172a14;--pink:#2563eb;--gold:#2563eb;--sa:#2563eb;--card:#fff}
+#scv button{background:#2563eb;color:#fff;border:0;border-radius:8px;box-shadow:none;padding:8px 14px;font-weight:600;font-size:.9rem}
+#scv button.alt{background:#e2e8f0;color:#1f2937}
+.scv-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:16px;padding:10px 16px;background:#fff;border-bottom:1px solid #d6dbe3}
+#scv .scv-logo{background:none;color:#1e3a8a;padding:4px 6px;font-size:1.05rem;-webkit-touch-callout:none}
+.scv-nav{display:flex;gap:16px;font-size:.9rem;color:#475569;overflow:hidden;flex:1;white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,#000 75%,transparent);mask-image:linear-gradient(90deg,#000 75%,transparent)}
+.scv-nav .on{color:#2563eb;font-weight:600;border-bottom:2px solid #2563eb;padding-bottom:2px}
+.scv-av{width:32px;height:32px;border-radius:50%;background:#dbeafe;color:#1e3a8a;display:grid;place-items:center;font-size:.8rem;font-weight:700;flex:none}
+.scv-main{max-width:1100px;margin:0 auto;padding:14px 16px 30px}
+.scv-bc{font-size:.82rem;color:#64748b;margin:4px 0 12px}
+.scv-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media (min-width:900px){.scv-cols{grid-template-columns:minmax(0,1fr) 300px}}
+.scv-card{background:#fff;border:1px solid #d6dbe3;border-radius:10px;padding:16px 18px;margin-bottom:16px}
+#scv h1,#scv h2{font-family:inherit;filter:none;text-align:left;font-weight:700;background:none;-webkit-text-fill-color:currentColor;text-shadow:none;animation:none;letter-spacing:0}
+.scv-card h1{font-size:1.35rem;margin:2px 0 10px;color:#0f172a}.scv-card h2{font-size:1.05rem;margin:0 0 10px;color:#0f172a}
+.scv-card p{line-height:1.55;margin:8px 0}
+.scv-kick{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:#64748b;margin:0!important}
+.scv-prog{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#475569}.scv-prog>div{flex:1;height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden}.scv-prog i{display:block;height:100%;background:#22c55e}
+#scvP{cursor:default}
+.scv-graph{width:100%;max-width:340px;display:block;margin:6px auto;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px}
+.scv-row{display:flex;gap:8px;flex-wrap:wrap}.scv-row input{flex:1;min-width:120px}
+.scv-fb{font-weight:600;min-height:1.4em}.scv-fb.ok{color:#16a34a}.scv-fb.no{color:#dc2626}
+.scv-due{list-style:none;padding:0;margin:0}.scv-due li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #eef1f5;font-size:.9rem}.scv-due small{color:#64748b;white-space:nowrap}
+.scv-small{font-size:.88rem;color:#334155}
+.scv-foot{text-align:center;font-size:.78rem;color:#94a3b8;margin-top:10px}
+#scv input.si,#scv select.si{background:#fff;color:#1f2937;border:1px solid #cbd5e1;border-radius:8px}
+#scv #sch{margin-top:0}
+
+/* ---- Schul-Werkzeuge (wandern zwischen Tab "Schule" und Lernplattform) ---- */
+#sch{--sa:var(--pink);max-width:1000px;margin:18px auto 0;text-align:left;color:var(--ink)}
+#sch .snav{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+#sch .snav button.sb{background:var(--glass);color:var(--ink);border:1px solid var(--line);box-shadow:none;padding:7px 14px;border-radius:999px;font-size:.88rem;font-weight:700}
+#sch .snav button.sb.on{background:var(--sa);color:#fff;border-color:transparent}
+#sch .sp{display:none}#sch .sp.on{display:block;animation:mpin .3s cubic-bezier(.2,.7,.3,1)}
+#sch .scard{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow);margin-bottom:14px;backdrop-filter:blur(14px)}
+#sch h3{margin:0 0 10px;font-size:1.08rem}
+#sch .shint{font-size:.82rem;opacity:.75;margin:6px 0}
+#sch input.si,#sch select.si{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:#ffffff14;color:var(--ink);min-width:0;margin:0;width:auto}
+#sch select.si option{color:#111}
+#sch button.sb{font:inherit;font-weight:700;background:var(--sa);color:#fff;border:0;border-radius:10px;padding:8px 14px;box-shadow:none;cursor:pointer}
+#sch button.sb.gh{background:transparent;color:var(--ink);border:1px solid var(--line)}
+#sch .srow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+#sch .srow>input.si{flex:1}
+#sch .chips{display:flex;flex-wrap:wrap;gap:6px}
+#sch .chip{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.85rem;background:transparent;color:var(--ink);font-weight:600;box-shadow:none;cursor:pointer}
+#sch .chip.on{background:var(--sa);color:#fff;border-color:transparent}
+#sch .big{font-size:2rem;font-weight:800;line-height:1.1}
+#sch .good{color:#16a34a}#sch .mid{color:#d97706}#sch .bad{color:#dc2626}
+/* Rechner */
+#sch .calc{max-width:460px;margin:0 auto}
+#sch .cdisp{width:100%!important;font:600 1.25rem ui-monospace,Menlo,Consolas,monospace!important;text-align:right;padding:12px!important}
+#sch .cres{text-align:right;font:800 1.9rem ui-monospace,Menlo,Consolas,monospace;min-height:2.3rem;margin:6px 2px 10px;word-break:break-all}
+#sch .cres.err{color:#dc2626;font-size:1rem}
+#sch .ckeys{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+#sch .ckeys button{padding:11px 0;border-radius:12px;font:700 1rem system-ui,sans-serif;border:1px solid var(--line);background:#ffffff1c;color:var(--ink);box-shadow:none;cursor:pointer}
+#sch .ckeys button.op{background:color-mix(in srgb,var(--sa) 18%,transparent)}
+#sch .ckeys button.eq{background:var(--sa);color:#fff;border-color:transparent}
+#sch .ckeys button.fn{font-size:.85rem}
+#sch .chist{list-style:none;padding:0;margin:10px 0 0;font:.9rem ui-monospace,Menlo,monospace}
+#sch .chist li{padding:5px 8px;border-radius:8px;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+#sch .chist li:hover{background:#8881}
+/* Formeln */
+#sch .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:10px}
+#sch .fcard{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:#ffffff10}
+#sch .fcard small{display:block;opacity:.65;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+#sch .fcard b{display:block;margin:2px 0 4px}
+#sch .fcard code{display:block;font:600 .98rem 'Cambria Math','STIX Two Math',Georgia,serif;white-space:pre-wrap;line-height:1.45}
+#sch .fcard p{margin:4px 0 0;font-size:.8rem;opacity:.75}
+#sch .solv{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+#sch .solv .fcard input.si{width:64px}
+#sch .sout{margin-top:6px;font-weight:700;min-height:1.3em;font-size:.92rem}
+/* Periodensystem */
+#sch .ptw{overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+#sch .pt{display:grid;grid-template-columns:repeat(18,minmax(34px,1fr));gap:3px;min-width:660px}
+#sch .el{border:0;border-radius:6px;padding:3px 2px;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:inherit;line-height:1.05;cursor:pointer;box-shadow:none;color:#111;transition:transform .12s,opacity .2s}
+#sch .el:hover{transform:scale(1.12);z-index:2}
+#sch .el i{font-style:normal;font-size:.55rem;opacity:.75}
+#sch .el b{font-size:.95rem}
+#sch .el.dim{opacity:.18}
+#sch .el.sel{outline:3px solid var(--ink);outline-offset:1px}
+#sch .el.ph{background:#0000!important;border:1px dashed var(--line);color:var(--ink);font-size:.6rem}
+#sch .gap{grid-column:1/-1;height:8px}
+#sch .c-alk{background:#ff9f9f}#sch .c-erd{background:#ffd29a}#sch .c-ueb{background:#ffe9a8}#sch .c-met{background:#c6e2ff}#sch .c-hal{background:#b9f0d0}#sch .c-nme{background:#a8f0a8}#sch .c-hlg{background:#9ff3f3}#sch .c-edl{background:#d6c7ff}#sch .c-lan{background:#ffc2e6}#sch .c-act{background:#f3b6c9}
+#sch .legend .chip{color:#111;border-color:transparent}
+#sch .eldet{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+#sch .elbig{width:96px;height:96px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#111}
+#sch .elbig b{font-size:2.2rem;line-height:1}#sch .elbig i{font-style:normal;font-size:.8rem}
+#sch .eltab{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:.9rem}
+#sch .eltab span:nth-child(odd){opacity:.65}
+/* Noten */
+#sch .subj{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;background:#ffffff10}
+#sch .subj header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#sch .subj header b{font-size:1.02rem}
+#sch .subj .avg{font-weight:800;font-size:1.15rem}
+#sch .gch{border:1px solid var(--line);border-radius:8px;padding:2px 8px;font:700 .9rem system-ui,sans-serif;background:transparent;color:var(--ink);box-shadow:none;cursor:pointer}
+#sch .gch.m{border-style:dashed}
+#sch .gch:hover{text-decoration:line-through}
+#sch .xbtn{background:none!important;border:0;color:var(--ink);opacity:.5;box-shadow:none;padding:2px 6px;cursor:pointer;font-size:1rem}
+#sch .subj .srow input.si{width:70px;flex:none}
+/* Ferien */
+#sch .fcd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;margin:10px 0}
+#sch .fcd div{border:1px solid var(--line);border-radius:14px;padding:10px 4px;background:#ffffff14}
+#sch .fcd b{display:block;font-size:1.8rem;font-variant-numeric:tabular-nums}
+#sch .fcd small{opacity:.7;font-size:.75rem}
+#sch .bar{height:12px;border-radius:99px;background:#8883;overflow:hidden;margin:6px 0}
+#sch .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--sa),var(--gold));border-radius:99px;transition:width .4s}
+#sch .qcd{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+#sch .qcd div{border:1px solid var(--line);border-radius:14px;padding:10px;background:#ffffff10}
+#sch .qcd b{display:block;font-size:1.15rem;font-variant-numeric:tabular-nums}
+#sch .hlist{list-style:none;padding:0;margin:8px 0 0}
+#sch .hlist li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+@media (max-width:520px){#sch .ckeys button{padding:10px 0}#sch .fcd b{font-size:1.4rem}#sch .eldet{grid-template-columns:1fr}}
+</style>
+<script>/* ---- Schule: Notenrechner, Ferien-Countdown, Rechner, Formeln, Periodensystem + Lernplattform-Tarnung ---- */
+(function(){
+var $=function(i){return document.getElementById(i)},body=document.body;
+function g(k,d){try{var v=localStorage.getItem(k);return v==null?d:v}catch(e){return d}}
+function s(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function gj(k,d){try{return JSON.parse(g(k,''))||d}catch(e){return d}}
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function de(n,d){return Number(n).toLocaleString('de-DE',{maximumFractionDigits:d==null?2:d})}
+function num(v){return parseFloat(String(v).replace(',','.').trim())}
+var sch=$('sch');if(!sch)return;
+/* Tipps in Eingabefeldern sollen keine globalen Hotkeys / Geheimwort ausloesen */
+sch.addEventListener('keydown',function(e){if(e.target.matches('input,select,textarea')&&e.key!=='Escape')e.stopPropagation()});
+
+/* ---------- Grundgeruest ---------- */
+var TABS=[['no','📊 Noten'],['fe','🏖️ Ferien'],['ca','🧮 Rechner'],['fo','📐 Formeln'],['pt','⚗️ Periodensystem']];
+var nav=el('div','snav');TABS.forEach(function(t,i){var b=el('button','sb'+(i?'':' on'),t[1]);b.dataset.v=t[0];nav.appendChild(b)});sch.appendChild(nav);
+var P={};TABS.forEach(function(t,i){P[t[0]]=el('div','sp'+(i?'':' on'));P[t[0]].dataset.v=t[0];sch.appendChild(P[t[0]])});
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;nav.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});
+ for(var k in P)P[k].classList.toggle('on',k===b.dataset.v);s('sch_tab',b.dataset.v);if(b.dataset.v==='fe')feRender()});
+
+/* ---------- Notenrechner ---------- */
+var NO=gj('sch_grades',null)||{sys:'noten',w:50,subs:[{n:'Mathe',g:[]},{n:'Deutsch',g:[]},{n:'Englisch',g:[]}]};
+function noSave(){s('sch_grades',JSON.stringify(NO))}
+P.no.innerHTML='<div class="scard"><h3>📊 Notenrechner</h3>'+
+ '<div class="srow"><span>System:</span><button class="chip" data-sys="noten">Noten 1–6</button><button class="chip" data-sys="punkte">Punkte 0–15</button>'+
+ '<span style="margin-left:8px">Schriftlich zählt</span><input class="si" id="noW" type="number" min="0" max="100" step="5" style="width:70px"><span>%</span></div>'+
+ '<p class="shint" id="noHint"></p><div id="noAll" class="srow"></div></div>'+
+ '<div id="noSubs"></div>'+
+ '<div class="scard"><div class="srow"><input class="si" id="noNew" type="text" maxlength="24" placeholder="Neues Fach, z. B. Biologie"><button class="sb" id="noAdd">+ Fach</button></div></div>'+
+ '<div class="scard"><h3>🎯 Was brauche ich noch?</h3><div class="srow"><select class="si" id="tgS"></select><span>Ziel-Schnitt</span><input class="si" id="tgV" type="text" inputmode="decimal" style="width:70px" placeholder="2,0"><select class="si" id="tgT"><option value="s">nächste schriftliche Note</option><option value="m">nächste mündliche Note</option></select><button class="sb" id="tgGo">Berechnen</button></div><p class="sout" id="tgOut"></p></div>';
+function isPts(){return NO.sys==='punkte'}
+function parseGrade(v){v=String(v).trim().replace(',','.');if(!v)return NaN;
+ if(isPts()){var p=parseInt(v,10);return /^\d{1,2}$/.test(v)&&p>=0&&p<=15?p:NaN}
+ var m=v.match(/^([1-6])\s*([+-]?)$/);if(m){var b=+m[1];return m[2]==='+'?Math.max(.7,b-.3):m[2]==='-'?b+.3:b}
+ var f=parseFloat(v);return isFinite(f)&&f>=.7&&f<=6?f:NaN}
+function fmtG(v){if(isPts())return String(v);var b=Math.round(v),d=Math.round((v-b)*10)/10;return d===-.3?b+'+':d===.3?b+'−':de(v,2)}
+function mean(a){return a.length?a.reduce(function(x,y){return x+y},0)/a.length:NaN}
+function subAvg(sb,extra){var gs=sb.g.slice();if(extra)gs.push(extra);var S=gs.filter(function(x){return x.t==='s'}).map(function(x){return x.v}),M=gs.filter(function(x){return x.t==='m'}).map(function(x){return x.v}),w=NO.w/100;
+ if(S.length&&M.length)return w*mean(S)+(1-w)*mean(M);return S.length?mean(S):M.length?mean(M):NaN}
+function cls(a){if(!isFinite(a))return'';if(isPts())return a>=10?'good':a>=5?'mid':'bad';return a<=2.5?'good':a<=4?'mid':'bad'}
+function noRender(){P.no.querySelectorAll('[data-sys]').forEach(function(b){b.classList.toggle('on',b.dataset.sys===NO.sys)});$('noW').value=NO.w;
+ $('noHint').textContent=isPts()?'Punkte 0–15 eintragen. Gestrichelt = mündlich.':'Noten wie 2, 2+ (=1,7), 3− (=3,3) oder 2,5 eintragen. Gestrichelt = mündlich. Note antippen = löschen.';
+ var box=$('noSubs');box.innerHTML='';var avgs=[];
+ NO.subs.forEach(function(sb,i){var a=subAvg(sb);if(isFinite(a))avgs.push(a);var d=el('div','subj');
+  d.innerHTML='<header><b>'+esc(sb.n)+'</b><span><span class="avg '+cls(a)+'">'+(isFinite(a)?'Ø '+de(a,2):'–')+'</span><button class="xbtn" data-del="'+i+'" aria-label="Fach löschen">✕</button></span></header>'+
+   '<div class="chips" style="margin:6px 0">'+sb.g.map(function(x,j){return '<button class="gch'+(x.t==='m'?' m':'')+'" data-s="'+i+'" data-g="'+j+'" title="'+(x.t==='m'?'mündlich':'schriftlich')+' – antippen zum Löschen">'+fmtG(x.v)+'</button>'}).join('')+(sb.g.length?'':'<span class="shint">noch keine Noten</span>')+'</div>'+
+   '<div class="srow"><input class="si" type="text" inputmode="decimal" placeholder="'+(isPts()?'12':'2+')+'" data-in="'+i+'" aria-label="Note für '+esc(sb.n)+'"><button class="sb" data-add="'+i+'" data-t="s">+ schriftlich</button><button class="sb gh" data-add="'+i+'" data-t="m">+ mündlich</button></div>';
+  box.appendChild(d)});
+ var all=mean(avgs);$('noAll').innerHTML=avgs.length?'<span>Gesamtschnitt:</span><span class="big '+cls(all)+'">'+de(all,2)+'</span><span class="shint">('+avgs.length+' Fächer)</span>':'<span class="shint">Trag Noten ein, dann erscheint hier dein Gesamtschnitt.</span>';
+ var ts=$('tgS'),old=ts.value;ts.innerHTML=NO.subs.map(function(sb,i){return '<option value="'+i+'">'+esc(sb.n)+'</option>'}).join('');if(old&&ts.options[old])ts.value=old}
+P.no.addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;
+ if(t.dataset.sys){if(NO.sys!==t.dataset.sys){if(NO.subs.some(function(x){return x.g.length})&&!confirm('Beim Wechsel werden alle eingetragenen Noten gelöscht. Weiter?'))return;NO.sys=t.dataset.sys;NO.subs.forEach(function(x){x.g=[]})}}
+ else if(t.dataset.del!=null){var sb=NO.subs[+t.dataset.del];if(sb.g.length&&!confirm('Fach „'+sb.n+'“ mit allen Noten löschen?'))return;NO.subs.splice(+t.dataset.del,1)}
+ else if(t.dataset.g!=null){NO.subs[+t.dataset.s].g.splice(+t.dataset.g,1)}
+ else if(t.dataset.add!=null){var inp=P.no.querySelector('[data-in="'+t.dataset.add+'"]'),v=parseGrade(inp.value);if(isNaN(v)){inp.focus();inp.style.borderColor='#dc2626';return}NO.subs[+t.dataset.add].g.push({v:v,t:t.dataset.t});noSave();noRender();var ni=P.no.querySelector('[data-in="'+t.dataset.add+'"]');if(ni)ni.focus();return}
+ else if(t.id==='noAdd'){var n=$('noNew').value.trim();if(!n)return $('noNew').focus();NO.subs.push({n:n,g:[]});$('noNew').value=''}
+ else if(t.id==='tgGo'){tgCalc();return}
+ else return;noSave();noRender()});
+P.no.addEventListener('keydown',function(e){if(e.key!=='Enter')return;if(e.target.dataset.in!=null){P.no.querySelector('[data-add="'+e.target.dataset.in+'"]').click()}else if(e.target.id==='noNew')$('noAdd').click();else if(e.target.id==='tgV')tgCalc()});
+$('noW').addEventListener('change',function(){var v=Math.max(0,Math.min(100,parseInt(this.value,10)||0));NO.w=v;noSave();noRender()});
+function tgCalc(){var o=$('tgOut'),sb=NO.subs[+$('tgS').value],z=num($('tgV').value),t=$('tgT').value;if(!sb){o.textContent='Erst ein Fach anlegen.';return}
+ if(!isFinite(z)){o.textContent='Bitte einen Ziel-Schnitt eingeben.';return}
+ var f0=subAvg(sb,{v:0,t:t}),f1=subAvg(sb,{v:1,t:t}),k=f1-f0,x=(z-f0)/k,pts=isPts();
+ if(!isFinite(x)){o.textContent='Das lässt sich so nicht berechnen.';return}
+ if(pts){if(x>15)o.innerHTML='<span class="bad">Leider nicht mehr erreichbar – selbst 15 Punkte reichen nicht (Ø wäre '+de(subAvg(sb,{v:15,t:t}),2)+').</span>';
+  else if(x<=0)o.innerHTML='<span class="good">Schon sicher! Selbst mit 0 Punkten bleibst du bei Ø '+de(subAvg(sb,{v:0,t:t}),2)+'.</span>';
+  else o.innerHTML='Du brauchst mindestens <span class="big">'+Math.ceil(x-1e-9)+'</span> Punkte.'}
+ else{if(x<.7)o.innerHTML='<span class="bad">Leider nicht mehr erreichbar – selbst eine 1+ reicht nicht (Ø wäre '+de(subAvg(sb,{v:.7,t:t}),2)+').</span>';
+  else if(x>=6)o.innerHTML='<span class="good">Schon sicher! Selbst mit einer 6 bleibst du bei Ø '+de(subAvg(sb,{v:6,t:t}),2)+'.</span>';
+  else o.innerHTML='Die Note darf höchstens <span class="big">'+de(Math.floor(x*10+1e-9)/10,1)+'</span> sein.'}}
+noRender();
+
+/* ---------- Ferien-Countdown ---------- */
+var HOL=gj('sch_hol',[]),SEND=g('sch_end','13:00');
+P.fe.innerHTML='<div class="scard"><h3 id="feT">🏖️ Ferien-Countdown</h3><div class="fcd" id="feCD"></div><p id="feInfo" class="shint"></p><div class="bar"><i id="feBar" style="width:0"></i></div><p id="feBarT" class="shint"></p></div>'+
+ '<div class="scard"><h3>⏳ Schnell-Countdowns</h3><div class="qcd" id="feQ"></div><div class="srow"><span>Schulschluss:</span><input class="si" id="feEnd" type="time"></div></div>'+
+ '<div class="scard"><h3>📅 Deine Ferien</h3><p class="shint">Trag die Ferientermine deines Bundeslandes ein (stehen auf der Seite deines Kultusministeriums oder im Schulplaner). Gespeichert wird nur auf diesem Gerät.</p>'+
+ '<div class="srow"><input class="si" id="feN" type="text" maxlength="30" placeholder="z. B. Herbstferien" style="flex:1"><label>von <input class="si" id="feS" type="date"></label><label>bis <input class="si" id="feE" type="date"></label><button class="sb" id="feAdd">Eintragen</button></div><p class="sout" id="feErr"></p><ul class="hlist" id="feL"></ul></div>';
+$('feEnd').value=SEND;$('feEnd').addEventListener('change',function(){SEND=this.value||'13:00';s('sch_end',SEND);feRender()});
+function dOf(str,end){var p=str.split('-');var d=new Date(+p[0],+p[1]-1,+p[2]);if(end)d.setHours(23,59,59,999);return d}
+function dshort(d){return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'})}
+function schoolDays(a,b){var n=0,d=new Date(a.getFullYear(),a.getMonth(),a.getDate());if(a.getHours()*60+a.getMinutes()>=endMin())d.setDate(d.getDate()+1);
+ for(;d<b;d.setDate(d.getDate()+1)){var w=d.getDay();if(w===0||w===6)continue;if(HOL.some(function(h){return d>=dOf(h.s)&&d<=dOf(h.e,1)}))continue;n++}return n}
+function endMin(){var p=SEND.split(':');return (+p[0])*60+(+p[1]||0)}
+function cd(ms){ms=Math.max(0,ms);return[Math.floor(ms/864e5),Math.floor(ms/36e5)%24,Math.floor(ms/6e4)%60,Math.floor(ms/1e3)%60]}
+function cdTxt(ms){var c=cd(ms);return (c[0]?c[0]+' T ':'')+c[1]+' h '+String(c[2]).padStart(2,'0')+' min'}
+function feList(){HOL.sort(function(a,b){return a.s<b.s?-1:1});var now=new Date();
+ $('feL').innerHTML=HOL.length?HOL.map(function(h,i){var past=dOf(h.e,1)<now;return '<li style="'+(past?'opacity:.5':'')+'"><span><b>'+esc(h.n)+'</b><br><small>'+dshort(dOf(h.s))+' – '+dshort(dOf(h.e))+'</small></span><button class="xbtn" data-hd="'+i+'" aria-label="Löschen">✕</button></li>'}).join(''):'<li class="shint">Noch keine Ferien eingetragen.</li>'}
+function feRender(){var now=new Date(),cur=null,next=null,prevEnd=null;
+ HOL.forEach(function(h){var a=dOf(h.s),b=dOf(h.e,1);if(a<=now&&now<=b)cur=h;else if(a>now&&(!next||a<dOf(next.s)))next=h;if(b<now&&(!prevEnd||b>prevEnd))prevEnd=b});
+ var t,target,info='';
+ if(cur){t='🎉 '+cur.n+'! Noch frei bis '+dshort(dOf(cur.e));target=dOf(cur.e,1);info='Genieß die Ferien – Countdown bis Schulbeginn.'}
+ else if(next){t='🏖️ Bis zu den '+next.n;target=dOf(next.s);/* Ferien beginnen praktisch mit Schulschluss am letzten Schultag davor */
+  var ls=new Date(target);do{ls.setDate(ls.getDate()-1)}while(ls.getDay()===0||ls.getDay()===6);ls.setHours(Math.floor(endMin()/60),endMin()%60,0,0);if(ls>now)target=ls;
+  info='Noch <b>'+schoolDays(now,dOf(next.s))+'</b> Schultage · Ferienbeginn '+dshort(dOf(next.s))}
+ else{var y=now.getFullYear(),x=new Date(y,11,24);if(x<now)x=new Date(y+1,11,24);t='🎄 Bis Heiligabend';target=x;info='Trag unten deine Ferien ein, dann zählt hier der Ferien-Countdown.'}
+ $('feT').textContent=t;var c=cd(target-now);$('feCD').innerHTML=[['Tage',c[0]],['Std',c[1]],['Min',c[2]],['Sek',c[3]]].map(function(a){return '<div><b>'+a[1]+'</b><small>'+a[0]+'</small></div>'}).join('');$('feInfo').innerHTML=info;
+ if(next&&!cur){var st=prevEnd||new Date(now.getFullYear()-(now.getMonth()<7?1:0),7,1),pc=Math.min(100,Math.max(0,(now-st)/(target-st)*100));$('feBar').style.width=pc.toFixed(1)+'%';$('feBarT').textContent=de(pc,1)+' % geschafft seit '+(prevEnd?'den letzten Ferien':'Schuljahresbeginn (ca.)')}
+ else{$('feBar').style.width=cur?'100%':'0';$('feBarT').textContent=''}
+ /* Schnell-Countdowns */
+ var q=[],day=now.getDay(),em=endMin(),todayEnd=new Date(now);todayEnd.setHours(Math.floor(em/60),em%60,0,0);
+ if(day>0&&day<6&&now<todayEnd&&!cur)q.push(['🔔 Schulschluss heute',cdTxt(todayEnd-now)]);
+ var fri=new Date(todayEnd);fri.setDate(fri.getDate()+((5-day+7)%7));if(fri<=now)fri.setDate(fri.getDate()+7);
+ q.push(day===6||day===0||(day===5&&now>=todayEnd)?['🛋️ Wochenende','läuft gerade 😎']:['🛋️ Bis Wochenende',cdTxt(fri-now)]);
+ var y2=now.getFullYear(),xm=new Date(y2,11,24);if(xm<now)xm=new Date(y2+1,11,24);q.push(['🎄 Heiligabend',cdTxt(xm-now)]);
+ var ny=new Date(y2+1,0,1);q.push(['🎆 Silvester/Neujahr',cdTxt(ny-now)]);
+ $('feQ').innerHTML=q.map(function(a){return '<div><small>'+a[0]+'</small><b>'+a[1]+'</b></div>'}).join('')}
+P.fe.addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;
+ if(t.id==='feAdd'){var n=$('feN').value.trim()||'Ferien',a=$('feS').value,b=$('feE').value||a;if(!a){$('feErr').textContent='Bitte mindestens das Startdatum wählen.';return}if(b<a){$('feErr').textContent='Das Ende liegt vor dem Anfang.';return}
+  $('feErr').textContent='';HOL.push({n:n,s:a,e:b});s('sch_hol',JSON.stringify(HOL));$('feN').value='';$('feS').value='';$('feE').value='';feList();feRender()}
+ else if(t.dataset.hd!=null){HOL.splice(+t.dataset.hd,1);s('sch_hol',JSON.stringify(HOL));feList();feRender()}});
+feList();feRender();setInterval(function(){if(P.fe.offsetParent!==null)feRender()},1000);
+
+/* ---------- Wissenschaftlicher Rechner (eigener Parser, kein eval) ---------- */
+var DEG=g('sch_deg','1')==='1',ANS=0,HIST=gj('sch_hist',[]);
+P.ca.innerHTML='<div class="scard calc"><h3>🧮 Rechner</h3><input class="si cdisp" id="caIn" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="z. B. 2·sin(30)+√16" aria-label="Rechnung"><div class="cres" id="caOut">0</div><div class="ckeys" id="caK"></div><ul class="chist" id="caH"></ul></div>';
+var KEYS=[['DEG','mode','fn'],['(','(','op'],[')',')','op'],['⌫','bs','op'],['C','clr','op'],
+ ['sin','sin(','fn'],['cos','cos(','fn'],['tan','tan(','fn'],['√','√(','fn'],['xʸ','^','op'],
+ ['ln','ln(','fn'],['log','log(','fn'],['x²','^2','fn'],['π','π','fn'],['÷','÷','op'],
+ ['7','7'],['8','8'],['9','9'],['n!','!','fn'],['×','×','op'],
+ ['4','4'],['5','5'],['6','6'],['%','%','fn'],['−','−','op'],
+ ['1','1'],['2','2'],['3','3'],['ANS','ans','fn'],['+','+','op'],
+ ['0','0'],[',',','],['e','e','fn'],['EXP','·10^','fn'],['=','eq','eq']];
+var ck=$('caK'),ci=$('caIn'),co=$('caOut');
+KEYS.forEach(function(k){var b=el('button',k[2]||'',k[0]);b.type='button';b.dataset.k=k[1];if(k[1]==='mode')b.id='caMode';ck.appendChild(b)});
+function modeTxt(){$('caMode').textContent=DEG?'DEG':'RAD'}modeTxt();
+function ins(t){var a=ci.selectionStart==null?ci.value.length:ci.selectionStart,b=ci.selectionEnd==null?a:ci.selectionEnd;ci.value=ci.value.slice(0,a)+t+ci.value.slice(b);var p=a+t.length;try{ci.setSelectionRange(p,p)}catch(e){}live()}
+ck.addEventListener('pointerdown',function(e){if(e.target.closest('button'))e.preventDefault()});/* Fokus/Cursor im Feld behalten */
+ck.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var k=b.dataset.k;
+ if(k==='mode'){DEG=!DEG;s('sch_deg',DEG?'1':'0');modeTxt();live()}else if(k==='clr'){ci.value='';co.textContent='0';co.classList.remove('err')}
+ else if(k==='bs'){var a=ci.selectionStart,c=ci.selectionEnd;if(a!==c){ci.value=ci.value.slice(0,a)+ci.value.slice(c);ci.setSelectionRange(a,a)}else if(a>0){ci.value=ci.value.slice(0,a-1)+ci.value.slice(a);ci.setSelectionRange(a-1,a-1)}live()}
+ else if(k==='eq')calcEq();else ins(k)});
+ci.addEventListener('input',live);ci.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();calcEq()}});
+function fmtN(v){if(!isFinite(v))return isNaN(v)?'Fehler':(v>0?'∞':'−∞');if(Math.abs(v)<1e-12)v=0;var a=Math.abs(v);
+ if(a!==0&&(a>=1e12||a<1e-6)){var ex=v.toExponential(8).split('e');return ex[0].replace(/\.?0+$/,'').replace('.',',')+' · 10^'+(+ex[1])}
+ return de(parseFloat(v.toPrecision(12)),10)}
+function tok(src){var s=src.replace(/\s+/g,'').replace(/[×·*]/g,'*').replace(/[÷:\/]/g,'/').replace(/[−–]/g,'-').replace(/,/g,'.').toLowerCase(),t=[],i=0,m;
+ while(i<s.length){var r=s.slice(i);
+  if((m=r.match(/^\d*\.?\d+(e[+-]?\d+)?/))||(m=r.match(/^\d+\./))){t.push({t:'n',v:parseFloat(m[0])});i+=m[0].length;continue}
+  if((m=r.match(/^(asin|acos|atan|sinh|cosh|tanh|sin|cos|tan|sqrt|ln|log|abs|ans|pi|π|√|e)/))){t.push({t:'id',v:m[0]});i+=m[0].length;continue}
+  if('+-*/^()!%'.indexOf(s[i])>=0){t.push({t:s[i]});i++;continue}
+  throw Error('Unbekanntes Zeichen „'+src.replace(/\s+/g,'')[i]+'“')}return t}
+function parse(src){var T=tok(src),p=0;if(!T.length)throw Error('');
+ function pk(){return T[p]}function nx(){return T[p++]}
+ function startsPrimary(x){return x&&(x.t==='n'||x.t==='id'||x.t==='(')}
+ function expr(){var v=term();while(pk()&&(pk().t==='+'||pk().t==='-')){var o=nx().t,r=term();v=o==='+'?v+r:v-r}return v}
+ function term(){var v=unary();for(;;){var x=pk();if(x&&(x.t==='*'||x.t==='/')){nx();var r=unary();v=x.t==='*'?v*r:v/r}else if(startsPrimary(x)){v*=unary()}else return v}}
+ function unary(){var x=pk();if(x&&(x.t==='-'||x.t==='+')){nx();var v=unary();return x.t==='-'?-v:v}return power()}
+ function power(){var b=postfix();if(pk()&&pk().t==='^'){nx();return Math.pow(b,unary())}return b}
+ function postfix(){var v=primary();for(;;){var x=pk();if(x&&x.t==='!'){nx();v=fact(v)}else if(x&&x.t==='%'){nx();v=v/100}else return v}}
+ function fact(n){if(n<0||n!==Math.floor(n))throw Error('n! nur für natürliche Zahlen');if(n>170)return Infinity;var r=1;for(var i=2;i<=n;i++)r*=i;return r}
+ function arg(){if(pk()&&pk().t==='('){nx();var v=expr();if(!pk()||pk().t!==')'){if(!pk())return v;throw Error('Klammer fehlt')}nx();return v}return power()}
+ function primary(){var x=nx();if(!x)throw Error('Rechnung unvollständig');
+  if(x.t==='n')return x.v;
+  if(x.t==='('){var v=expr();if(pk()&&pk().t===')')nx();else if(pk())throw Error('Klammer fehlt');return v}
+  if(x.t==='id'){var f=x.v,R=DEG?Math.PI/180:1;
+   if(f==='pi'||f==='π')return Math.PI;if(f==='e')return Math.E;if(f==='ans')return ANS;
+   var a=arg();switch(f){case'sin':return Math.sin(a*R);case'cos':return Math.cos(a*R);case'tan':if(DEG&&Math.abs(((a%180)+180)%180-90)<1e-9)throw Error('tan nicht definiert');return Math.tan(a*R);
+    case'asin':return Math.asin(a)/R;case'acos':return Math.acos(a)/R;case'atan':return Math.atan(a)/R;case'sinh':return Math.sinh(a);case'cosh':return Math.cosh(a);case'tanh':return Math.tanh(a);
+    case'sqrt':case'√':if(a<0)throw Error('Wurzel aus negativer Zahl');return Math.sqrt(a);case'ln':return Math.log(a);case'log':return Math.log10(a);case'abs':return Math.abs(a)}}
+  throw Error('Unerwartetes „'+(x.v||x.t)+'“')}
+ var v=expr();if(p<T.length)throw Error(T[p].t===')'?'Zu viele „)“':'Unerwartetes Zeichen');
+ /* sin(30°) = 0,5 statt 0,49999999 */
+ if(Math.abs(v)>1e-6&&Math.abs(v-Math.round(v))<1e-10*Math.max(1,Math.abs(v)))v=Math.round(v);return v}
+function live(){var v=ci.value.trim();if(!v){co.textContent='0';co.classList.remove('err');return}try{var r=parse(v);co.textContent='= '+fmtN(r);co.classList.remove('err')}catch(e){co.textContent='…';co.classList.remove('err')}}
+function calcEq(){var v=ci.value.trim();if(!v)return;try{var r=parse(v);ANS=r;co.textContent=fmtN(r);co.classList.remove('err');HIST.unshift([v,fmtN(r)]);HIST=HIST.slice(0,8);s('sch_hist',JSON.stringify(HIST));histR();ci.value='';}catch(e){co.textContent=e.message||'Fehler';co.classList.add('err')}}
+function histR(){$('caH').innerHTML=HIST.map(function(h,i){return '<li data-h="'+i+'" title="Antippen zum Übernehmen"><span>'+esc(h[0])+'</span><b>= '+esc(h[1])+'</b></li>'}).join('')}
+$('caH').addEventListener('click',function(e){var li=e.target.closest('li');if(!li)return;ci.value=HIST[+li.dataset.h][0];ci.focus();live()});histR();
+
+/* ---------- Formelsammlung + Loeser ---------- */
+var FO=[
+['Mathe','Binomische Formeln','(a + b)² = a² + 2ab + b²\n(a − b)² = a² − 2ab + b²\n(a + b)(a − b) = a² − b²',''],
+['Mathe','pq-Formel','x₁,₂ = −p/2 ± √((p/2)² − q)','für x² + px + q = 0'],
+['Mathe','Mitternachtsformel (abc)','x₁,₂ = (−b ± √(b² − 4ac)) / 2a','für ax² + bx + c = 0; D = b² − 4ac'],
+['Mathe','Satz des Pythagoras','a² + b² = c²','c = Hypotenuse (gegenüber dem rechten Winkel)'],
+['Mathe','Lineare Funktion','f(x) = m·x + b\nm = (y₂ − y₁) / (x₂ − x₁)','m = Steigung, b = y-Achsenabschnitt'],
+['Mathe','Scheitelpunktform','f(x) = a(x − d)² + e','Scheitelpunkt S(d | e)'],
+['Mathe','Kreis','U = 2πr = πd\nA = πr²',''],
+['Mathe','Dreieck','A = ½ · g · h\nα + β + γ = 180°',''],
+['Mathe','Rechteck / Quadrat','A = a · b   U = 2(a + b)\nA = a²   U = 4a',''],
+['Mathe','Trapez / Parallelogramm','A = ½(a + c) · h\nA = g · h',''],
+['Mathe','Quader / Würfel','V = a · b · c   O = 2(ab + ac + bc)\nV = a³   O = 6a²',''],
+['Mathe','Zylinder','V = πr²h\nO = 2πr² + 2πrh',''],
+['Mathe','Kegel / Pyramide','V = ⅓ · πr² · h\nV = ⅓ · G · h','G = Grundfläche'],
+['Mathe','Kugel','V = ⁴⁄₃ · πr³\nO = 4πr²',''],
+['Mathe','Trigonometrie (rechtwinklig)','sin α = Gegenkathete / Hypotenuse\ncos α = Ankathete / Hypotenuse\ntan α = Gegenkathete / Ankathete',''],
+['Mathe','Sinus- & Kosinussatz','a / sin α = b / sin β = c / sin γ\nc² = a² + b² − 2ab · cos γ','für beliebige Dreiecke'],
+['Mathe','Prozentrechnung','W = G · p / 100\np = W / G · 100\nG = W · 100 / p','G = Grundwert, W = Prozentwert, p = Prozentsatz'],
+['Mathe','Zinsen','Z = K · p / 100\nKₙ = K₀ · (1 + p/100)ⁿ','Zinseszins nach n Jahren'],
+['Mathe','Potenzgesetze','aᵐ · aⁿ = aᵐ⁺ⁿ   aᵐ : aⁿ = aᵐ⁻ⁿ\n(aᵐ)ⁿ = aᵐ·ⁿ   a⁻ⁿ = 1 / aⁿ\na^(1/n) = ⁿ√a',''],
+['Mathe','Logarithmus','aˣ = b  ⇔  x = logₐ b\nlog(x · y) = log x + log y\nlog(xⁿ) = n · log x',''],
+['Mathe','Ableitungsregeln','(xⁿ)′ = n · xⁿ⁻¹\n(u · v)′ = u′v + uv′\n(u / v)′ = (u′v − uv′) / v²\nf(g(x))′ = f′(g(x)) · g′(x)','Potenz-, Produkt-, Quotienten-, Kettenregel'],
+['Mathe','Wahrscheinlichkeit','P(E) = günstige / mögliche Ergebnisse\nP(Ē) = 1 − P(E)','Laplace-Experiment'],
+['Mathe','Mittelwert','x̄ = (x₁ + x₂ + … + xₙ) / n','arithmetisches Mittel'],
+['Physik','Geschwindigkeit','v = s / t','1 m/s = 3,6 km/h'],
+['Physik','Beschleunigung','a = Δv / Δt\ns = ½ · a · t²   v = a · t','aus dem Stand'],
+['Physik','Kraft (2. Newton)','F = m · a','[F] = N = kg·m/s²'],
+['Physik','Gewichtskraft','F_G = m · g','g ≈ 9,81 m/s² (Erde)'],
+['Physik','Dichte','ρ = m / V',''],
+['Physik','Druck','p = F / A','1 bar = 100 000 Pa'],
+['Physik','Arbeit & Leistung','W = F · s\nP = W / t',''],
+['Physik','Energie','E_kin = ½ · m · v²\nE_pot = m · g · h',''],
+['Physik','Wirkungsgrad','η = E_nutz / E_zu',''],
+['Physik','Ohmsches Gesetz','U = R · I','R = U / I   I = U / R'],
+['Physik','Elektrische Leistung & Energie','P = U · I\nE = P · t','1 kWh = 3,6 MJ'],
+['Physik','Widerstände','Reihe: R = R₁ + R₂ + …\nParallel: 1/R = 1/R₁ + 1/R₂ + …',''],
+['Physik','Ladung','Q = I · t',''],
+['Physik','Wellen','c = λ · f\nf = 1 / T','Licht: c ≈ 300 000 km/s'],
+['Physik','Hebelgesetz','F₁ · l₁ = F₂ · l₂',''],
+['Physik','Hookesches Gesetz','F = D · s','D = Federkonstante'],
+['Physik','Wärme','Q = c · m · ΔT','Wasser: c ≈ 4,19 kJ/(kg·K)'],
+['Physik','Impuls','p = m · v',''],
+['Chemie','Stoffmenge','n = m / M\nN = n · N_A','N_A ≈ 6,022 · 10²³ 1/mol'],
+['Chemie','Konzentration','c = n / V','[c] = mol/L'],
+['Chemie','Molares Volumen (Gas)','V = n · V_m','V_m ≈ 22,4 L/mol bei 0 °C und 1013 hPa'],
+['Chemie','pH-Wert','pH = −log c(H₃O⁺)','pH < 7 sauer, = 7 neutral, > 7 basisch'],
+['Chemie','Ideales Gas','p · V = n · R · T','R ≈ 8,314 J/(mol·K), T in Kelvin'],
+['Chemie','Massenanteil','w = m(Stoff) / m(Gesamt)',''],
+['Chemie','Neutralisation','Säure + Base → Salz + Wasser','z. B. HCl + NaOH → NaCl + H₂O']];
+var FCAT='Alle';
+P.fo.innerHTML='<div class="scard"><h3>🧠 Löser</h3><div class="solv">'+
+ '<div class="fcard"><b>Quadratische Gleichung</b><div class="srow">a <input class="si" id="q_a" value="1"> b <input class="si" id="q_b" value="-5"> c <input class="si" id="q_c" value="6"></div><div class="sout" id="q_o"></div></div>'+
+ '<div class="fcard"><b>Pythagoras</b><p>Zwei Seiten eintragen, eine leer lassen.</p><div class="srow">a <input class="si" id="p_a" value="3"> b <input class="si" id="p_b" value="4"> c <input class="si" id="p_c"></div><div class="sout" id="p_o"></div></div>'+
+ '<div class="fcard"><b>Dreisatz</b><div class="srow"><input class="si" id="d_a" value="3"> → <input class="si" id="d_b" value="4,50"></div><div class="srow"><input class="si" id="d_c" value="7"> → ?</div><div class="sout" id="d_o"></div></div>'+
+ '<div class="fcard"><b>Prozent</b><p>Zwei Werte eintragen, einen leer lassen.</p><div class="srow">G <input class="si" id="r_g" value="80"> p% <input class="si" id="r_p" value="15"> W <input class="si" id="r_w"></div><div class="sout" id="r_o"></div></div>'+
+ '</div></div><div class="scard"><h3>📐 Formelsammlung</h3><div class="srow"><input class="si" id="foQ" type="search" placeholder="Suchen, z. B. Kreis, Dichte, pH"></div><div class="chips" id="foC"></div><div class="fgrid" id="foG"></div></div>';
+function foR(){var q=$('foQ').value.trim().toLowerCase();$('foC').innerHTML=['Alle','Mathe','Physik','Chemie'].map(function(c){return '<button class="chip'+(c===FCAT?' on':'')+'" data-c="'+c+'">'+c+'</button>'}).join('');
+ var L=FO.filter(function(f){return (FCAT==='Alle'||f[0]===FCAT)&&(!q||(f.join(' ').toLowerCase().indexOf(q)>=0))});
+ $('foG').innerHTML=L.length?L.map(function(f){return '<div class="fcard"><small>'+f[0]+'</small><b>'+esc(f[1])+'</b><code>'+esc(f[2])+'</code>'+(f[3]?'<p>'+esc(f[3])+'</p>':'')+'</div>'}).join(''):'<p class="shint">Nichts gefunden.</p>'}
+$('foC').addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(b){FCAT=b.dataset.c;foR()}});$('foQ').addEventListener('input',foR);foR();
+function nv(id){var v=$(id).value.trim();return v===''?null:num(v)}
+function solve(){var o;
+ /* quadratisch */
+ var a=nv('q_a'),b=nv('q_b'),c=nv('q_c');o=$('q_o');
+ if([a,b,c].some(function(x){return x==null||!isFinite(x)}))o.textContent='Bitte a, b und c eintragen.';
+ else if(a===0)o.textContent=b===0?(c===0?'Jedes x ist Lösung.':'Keine Lösung.'):'Linear: x = '+fmtN(-c/b);
+ else{var D=b*b-4*a*c;if(D<0)o.textContent='D = '+fmtN(D)+' < 0 → keine reelle Lösung';else if(D===0)o.textContent='D = 0 → x = '+fmtN(-b/(2*a));else o.textContent='D = '+fmtN(D)+' → x₁ = '+fmtN((-b+Math.sqrt(D))/(2*a))+', x₂ = '+fmtN((-b-Math.sqrt(D))/(2*a))}
+ /* Pythagoras */
+ var pa=nv('p_a'),pb=nv('p_b'),pc=nv('p_c');o=$('p_o');var n=[pa,pb,pc].filter(function(x){return x!=null}).length;
+ if(n!==2)o.textContent='Genau zwei Seiten eintragen.';
+ else if(pc==null)o.textContent='c = √(a² + b²) = '+fmtN(Math.sqrt(pa*pa+pb*pb));
+ else{var k=pa==null?pb:pa;o.textContent=pc<=k?'c muss die längste Seite sein.':(pa==null?'a':'b')+' = √(c² − '+(pa==null?'b':'a')+'²) = '+fmtN(Math.sqrt(pc*pc-k*k))}
+ /* Dreisatz */
+ var da=nv('d_a'),db=nv('d_b'),dc=nv('d_c');o=$('d_o');o.textContent=(da&&db!=null&&dc!=null)?'? = '+fmtN(db/da*dc)+'  (1 → '+fmtN(db/da)+')':'Alle drei Werte eintragen.';
+ /* Prozent */
+ var G=nv('r_g'),p=nv('r_p'),W=nv('r_w');o=$('r_o');var m=[G,p,W].filter(function(x){return x!=null}).length;
+ if(m!==2)o.textContent='Genau zwei Werte eintragen.';else if(W==null)o.textContent='W = '+fmtN(G*p/100);else if(p==null)o.textContent=G?'p = '+fmtN(W/G*100)+' %':'G darf nicht 0 sein.';else o.textContent=p?'G = '+fmtN(W*100/p):'p darf nicht 0 sein.'}
+P.fo.querySelector('.solv').addEventListener('input',solve);solve();
+
+/* ---------- Periodensystem + Molmassen-Rechner ---------- */
+var ELS='H Wasserstoff 1.008|He Helium 4.0026|Li Lithium 6.94|Be Beryllium 9.0122|B Bor 10.81|C Kohlenstoff 12.011|N Stickstoff 14.007|O Sauerstoff 15.999|F Fluor 18.998|Ne Neon 20.180|Na Natrium 22.990|Mg Magnesium 24.305|Al Aluminium 26.982|Si Silicium 28.085|P Phosphor 30.974|S Schwefel 32.06|Cl Chlor 35.45|Ar Argon 39.95|K Kalium 39.098|Ca Calcium 40.078|Sc Scandium 44.956|Ti Titan 47.867|V Vanadium 50.942|Cr Chrom 51.996|Mn Mangan 54.938|Fe Eisen 55.845|Co Cobalt 58.933|Ni Nickel 58.693|Cu Kupfer 63.546|Zn Zink 65.38|Ga Gallium 69.723|Ge Germanium 72.630|As Arsen 74.922|Se Selen 78.971|Br Brom 79.904|Kr Krypton 83.798|Rb Rubidium 85.468|Sr Strontium 87.62|Y Yttrium 88.906|Zr Zirconium 91.224|Nb Niob 92.906|Mo Molybdän 95.95|Tc Technetium 98|Ru Ruthenium 101.07|Rh Rhodium 102.91|Pd Palladium 106.42|Ag Silber 107.87|Cd Cadmium 112.41|In Indium 114.82|Sn Zinn 118.71|Sb Antimon 121.76|Te Tellur 127.60|I Iod 126.90|Xe Xenon 131.29|Cs Caesium 132.91|Ba Barium 137.33|La Lanthan 138.91|Ce Cer 140.12|Pr Praseodym 140.91|Nd Neodym 144.24|Pm Promethium 145|Sm Samarium 150.36|Eu Europium 151.96|Gd Gadolinium 157.25|Tb Terbium 158.93|Dy Dysprosium 162.50|Ho Holmium 164.93|Er Erbium 167.26|Tm Thulium 168.93|Yb Ytterbium 173.05|Lu Lutetium 174.97|Hf Hafnium 178.49|Ta Tantal 180.95|W Wolfram 183.84|Re Rhenium 186.21|Os Osmium 190.23|Ir Iridium 192.22|Pt Platin 195.08|Au Gold 196.97|Hg Quecksilber 200.59|Tl Thallium 204.38|Pb Blei 207.2|Bi Bismut 208.98|Po Polonium 209|At Astat 210|Rn Radon 222|Fr Francium 223|Ra Radium 226|Ac Actinium 227|Th Thorium 232.04|Pa Protactinium 231.04|U Uran 238.03|Np Neptunium 237|Pu Plutonium 244|Am Americium 243|Cm Curium 247|Bk Berkelium 247|Cf Californium 251|Es Einsteinium 252|Fm Fermium 257|Md Mendelevium 258|No Nobelium 259|Lr Lawrencium 266|Rf Rutherfordium 267|Db Dubnium 268|Sg Seaborgium 269|Bh Bohrium 270|Hs Hassium 269|Mt Meitnerium 278|Ds Darmstadtium 281|Rg Roentgenium 282|Cn Copernicium 285|Nh Nihonium 286|Fl Flerovium 289|Mc Moscovium 290|Lv Livermorium 293|Ts Tenness 294|Og Oganesson 294'.split('|').map(function(x,i){var p=x.split(' ');return{z:i+1,s:p[0],n:p[1],m:+p[2]}});
+var RADIO={43:1,61:1};/* instabil: Masse = langlebigstes Isotop */
+var CATN={alk:'Alkalimetalle',erd:'Erdalkalimetalle',ueb:'Übergangsmetalle',met:'Metalle',hal:'Halbmetalle',nme:'Nichtmetalle',hlg:'Halogene',edl:'Edelgase',lan:'Lanthanoide',act:'Actinoide'};
+function catOf(z){if([1,6,7,8,15,16,34].indexOf(z)>=0)return'nme';if([2,10,18,36,54,86,118].indexOf(z)>=0)return'edl';if([3,11,19,37,55,87].indexOf(z)>=0)return'alk';if([4,12,20,38,56,88].indexOf(z)>=0)return'erd';
+ if([5,14,32,33,51,52].indexOf(z)>=0)return'hal';if([9,17,35,53,85,117].indexOf(z)>=0)return'hlg';if([13,31,49,50,81,82,83,84,113,114,115,116].indexOf(z)>=0)return'met';if(z>=57&&z<=71)return'lan';if(z>=89&&z<=103)return'act';return'ueb'}
+function pos(z){/* [Spalte, Zeile] */if(z===1)return[1,1];if(z===2)return[18,1];
+ if(z<=18){var p=z<=10?2:3,o=z-(p===2?2:10);return[o<=2?o:o+10,p]}
+ if(z<=54){var p2=z<=36?4:5;return[z-(p2===4?18:36),p2]}
+ if(z>=57&&z<=71)return[z-57+3,9];if(z>=89&&z<=103)return[z-89+3,10];
+ var p3=z<=86?6:7,b=p3===6?54:86,o3=z-b;return[o3<=2?o3:o3-14,p3]}
+function state(z){if([1,2,7,8,9,10,17,18,36,54,86].indexOf(z)>=0)return'gasförmig';if(z===35||z===80)return'flüssig';return z>=100?'unbekannt (künstlich)':'fest'}
+ELS.forEach(function(e){e.c=catOf(e.z);var q=pos(e.z);e.x=q[0];e.y=q[1]});
+P.pt.innerHTML='<div class="scard"><h3>⚗️ Periodensystem</h3><div class="srow"><input class="si" id="ptQ" type="search" placeholder="Suchen: Name, Symbol oder Ordnungszahl"></div>'+
+ '<div class="chips legend" id="ptL"></div><div class="ptw" style="margin-top:10px"><div class="pt" id="ptG"></div></div><div id="ptD" style="margin-top:12px"></div></div>'+
+ '<div class="scard"><h3>⚖️ Molare Masse berechnen</h3><div class="srow"><input class="si" id="mmQ" type="text" placeholder="z. B. H2SO4, Ca(OH)2, CuSO4·5H2O" autocomplete="off" spellcheck="false"></div><div class="sout" id="mmO"></div><div id="mmT" class="shint"></div></div>';
+var grid=$('ptG'),CELL={},CUR=null;
+ELS.forEach(function(e){var b=el('button','el c-'+e.c,'<i>'+e.z+'</i><b>'+e.s+'</b>');b.type='button';b.title=e.n;b.style.gridColumn=e.x;b.style.gridRow=e.y;b.dataset.z=e.z;grid.appendChild(b);CELL[e.z]=b});
+[[3,6,'57–71'],[3,7,'89–103']].forEach(function(p){var d=el('div','el ph',p[2]);d.style.gridColumn=p[0];d.style.gridRow=p[1];grid.appendChild(d)});
+var gp=el('div','gap');gp.style.gridRow=8;grid.appendChild(gp);
+$('ptL').innerHTML=Object.keys(CATN).map(function(k){return '<button class="chip c-'+k+'" data-cat="'+k+'">'+CATN[k]+'</button>'}).join('');
+function ptFilter(fn){ELS.forEach(function(e){CELL[e.z].classList.toggle('dim',fn?!fn(e):false)})}
+$('ptQ').addEventListener('input',function(){var q=this.value.trim().toLowerCase();CUR=null;$('ptL').querySelectorAll('.chip').forEach(function(c){c.style.outline=''});
+ if(!q){ptFilter(null);return}var hits=ELS.filter(function(e){return String(e.z)===q||e.s.toLowerCase()===q||e.n.toLowerCase().indexOf(q)>=0});ptFilter(function(e){return hits.indexOf(e)>=0});if(hits.length===1)ptShow(hits[0])});
+$('ptL').addEventListener('click',function(e){var b=e.target.closest('[data-cat]');if(!b)return;var on=CUR!==b.dataset.cat;CUR=on?b.dataset.cat:null;$('ptL').querySelectorAll('.chip').forEach(function(c){c.style.outline=c===b&&on?'2px solid var(--ink)':''});ptFilter(on?function(x){return x.c===CUR}:null)});
+grid.addEventListener('click',function(e){var b=e.target.closest('[data-z]');if(b)ptShow(ELS[+b.dataset.z-1])});
+function ptShow(e){grid.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel')});CELL[e.z].classList.add('sel');
+ var main=e.x<=2||e.x>=13,hg=main&&e.y<=7?(e.x<=2?e.x:e.x-10):null,ve=e.z===2?2:hg,unst=e.z>=84||RADIO[e.z];
+ var rows=[['Ordnungszahl',e.z+' (= '+e.z+' Protonen und '+e.z+' Elektronen)'],['Atommasse',de(e.m,4)+' u'+(unst?' (langlebigstes Isotop, radioaktiv)':'')],['≈ Neutronen',(Math.round(e.m)-e.z)+' (häufigstes/stabilstes Isotop, gerundet)'],
+  ['Periode',e.y>=9?(e.y===9?6:7):e.y],['Gruppe',e.y>=9?'– ('+CATN[e.c]+')':e.x+(hg?' · '+['I','II','III','IV','V','VI','VII','VIII'][hg-1]+'. Hauptgruppe':' · Nebengruppe')],
+  ['Valenzelektronen',ve?ve:'–'],['Elementgruppe',CATN[e.c]],['Zustand (20 °C)',state(e.z)]];
+ $('ptD').innerHTML='<div class="eldet"><div class="elbig c-'+e.c+'" style="background:"><i>'+e.z+'</i><b>'+e.s+'</b><i>'+de(e.m,3)+'</i></div><div><h3 style="margin:0 0 6px">'+e.n+'</h3><div class="eltab">'+rows.map(function(r){return '<span>'+r[0]+'</span><span>'+r[1]+'</span>'}).join('')+'</div></div></div>';
+ var bg=getComputedStyle(CELL[e.z]).backgroundColor;$('ptD').querySelector('.elbig').style.background=bg}
+var SYM={};ELS.forEach(function(e){SYM[e.s]=e});
+function molar(f){f=f.replace(/\s+/g,'').replace(/[₀-₉]/g,function(c){return String(c.charCodeAt(0)-8320)});if(!f)throw Error('');
+ var parts=f.split(/[·*•.]/),tot={};
+ parts.forEach(function(pt){if(!pt)throw Error('Leerer Teil');var m=pt.match(/^(\d+)(.*)$/),k=1;if(m&&/^[A-Z(\[]/.test(m[2])){k=+m[1];pt=m[2]}
+  var i=0;function grp(){var c={};while(i<pt.length){var ch=pt[i];
+    if(ch==='('||ch==='['){i++;var sub=grp();if(pt[i]!==')'&&pt[i]!==']')throw Error('Klammer nicht geschlossen');i++;var n=rdN();for(var s in sub)c[s]=(c[s]||0)+sub[s]*n}
+    else if(ch===')'||ch===']')return c;
+    else{var mm=pt.slice(i).match(/^[A-Z][a-z]?/);if(!mm)throw Error('Unerwartet: „'+ch+'“ (Symbole groß schreiben, z. B. Co statt co)');var sy=mm[0];if(!SYM[sy]&&sy.length===2&&SYM[sy[0]]){sy=sy[0]}if(!SYM[sy])throw Error('Unbekanntes Element „'+mm[0]+'“');i+=sy.length;var n2=rdN();c[sy]=(c[sy]||0)+n2}}return c}
+  function rdN(){var mm=pt.slice(i).match(/^\d+/);if(!mm)return 1;i+=mm[0].length;return +mm[0]}
+  var r=grp();if(i<pt.length)throw Error('Zu viele „)“');for(var s in r)tot[s]=(tot[s]||0)+r[s]*k});
+ return tot}
+$('mmQ').addEventListener('input',function(){var o=$('mmO'),t=$('mmT');try{var c=molar(this.value),M=0,rows=[];for(var s in c){var e=SYM[s];M+=c[s]*e.m;rows.push(c[s]+' × '+s+' ('+de(e.m,3)+') = '+de(c[s]*e.m,3))}
+  o.innerHTML='M = <span class="big">'+de(M,3)+'</span> g/mol';t.innerHTML=rows.join('<br>')}catch(err){o.textContent=err.message;t.textContent=''}});
+
+/* ---------- Werkzeuge zwischen Tab und Lernplattform verschieben ---------- */
+var slot=$('schslot'),cslot=$('scvTools'),hl=document.documentElement;
+function schoolCv(){return hl.classList.contains('schoolcv')}
+function place(){var inCv=body.classList.contains('disguise')&&schoolCv(),t=inCv?cslot:slot;if(t&&sch.parentNode!==t)t.appendChild(sch)}
+var wasD=body.classList.contains('disguise');
+new MutationObserver(function(){var d=body.classList.contains('disguise');if(d===wasD)return;wasD=d;if(d)place();else setTimeout(place,760)}).observe(body,{attributes:true,attributeFilter:['class']});
+place();
+
+/* ---------- Lernplattform-Tarnung ---------- */
+var XI=document.querySelector('link[rel=icon]'),XH=XI?XI.href:'',SI="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%98%3C/text%3E%3C/svg%3E";
+window.__cvTitle=function(){return schoolCv()?'Lernportal – Mathematik 9':'Weihnachts-Countdown 🎄'};
+function setCover(m){s('cover_mode',m);hl.classList.toggle('schoolcv',m==='school');if(body.classList.contains('disguise'))document.title=window.__cvTitle();place()}
+/* Favicon nur waehrend der Tarnung umstellen */
+function icon(){if(XI)XI.href=body.classList.contains('disguise')&&schoolCv()?SI:XH}
+new MutationObserver(icon).observe(body,{attributes:true,attributeFilter:['class']});new MutationObserver(icon).observe(hl,{attributes:true,attributeFilter:['class']});
+if(XI&&schoolCv())XH="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%84%3C/text%3E%3C/svg%3E";
+var sc=$('setCover');if(sc){sc.value=g('cover_mode','xmas');sc.addEventListener('change',function(){setCover(sc.value)})}
+/* Entsperren: 3x auf "63 %" tippen, dann Logo 700 ms halten */
+(function(){var tz=$('scvP'),lg=$('scvL'),taps=0,tt,ht;if(!tz||!lg)return;
+ tz.addEventListener('click',function(){taps++;clearTimeout(tt);tt=setTimeout(function(){taps=0},2500)});
+ lg.addEventListener('pointerdown',function(e){if(e.cancelable)e.preventDefault();clearTimeout(ht);ht=setTimeout(function(){if(taps>=3&&window.__reveal)window.__reveal();taps=0},700)});
+ ['pointerup','pointerleave','pointercancel'].forEach(function(v){lg.addEventListener(v,function(){clearTimeout(ht)})});lg.addEventListener('contextmenu',function(e){e.preventDefault()})})();
+/* Uebungsaufgabe + Abgaben */
+var QA;function newQ(){var x1=Math.floor(Math.random()*5)-1,x2=x1+1+Math.floor(Math.random()*4),m=[-3,-2,-1,1,2,3,0.5][Math.floor(Math.random()*7)],b=Math.floor(Math.random()*7)-3,y1=m*x1+b,y2=m*x2+b;QA=m;
+ $('scvQ').innerHTML='Bestimme die Steigung m der Geraden durch <b>P('+de(x1)+' | '+de(y1)+')</b> und <b>Q('+de(x2)+' | '+de(y2)+')</b>.';$('scvA').value='';$('scvF').textContent='';$('scvF').className='scv-fb'}
+if($('scvQ')){newQ();$('scvN').onclick=newQ;
+ function chk(){var v=num($('scvA').value),f=$('scvF');if(!isFinite(v)){f.textContent='Bitte eine Zahl eingeben.';f.className='scv-fb no';return}
+  if(Math.abs(v-QA)<1e-9){f.textContent='✔ Richtig! m = '+de(QA);f.className='scv-fb ok'}else{f.textContent='✘ Leider falsch. Tipp: m = (y₂ − y₁) / (x₂ − x₁)';f.className='scv-fb no'}}
+ $('scvC').onclick=chk;$('scvA').addEventListener('keydown',function(e){if(e.key!=='Escape')e.stopPropagation();if(e.key==='Enter')chk()});
+ var D=[['Mathe: Arbeitsblatt Lineare Funktionen',2],['Deutsch: Erörterung – Gliederung',4],['Biologie: Versuchsprotokoll Fotosynthese',6],['Englisch: Vocabulary Unit 3',9]];
+ $('scvDue').innerHTML=D.map(function(d){var t=new Date();t.setDate(t.getDate()+d[1]);return '<li><span>'+d[0]+'</span><small>'+t.toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit'})+'</small></li>'}).join('')}
+(function(){var t=g('sch_tab','no'),b=nav.querySelector('[data-v="'+t+'"]');if(b&&t!=='no')b.click()})();
 })();</script>
 </body>
 </html>
