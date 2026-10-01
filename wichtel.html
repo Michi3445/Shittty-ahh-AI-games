@@ -462,14 +462,18 @@ body:not([data-skin="neon"]):not(.crazy):not(.trip) #bgc{display:none}
 #asciiwin .acard:nth-child(6n+5) pre{color:#d9a8ff;text-shadow:0 0 10px #c07bff55}
 #asciiwin .acard:nth-child(6n) pre{color:#ffffff;text-shadow:0 0 10px #ffffff44}
 #asciix{position:fixed;top:12px;right:14px;z-index:2;background:#ffffff14;border:1px solid #ffffff30;color:#fff;border-radius:999px;padding:8px 14px;cursor:pointer;font-family:inherit;box-shadow:none}
+#asciiwin #asearch{background:#ffffff10;border:1px solid #ffffff2a;color:#eee;border-radius:999px;padding:8px 14px;font:inherit;font-size:.82rem;width:min(60vw,240px);outline:none}
+#asciiwin #asearch:focus{border-color:#ffd23f}
+#asciiwin .azoom{flex-wrap:wrap}
+#asciiwin .acard.pick{border-color:#ffd23f;box-shadow:0 0 0 3px #ffd23f66,0 0 34px #ffd23f44;transform:scale(1.04)}
 #asciiwin .hint2{text-align:center;opacity:.4;font-size:.72rem;margin:20px 0 0}
 @media (max-width:460px){#asciiwin .acard.big{grid-column:span 1}#asciiwin .wrap{grid-template-columns:1fr 1fr}}
 </style>
 <button id="asciix" aria-label="Schließen">✕ schließen</button>
 <h2>✨ süße ASCII-Galerie ✨</h2>
 <p class="sub">dein kleines Geheimnis hinterm Weihnachtsbaum 🎄 · <b id="acount">0</b> Kunstwerke · antippen = kopieren</p>
-<div class="achips"><button data-f="all" class="on">✨ Alle</button><button data-f="cat">🐱 Katzen</button><button data-f="tier">🐾 Tierchen</button><button data-f="sweet">🍰 Süß</button><button data-f="xmas">🎄 Weihnachten</button><button data-f="big">🖼️ Groß</button></div>
-<div class="azoom"><button id="azm" aria-label="Kleiner">A−</button><span>Größe</span><button id="azp" aria-label="Größer">A+</button></div>
+<div class="achips"><button data-f="all" class="on">✨ Alle</button><button data-f="cat">🐱 Katzen</button><button data-f="tier">🐾 Tierchen</button><button data-f="sweet">🍰 Süß</button><button data-f="xmas">🎄 Weihnachten</button><button data-f="face">😊 Gesichter</button><button data-f="natur">🌸 Natur</button><button data-f="food">🍓 Leckeres</button><button data-f="big">🖼️ Groß</button></div>
+<div class="azoom"><input id="asearch" type="search" placeholder="🔍 suchen… z. B. katze" aria-label="Suchen"><button id="arnd">🎲 Zufall</button><button id="azm" aria-label="Kleiner">A−</button><span>Größe</span><button id="azp" aria-label="Größer">A+</button></div><p id="anone" hidden style="text-align:center;opacity:.6">Nichts gefunden 🙈</p>
 <div class="wrap">
 
 <div class="acard" data-cat="cat"><pre>(=^･ω･^=)</pre><span class="cap">kätzchen</span></div>
@@ -691,6 +695,331 @@ __{*~*~*~*}__</pre><span class="cap">torte</span></div>
      /( : : )\
       ( : : )
    ~~~~~~~~~~~~~</pre><span class="cap">großer schneemann</span></div>
+
+<div class="acard" data-cat="cat"><pre>(=^ ◡ ^=)</pre><span class="cap">sonnenschein-katze</span></div>
+<div class="acard" data-cat="cat"><pre>(ﾐⓛᆽⓛﾐ)✧</pre><span class="cap">katzenaugen</span></div>
+<div class="acard" data-cat="cat"><pre>(=✪ᆽ✪=)</pre><span class="cap">starrblick</span></div>
+<div class="acard" data-cat="cat"><pre>(=^･ｪ･^=))ﾉ彡☆</pre><span class="cap">wurf-katze</span></div>
+<div class="acard" data-cat="cat"><pre>ฅ(•ㅅ•❀)ฅ</pre><span class="cap">blumen-katze</span></div>
+<div class="acard" data-cat="cat"><pre>(=◕ᆽ◕ฺ=)</pre><span class="cap">kulleraugen</span></div>
+<div class="acard" data-cat="cat"><pre>(ฅ'ω'ฅ)</pre><span class="cap">schmuse-pfoten</span></div>
+<div class="acard" data-cat="cat"><pre>(ᓀ‸ᓂ)</pre><span class="cap">skeptische katze</span></div>
+<div class="acard" data-cat="cat"><pre>₍˄·͈༝·͈˄₎ฅ˒˒</pre><span class="cap">mini-katze</span></div>
+<div class="acard" data-cat="cat"><pre>≽^•༚•^≼</pre><span class="cap">schnuppern</span></div>
+<div class="acard" data-cat="cat"><pre>(=^ェ^=)</pre><span class="cap">stupsnase</span></div>
+<div class="acard" data-cat="cat"><pre>(ΦωΦ)</pre><span class="cap">katzenblick</span></div>
+<div class="acard" data-cat="cat"><pre>(=ΦωΦ=)</pre><span class="cap">hellwach</span></div>
+<div class="acard" data-cat="cat"><pre>(≚ᄌ≚)ƶƵ</pre><span class="cap">nickerchen</span></div>
+<div class="acard" data-cat="cat"><pre>( =①ω①=)</pre><span class="cap">kugelaugen</span></div>
+<div class="acard" data-cat="cat"><pre>(=^‥^=)</pre><span class="cap">graue katze</span></div>
+<div class="acard" data-cat="cat"><pre>ʕ =ↀωↀ= ʔ</pre><span class="cap">katze im bärkostüm</span></div>
+<div class="acard" data-cat="cat"><pre>ฅ^•ﻌ•^ฅ ♡</pre><span class="cap">pfote mit herz</span></div>
+<div class="acard" data-cat="cat"><pre>ᓚ₍ ^. .^₎</pre><span class="cap">lauer-katze</span></div>
+<div class="acard" data-cat="cat"><pre>(˶˃ ᵕ ˂˶) .ᐟ.ᐟ</pre><span class="cap">aufgeregt</span></div>
+<div class="acard" data-cat="cat"><pre>   |\---/|
+   | o_o |
+    \_^_/</pre><span class="cap">katzenkopf</span></div>
+<div class="acard" data-cat="cat"><pre>  /\_/\
+ ( -.- )
+  o_(")(")</pre><span class="cap">schlummer-katze</span></div>
+<div class="acard" data-cat="cat"><pre>  /\_/\  (
+ ( ^.^ ) _)
+   \"/  (
+ ( | | )
+(__d b__)</pre><span class="cap">katze mit schwänzchen</span></div>
+<div class="acard" data-cat="cat"><pre> ／l、
+（ﾟ､ ｡ ７
+  l、 ~ヽ
+  じしf_, )ノ</pre><span class="cap">sitzkatze 2</span></div>
+<div class="acard" data-cat="cat"><pre>  ∧＿∧
+ （｡･ω･｡)
+ （ つ旦O
+ と＿)＿)</pre><span class="cap">katze mit tee</span></div>
+<div class="acard" data-cat="cat"><pre> ∧,,,∧
+( ̳• · • ̳)
+/    づ🍪</pre><span class="cap">katze mit keks</span></div>
+<div class="acard" data-cat="cat"><pre> ∧,,,∧
+( ̳• · • ̳)
+/    づ☕</pre><span class="cap">katze mit kakao</span></div>
+<div class="acard" data-cat="cat"><pre> ∧,,,∧
+( ̳• · • ̳)
+/    づ🎁</pre><span class="cap">katze mit geschenk</span></div>
+<div class="acard" data-cat="cat"><pre>   ∧,,∧
+  ( ̳• ·̫ • ̳)
+┏ー∪∪━━━━━┓
+┃  HALLO!  ┃
+┗━━━━━━━━━┛</pre><span class="cap">schild-katze</span></div>
+<div class="acard big" data-cat="cat"><pre> _._     _,-'""`-._
+(,-.`._,'(       |\`-/|
+    `-.-' \ )-`( , o o)
+          `-    \`_`"'-</pre><span class="cap">liegende katze</span></div>
+<div class="acard big" data-cat="cat"><pre>    /\_____/\
+   /  o   o  \
+  ( ==  ^  == )
+   )         (
+  (           )
+ ( (  )   (  ) )
+(__(__)___(__)__)</pre><span class="cap">pummelkatze</span></div>
+<div class="acard big" data-cat="cat"><pre>  ,_     _
+ |\\_,-~/
+ / _  _ |    ,--.
+(  @  @ )   / ,-'
+ \  _T_/-._( (
+ /         `. \
+|         _  \ |
+ \ \ ,  /      |
+  || |-_\__   /
+ ((_/`(____,-'</pre><span class="cap">stolze katze</span></div>
+
+<div class="acard" data-cat="tier"><pre>ʕ·͡ᴥ·ʔ</pre><span class="cap">teddy</span></div>
+<div class="acard" data-cat="tier"><pre>ʕ ꈍᴥꈍʔ</pre><span class="cap">schlafbär</span></div>
+<div class="acard" data-cat="tier"><pre>ʕ ˵• ₒ •˵ ʔ</pre><span class="cap">staunbär</span></div>
+<div class="acard" data-cat="tier"><pre>ʕ•ᴥ•ʔﾉ♡</pre><span class="cap">winkebär</span></div>
+<div class="acard" data-cat="tier"><pre>૮ ˶ᵔ ᵕ ᵔ˶ ა</pre><span class="cap">glückswelpe</span></div>
+<div class="acard" data-cat="tier"><pre>∪･ｪ･∪</pre><span class="cap">hundeblick</span></div>
+<div class="acard" data-cat="tier"><pre>U^ェ^U</pre><span class="cap">spitz</span></div>
+<div class="acard" data-cat="tier"><pre>(ㅇㅅㅇ❀)</pre><span class="cap">blumenhase</span></div>
+<div class="acard" data-cat="tier"><pre>⁽⁽◝( •ω• )◜⁾⁾</pre><span class="cap">hüpf hüpf</span></div>
+<div class="acard" data-cat="tier"><pre>(・Θ・)</pre><span class="cap">kükchen</span></div>
+<div class="acard" data-cat="tier"><pre>( ・ θ・)ゞ</pre><span class="cap">vogel grüßt</span></div>
+<div class="acard" data-cat="tier"><pre>(•ө•)♡</pre><span class="cap">verliebter spatz</span></div>
+<div class="acard" data-cat="tier"><pre>〜(꒪꒳꒪)〜</pre><span class="cap">schwebi</span></div>
+<div class="acard" data-cat="tier"><pre>  ()()
+  (^.^)
+ c(")(")</pre><span class="cap">hase klassisch</span></div>
+<div class="acard" data-cat="tier"><pre> /)/)
+( . .)
+( づ♡</pre><span class="cap">hase mit herz</span></div>
+<div class="acard" data-cat="tier"><pre>   (\_/)
+   (='.'=)
+   (")_(")</pre><span class="cap">häschen kuschel</span></div>
+<div class="acard" data-cat="tier"><pre> ()-()
+  \"/
+   `</pre><span class="cap">maus</span></div>
+<div class="acard" data-cat="tier"><pre>  ,___,
+  [O.o]
+  /)__)
+  -"--"-</pre><span class="cap">eule 2</span></div>
+<div class="acard" data-cat="tier"><pre>  @..@
+ (----)
+( &gt;__&lt; )
+^^ ~~ ^^</pre><span class="cap">frosch</span></div>
+<div class="acard" data-cat="tier"><pre>  / \__
+ (    @\___
+ /         O
+/   (_____/
+/_____/   U</pre><span class="cap">hund</span></div>
+<div class="acard" data-cat="tier"><pre>  __      _
+o'')}____//
+ `_/      )
+ (_(_/-(_/</pre><span class="cap">dackel</span></div>
+<div class="acard big" data-cat="tier"><pre>     _____     ____
+    /      \  |  o |
+   |        |/ ___\|
+   |_________/
+   |_|_| |_|_|</pre><span class="cap">schildkröte</span></div>
+<div class="acard big" data-cat="tier"><pre>      /`·.¸
+     /¸...¸`:·
+ ¸.·´  ¸   `·.¸.·´)
+: © ):´;      ¸  {
+ `·.¸ `·  ¸.·´\`·¸)
+     `\\´´\¸.·´</pre><span class="cap">großer fisch</span></div>
+<div class="acard big" data-cat="tier"><pre> .==-.                   .-==.
+  \()8`-._  `.   .'  _.-'8()/
+  (88"   ::.  \./  .::   "88)
+   \_.'`-::::.(#).::::-'`._/
+     `._... .q(_)p. ..._.'
+       ""-..-'|=|`-..-""
+       .""' .'|=|`. `"".
+     ,':8(o)./|=|\.(o)8:`.
+    (O :8 ::/ \_/ \:: 8: O)
+     \O `::/       \::' O/
+      ""--'         `--""</pre><span class="cap">schmetterling</span></div>
+
+<div class="acard" data-cat="face"><pre>( ͡° ͜ʖ ͡°)</pre><span class="cap">lenny</span></div>
+<div class="acard" data-cat="face"><pre>ಠ_ಠ</pre><span class="cap">misstrauisch</span></div>
+<div class="acard" data-cat="face"><pre>( •_•)&gt;⌐■-■
+(⌐■_■)</pre><span class="cap">sonnenbrille auf</span></div>
+<div class="acard" data-cat="face"><pre>┐(￣ヘ￣)┌</pre><span class="cap">egal</span></div>
+<div class="acard" data-cat="face"><pre>(ノ°益°)ノ</pre><span class="cap">wütend</span></div>
+<div class="acard" data-cat="face"><pre>(╥﹏╥)</pre><span class="cap">traurig</span></div>
+<div class="acard" data-cat="face"><pre>(ಥ﹏ಥ)</pre><span class="cap">heul</span></div>
+<div class="acard" data-cat="face"><pre>(｡&gt;﹏&lt;｡)</pre><span class="cap">aua</span></div>
+<div class="acard" data-cat="face"><pre>(¬‿¬)</pre><span class="cap">frech</span></div>
+<div class="acard" data-cat="face"><pre>( •̀ ω •́ )✧</pre><span class="cap">bereit</span></div>
+<div class="acard" data-cat="face"><pre>(〃＾▽＾〃)</pre><span class="cap">kichern</span></div>
+<div class="acard" data-cat="face"><pre>(っ´ω`)ﾉ(╥ω╥)</pre><span class="cap">trösten</span></div>
+<div class="acard" data-cat="face"><pre>(っ˘̩╭╮˘̩)っ</pre><span class="cap">schmollen</span></div>
+<div class="acard" data-cat="face"><pre>( ˙꒳˙ )</pre><span class="cap">fluffig</span></div>
+<div class="acard" data-cat="face"><pre>(⊙_⊙)</pre><span class="cap">verdutzt</span></div>
+<div class="acard" data-cat="face"><pre>(°ロ°) !</pre><span class="cap">überrascht</span></div>
+<div class="acard" data-cat="face"><pre>(－_－) zzZ</pre><span class="cap">müde</span></div>
+<div class="acard" data-cat="face"><pre>(￣▽￣)ノ</pre><span class="cap">tschüss</span></div>
+<div class="acard" data-cat="face"><pre>ヾ(⌐■_■)ノ♪</pre><span class="cap">party</span></div>
+<div class="acard" data-cat="face"><pre>(•̀ᴗ•́)و ̑̑</pre><span class="cap">geschafft</span></div>
+
+<div class="acard" data-cat="sweet"><pre>(◍•ᴗ•◍)❤</pre><span class="cap">herzlich</span></div>
+<div class="acard" data-cat="sweet"><pre>( ´ ▽ ` )ﾉ</pre><span class="cap">hallöchen</span></div>
+<div class="acard" data-cat="sweet"><pre>(⌒‿⌒)</pre><span class="cap">lächeln</span></div>
+<div class="acard" data-cat="sweet"><pre>ヽ(♡‿♡)ノ</pre><span class="cap">verknallt</span></div>
+<div class="acard" data-cat="sweet"><pre>(♡°▽°♡)</pre><span class="cap">schwärmen</span></div>
+<div class="acard" data-cat="sweet"><pre>(✯◡✯)</pre><span class="cap">sternenaugen</span></div>
+<div class="acard" data-cat="sweet"><pre>✧*｡٩(ˊᗜˋ*)و✧*｡</pre><span class="cap">jubel</span></div>
+<div class="acard" data-cat="sweet"><pre>(ﾉ´ヮ`)ﾉ*: ･ﾟ</pre><span class="cap">freudentanz</span></div>
+<div class="acard" data-cat="sweet"><pre>(*^ω^)</pre><span class="cap">vergnügt</span></div>
+<div class="acard" data-cat="sweet"><pre>( ◜‿◝ )♡</pre><span class="cap">zufrieden</span></div>
+<div class="acard" data-cat="sweet"><pre>ʚ♡ɞ</pre><span class="cap">herzflügel</span></div>
+<div class="acard" data-cat="sweet"><pre>♡〜٩( ˃▿˂ )۶〜♡</pre><span class="cap">überglücklich</span></div>
+<div class="acard" data-cat="sweet"><pre>(づ ◕‿◕ )づ ♡</pre><span class="cap">drück dich</span></div>
+<div class="acard" data-cat="sweet"><pre>૮꒰ ˶• ༝ •˶꒱ა ♡</pre><span class="cap">knuddel</span></div>
+<div class="acard" data-cat="sweet"><pre>˚ʚ♡ɞ˚</pre><span class="cap">schwebe-herz</span></div>
+<div class="acard" data-cat="sweet"><pre>( ˘͈ ᵕ ˘͈♡)</pre><span class="cap">sanft</span></div>
+
+<div class="acard" data-cat="natur"><pre>   _
+ _(_)_
+(_)@(_)
+  (_)\
+     `|/
+     \|
+      |/</pre><span class="cap">blume</span></div>
+<div class="acard" data-cat="natur"><pre>  .-.-.
+ (_\|/_)
+ ( /|\ )
+  '-'-'</pre><span class="cap">blüte</span></div>
+<div class="acard" data-cat="natur"><pre>    \ | /
+  '-.;;;.-'
+ -==;;;;;==-
+  .-';;;'-.
+    / | \</pre><span class="cap">sonne</span></div>
+<div class="acard" data-cat="natur"><pre>   _.._
+ .' .-'`
+/  /
+|  |
+\  \
+ '._'-._
+    ```</pre><span class="cap">mondsichel</span></div>
+<div class="acard" data-cat="natur"><pre>  .   *   .
+*   .  ✦   .  *
+  ·  ✧   *  ·
+ .   ⋆  .   ✦</pre><span class="cap">sternenhimmel</span></div>
+<div class="acard" data-cat="natur"><pre>   ,-.
+  ( O )   ~
+   `-'   ~~
+  ~~~~~~~~~
+ ~~~~~~~~~~~</pre><span class="cap">mond über dem see</span></div>
+<div class="acard" data-cat="natur"><pre>✿ ❀ ✿ ❀ ✿
+ ❀ ✿ ❀ ✿
+✿ ❀ ✿ ❀ ✿</pre><span class="cap">blumenwiese</span></div>
+<div class="acard big" data-cat="natur"><pre>    _,--._.-,
+   /\_r-,\_ )
+.-.) _;='_/ (.;
+ \ \'     \/S )
+  L.'-. _.'|-'
+ &lt;_`-'\'_.'/
+   `'-._( \
+    ___   \\,      ___
+    \ .'-. \\   .-'_. /
+     '._' '.\\/.-'_.'
+        '--``\('--'
+              \\
+              `\\,
+                \|</pre><span class="cap">rose</span></div>
+
+<div class="acard" data-cat="food"><pre>(っ˘ڡ˘ς)</pre><span class="cap">lecker</span></div>
+<div class="acard" data-cat="food"><pre>( ˘▽˘)っ♨</pre><span class="cap">heißgetränk</span></div>
+<div class="acard" data-cat="food"><pre>(っ'ヮ'c)</pre><span class="cap">hunger</span></div>
+<div class="acard" data-cat="food"><pre>   _
+  ( )
+ (   )
+  \ /
+   V</pre><span class="cap">eiswaffel</span></div>
+<div class="acard" data-cat="food"><pre>   _.-""-._
+ .'  .--.  '.
+/   /    \   \
+\   \    /   /
+ '.  '--'  .'
+   '-.__.-'</pre><span class="cap">donut</span></div>
+<div class="acard" data-cat="food"><pre>  _.---._
+.'"".'/|\`.""'.
+:  .' / | \ `.  :
+'.'  /  |  \  `.'
+ `. /   |   \ .'
+   `-.__|__.-'</pre><span class="cap">orangenscheibe</span></div>
+<div class="acard big" data-cat="food"><pre> // ""--.._
+||  (_)  _ "-._
+||    _ (_)    '-.
+||   (_)   __..-'
+ \\__..--""</pre><span class="cap">pizza</span></div>
+<div class="acard big" data-cat="food"><pre>     __.--~~.,-.__
+     `~-._.-(`-.__`-.
+             \    `~~`
+        .--./ \
+       /#   \  \.--.
+       \    /  /#   \
+        '--'   \    /
+                '--'</pre><span class="cap">kirschen</span></div>
+<div class="acard big" data-cat="food"><pre>             ;,'
+     _o_    ;:;'
+ ,-.'---`.__ ;
+((j`=====',-'
+ `-\     /
+    `-=-'</pre><span class="cap">teekanne</span></div>
+<div class="acard big" data-cat="food"><pre>      i  i  i
+     |~||~||~|
+   __|_||_||_|__
+  |   HAPPY     |
+  |  BIRTHDAY!  |
+  |_____________|</pre><span class="cap">geburtstagstorte</span></div>
+
+<div class="acard" data-cat="xmas"><pre>˚₊‧❄︎‧₊˚ ❄︎ ˚₊‧❄︎‧₊˚</pre><span class="cap">schneefall</span></div>
+<div class="acard" data-cat="xmas"><pre>HO HO HO ヽ(^o^)ノ</pre><span class="cap">ho ho ho</span></div>
+<div class="acard" data-cat="xmas"><pre>(っ◔◡◔)っ 🎁</pre><span class="cap">ein geschenk für dich</span></div>
+<div class="acard" data-cat="xmas"><pre>☆ﾟ.*･｡ﾟ🎄ﾟ｡･*.ﾟ☆</pre><span class="cap">glitzerbaum</span></div>
+<div class="acard" data-cat="xmas"><pre>    )
+   (_)
+   |~|
+   | |
+   | |
+ __|_|__</pre><span class="cap">kerze</span></div>
+<div class="acard" data-cat="xmas"><pre>    /\
+ __/  \__
+ \      /
+ /_    _\
+   \  /
+    \/</pre><span class="cap">stern</span></div>
+<div class="acard" data-cat="xmas"><pre>   .-""-.
+  /  ()  \
+ | ()  () |
+  \  ()  /
+   '-..-'
+    \||/</pre><span class="cap">adventskranz</span></div>
+<div class="acard" data-cat="xmas"><pre>    __
+   (oo)
+ /(  * )\
+   /   \
+  ~~   ~~</pre><span class="cap">lebkuchenmann</span></div>
+<div class="acard" data-cat="xmas"><pre>   _____
+  |  +  |
+ _|_____|_
+|    +    |
+|_________|</pre><span class="cap">geschenkestapel</span></div>
+<div class="acard" data-cat="xmas"><pre> .-.
+(   )
+ '-'|
+    |
+    |</pre><span class="cap">zuckerstange</span></div>
+<div class="acard big" data-cat="xmas"><pre>   ___ ___
+  |   |   |____
+  |___|___|    \
+   \_________/_/
+     o     o</pre><span class="cap">schlitten</span></div>
+<div class="acard big" data-cat="xmas"><pre>      _____
+    _(_____)_
+   (  o   o  )
+  (    \_/    )
+   (  '---'  )
+    \_______/
+     |  |  |</pre><span class="cap">weihnachtsmann-gesicht</span></div>
 
 </div>
 <p class="hint2">antippen = kopieren · Esc oder „schließen" zum Zurück · 2× auf den Baum tippen öffnet mich wieder</p>
@@ -3397,7 +3726,7 @@ button,.btn,.mtabs button,.msub button,.gfilter button,.seg button{transition:ba
  go.onclick=gen;inp.addEventListener('keydown',function(e){if(e.key==='Enter')gen()});
 })();</script>
 
-<script>/* Doppelklick/Doppeltipp auf den Baum -> ASCII-Galerie (mit Kopieren, Filter, Zoom) */(function(){var t=document.getElementById('secret'),win=document.getElementById('asciiwin');if(!t||!win)return;var last=0;
+<script>/* Doppelklick/Doppeltipp auf den Baum -> ASCII-Galerie (Kopieren, Filter, Suche, Zufall, Zoom) */(function(){var t=document.getElementById('secret'),win=document.getElementById('asciiwin');if(!t||!win)return;var last=0;
  function open(){win.hidden=false;win.scrollTop=0}function close(){win.hidden=true}
  t.addEventListener('pointerup',function(){var n=Date.now();if(n-last<350){open();last=0}else last=n});
  t.addEventListener('dblclick',open);
@@ -3406,11 +3735,18 @@ button,.btn,.mtabs button,.msub button,.gfilter button,.seg button{transition:ba
  addEventListener('keydown',function(e){if(e.key==='Escape'&&!win.hidden){e.stopPropagation();close()}},true);
  function copy(txt,done){function fb(){var ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';win.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();done()}
   try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done,fb)}else fb()}catch(e){fb()}}
- var cards=win.querySelectorAll('.acard');
+ var cards=win.querySelectorAll('.acard'),cur='all',term='';
+ function capOf(c){var s=c.querySelector('.cap');return (s.dataset.o||s.textContent).toLowerCase()}
  cards.forEach(function(c){c.title='Antippen zum Kopieren';c.addEventListener('click',function(){var p=c.querySelector('pre'),cap=c.querySelector('.cap');
   copy(p.textContent,function(){if(!cap.dataset.o)cap.dataset.o=cap.textContent;c.classList.add('copied');cap.textContent='📋 kopiert!';clearTimeout(c._t);c._t=setTimeout(function(){c.classList.remove('copied');cap.textContent=cap.dataset.o},1300)})})});
+ function apply(){var n=0;cards.forEach(function(c){var okc=cur==='all'||(cur==='big'?c.classList.contains('big'):c.dataset.cat===cur);var okt=!term||capOf(c).indexOf(term)>=0;var show=okc&&okt;c.style.display=show?'':'none';if(show)n++});document.getElementById('anone').hidden=n>0}
  var chips=win.querySelectorAll('.achips button');
- chips.forEach(function(b){b.onclick=function(){chips.forEach(function(x){x.classList.toggle('on',x===b)});var f=b.dataset.f;cards.forEach(function(c){var show=f==='all'||(f==='big'?c.classList.contains('big'):c.dataset.cat===f);c.style.display=show?'':'none'})}});
+ chips.forEach(function(b){b.onclick=function(){chips.forEach(function(x){x.classList.toggle('on',x===b)});cur=b.dataset.f;apply()}});
+ var sb=document.getElementById('asearch');
+ sb.addEventListener('input',function(){term=sb.value.trim().toLowerCase();apply()});
+ sb.addEventListener('keydown',function(e){if(e.key!=='Escape')e.stopPropagation()});
+ document.getElementById('arnd').onclick=function(){var vis=[].filter.call(cards,function(c){return c.style.display!=='none'});if(!vis.length)return;var c=vis[Math.floor(Math.random()*vis.length)];
+  cards.forEach(function(x){x.classList.remove('pick')});c.classList.add('pick');c.scrollIntoView({behavior:'smooth',block:'center'});clearTimeout(c._p);c._p=setTimeout(function(){c.classList.remove('pick')},1800)};
  var sz=16;function setSz(v){sz=Math.max(10,Math.min(32,v));win.style.setProperty('--asz',sz+'px')}
  document.getElementById('azm').onclick=function(){setSz(sz-2)};document.getElementById('azp').onclick=function(){setSz(sz+2)};
  document.getElementById('acount').textContent=cards.length;
