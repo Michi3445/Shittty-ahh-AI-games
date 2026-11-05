@@ -30,6 +30,7 @@
 | 🕹️ **ASCII Arcade** | Fünf Retro-Spiele im ASCII-Look: **Doom, Pong, Tetris, Pacman** und **Nachtschicht**. Spiel mit den Pfeiltasten wählen, mit `Enter` starten. |
 | ⛏️ **Klotzwelt** | Eigenes Voxel-Spiel im Minecraft-Stil mit Überleben- und Kreativmodus, Crafting, Monstern und Wetter. Texturen und Sounds werden live erzeugt. |
 | 🎵 **Pulse Grid** | Rhythmusspiel: Mit dem Cursor die Noten im 3×3-Raster treffen. Eigene Songs laden (automatisch gemappt) oder `.sspm`/`.txt`-Maps importieren, dazu viele Mods. |
+| 💉 **Overdose Protocol** | Rundenbasiertes Neon-Kampfspiel mit Karten: Beide wählen gleichzeitig geheim eine Aktion, dann läuft alles Frame für Frame ab. Mit **Flux** spulst du zurück, siehst die Karte des Gegners voraus – aber zu viel davon bringt Glitches, lügende Vorschauen und Halluzinationen. Prototyp: Ryo vs. Bront gegen KI. |
 | 🃏 **Solitaire** | Klassisches Solitär (Klondike) im Retro-Fenster-Look. Doppelklick legt eine Karte automatisch ab. |
 | 💾 **Retro 98 Desktop** | Nachgebauter Retro-Desktop mit Startmenü, Editor, Paint, Rechner, Eingabeaufforderung, Minesweeper, Solitär und Internet. |
 | 📚 **Lernwerk** (`schule.html`) | Schulzentrale: Aufgaben, Noten-Schnitt, Stundenplan, Ferien-Countdown, Karteikarten, Formelsammlung, 3D-Labor und mehr. |
@@ -102,6 +103,7 @@ Tipp: Im Kreativmodus 2× `Leertaste` zum Fliegen, 2× `W` zum Sprinten.
 | 🕹️ **ASCII Arcade** | Five retro games in ASCII style: **Doom, Pong, Tetris, Pacman** and **Nachtschicht** (night shift). Pick with the arrow keys, start with `Enter`. |
 | ⛏️ **Klotzwelt** | Custom Minecraft-style voxel game with survival and creative mode, crafting, mobs and weather. Textures and sounds are generated live. |
 | 🎵 **Pulse Grid** | Rhythm game: hit the notes on a 3×3 grid with your cursor. Load your own songs (auto-mapped) or import `.sspm`/`.txt` maps, plus lots of mods. |
+| 💉 **Overdose Protocol** | Turn-based neon fighting game with cards: both players secretly pick an action at the same time, then it plays out frame by frame. Use **Flux** to rewind and peek at your opponent's card – but too much of it brings glitches, lying previews and hallucinations. Prototype: Ryo vs. Bront against the AI (German UI). |
 | 🃏 **Solitaire** | Classic Klondike solitaire in a retro window. Double-click sends a card to the foundation. |
 | 💾 **Retro 98 Desktop** | Recreated retro desktop with start menu, Notepad, Paint, calculator, command prompt, Minesweeper, Solitaire and "internet". |
 | 📚 **Lernwerk** (`schule.html`) | School hub: tasks, grade average, timetable, holiday countdown, flashcards, formula collection, 3D lab and more (German). |
